@@ -27,6 +27,7 @@ public class Lymphocyte extends Tower {
         maxHp = hp=430;
         bounces = false;
         infectionsRemaining = 2;
+        maxDTheta = Math.PI / 30
     }
     
     public Lymphocyte(double placewidth, double placeheight)

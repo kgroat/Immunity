@@ -29,6 +29,7 @@ public class KillerT extends Tower {
         maxHp = hp=500;
         rateoffire=15;
         infectionsRemaining = 2;
+        maxDTheta = Math.PI / 15;
     }
     
     public KillerT(double placewidth, double placeheight)
@@ -52,5 +53,15 @@ public class KillerT extends Tower {
         else
             rateoffire--;
         super.act();
+    }
+    
+    public void move()
+    {
+        double targetangle = Math.atan2(target.y-y, target.x-x);
+        targetangle-=theta;
+        double signum=Math.signum(targetangle);
+        targetangle=Math.min(Math.abs(targetangle), maxDTheta);
+        theta+=signum * targetangle;
+        super.move();
     }
 }

@@ -31,6 +31,7 @@ public class NaturalKiller extends Tower {
         maxHp = hp=150;
         bounces = true;
         infectionsRemaining = 3;
+        maxDTheta = Math.PI / 17;
     }
     
     public NaturalKiller(double placewidth, double placeheight)
