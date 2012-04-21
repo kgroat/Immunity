@@ -140,8 +140,7 @@ public abstract class Entity {
    public boolean damage(double ouch)
    {
        hp-=ouch;
-       if (hp<=0)
-           disposable=true;
+       disposable=hp<=0;
        return disposable;
    }
    
