@@ -114,6 +114,12 @@ public class BloodVessel extends GameMode {
        return out.toArray(new Tower[out.size()]);
    }
    
+   public Intruder randomIntruder()
+   {
+       int returner = (int)(Math.random()*intruders.size());
+       return intruders.get(returner);
+   }
+   
    public Intruder nearestIntruder(Entity e){
       Intruder i = null;
       double best = Double.MAX_VALUE;
