@@ -21,4 +21,19 @@ public class BloodVessel {
          e.act();
       }
    }
+   
+   public Tower nearestTower(Entity e){
+      Tower t = null;
+      return t;
+   }
+   
+   public Intruder nearestIntruder(Entity e){
+      Intruder i = null;
+      return i;
+   }
+   
+   public Entity nearestEntity(Entity e){
+      Entity ne = null;
+      return ne;
+   }
 }
