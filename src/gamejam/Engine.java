@@ -36,8 +36,10 @@ public final class Engine {
       resize();
       BloodVessel bv;
       currentMode = bv = new BloodVessel();
-      for(int i=0; i<30; i++)
+      for(int i=0; i<100; i++)
          bv.add(new PillBacteria());
+      for(int i=0; i<10; i++)
+         bv.add(new Civilian());
       mainLoop = new Thread(){
          public void run(){
             while(running){

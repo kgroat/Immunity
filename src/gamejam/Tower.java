@@ -9,10 +9,5 @@ package gamejam;
  * @author Kevin
  */
 public abstract class Tower extends Entity {
-
-   @Override
-   public void act() {
-      throw new UnsupportedOperationException("Not supported yet.");
-   }
    
 }

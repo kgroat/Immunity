@@ -5,51 +5,87 @@
 package gamejam;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 
 /**
  *
  * @author Kevin
  */
 public class PillBacteria extends Intruder {
+   public static final SpriteSet SP = SpriteSet.load("resources/images/pills.txt");
+   protected PillBacteria parent;
+   public static final double DIST_CUTOFF = SP.getSpriteWidth();
+
    private static final double aggression = 2.0;
 
-   public PillBacteria(){
-      x = Math.random()*Engine.getWidth();
-      y = Math.random()*Engine.getHeight();
-      maxDFTheta = Math.PI/50;
-      maxVel = 1;
-      vel = Math.random()*maxVel;
-      theta = fTheta = Math.random()*Math.PI*2;
-      dFTheta = (Math.random()*2-1)*maxDFTheta;
-      col = ColorType.values()[(int)(Math.random()*4)];
-      sprite = SpriteSet.load("resources/images/pills.txt");
-      sprite.enact(col.name());
+   public PillBacteria() {
+      x = Math.random() * Engine.getWidth();
+      y = Math.random() * Engine.getHeight();
+      maxVel = .5;
+      vel = Math.random() * maxVel;
+      theta = fTheta = Math.random() * Math.PI * 2;
+      col = ColorType.values()[(int) (Math.random() * 4)];
+      sprite = SP;
+      ratUp = 3;
+      ratDown = 7;
+      primeDist = sprite.getSpriteWidth()/2;
    }
-   
-   public enum ColorType{ green, lime, cyan, violet };
+
+   public enum ColorType {
+
+      green, lime, cyan, violet
+   };
    ColorType col;
-   
-   public PillBacteria(double tx, double ty, double tTheta, ColorType c){
+
+   public PillBacteria(double tx, double ty, double tTheta, ColorType c) {
       col = c;
-      x = tx; y = ty;
+      x = tx;
+      y = ty;
       theta = tTheta;
    }
+
+   public Point head(){
+      return new Point((int)(x+Math.cos(theta)*sprite.getSpriteWidth()/2), (int)(y+Math.sin(theta)*sprite.getSpriteWidth()/2));
+   }
    
-    @Override
-   public void act(){
-       Tower nTower = Engine.getBloodVessel().nearestTower(this);
-       Intruder nPill = Engine.getBloodVessel().nearestPill(this);
-       
-       if(nPill!=null && nTower!=null) {
-           if(dist(nPill)*aggression < dist(nTower)) {
+   public Point tail(){
+      return new Point((int)(x-Math.cos(theta)*sprite.getSpriteWidth()/2), (int)(y-Math.sin(theta)*sprite.getSpriteWidth()/2));
+   }
+   
+   @Override
+   public void render(Graphics2D g){
+      sprite.enact(col.name());
+      super.render(g);
+   }
+   
+   @Override
+   public void act() {
+      if(parent != null){
+         if(parent.disposable){
+            parent = null;
+         }
+      }
+      if (parent == null){
+         Tower nTower = Engine.getBloodVessel().nearestTower(this);
+         PillBacteria nPill = Engine.getBloodVessel().nearestPill(this);
+      
+         if(dist(nPill)<DIST_CUTOFF){
+            parent = nPill;
+            target = nPill;
+         }else if (nPill != null && nTower != null) {
+            if (dist(nPill) * aggression < dist(nTower)) {
                target = nPill;
-           } else {
+            } else {
                target = nTower;
-           }
-       } else if(nPill!=null) {
-           target = nPill;
-       }
-       
-       super.act();
+            }
+         } else if (nPill != null) {
+            target = nPill;
+         }
+      }else if(parent != this){
+         target = parent;
+      }else{
+         target = Engine.getBloodVessel().nearestTower(this);
+      }
+      super.act();
    }
 }

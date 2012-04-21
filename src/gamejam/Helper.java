@@ -61,7 +61,7 @@ public class Helper {
    
    protected static class Intersection{
       public int x, y, code;
-      private Intersection(int tx, int ty, int tCode){
+      public Intersection(int tx, int ty, int tCode){
          x = tx;
          y = ty;
          code = tCode;
@@ -70,10 +70,14 @@ public class Helper {
    
    protected static class Velocity{
       public double vel, theta;
-      private Velocity(double tVel, double tTheta){
+      public Velocity(double tVel, double tTheta){
          vel = tVel;
          theta = tTheta;
       }
+   }
+   
+   public static Velocity sum(Entity one, Entity two){
+      return sum(one.vel, one.theta, two.vel, two.theta);
    }
    
    public static Velocity sum(double vel1, double theta1, double vel2, double theta2){

@@ -13,27 +13,44 @@ import java.awt.Polygon;
  * @author Kevin
  */
 public abstract class Entity {
+   public static final double VFRICTION = 1.00;
+   public static final double TFRICTION = 1.03;
+   public static final int TURN_TRIES = 5;
    
-   SpriteSet preSprite, sprite;
-   Entity target;
-   protected double hp, x, y, vel, theta, fTheta, targetVel, dTheta, targetDTheta, dFTheta, targetDFTheta, maxDVel, maxDTheta, maxDFTheta, maxVel, mass;
+   protected SpriteSet preSprite, sprite;
+   protected Entity target;
+   protected double hp, x, y, vel, targetVel, theta, fTheta, maxDTheta, maxVel, mass;
+   protected boolean disposable;
+   protected double primeDist, ratUp, ratDown;
    
    public void act(){
-      
+      if(target != null){
+         double th;
+         targetVel = Math.min(dist(target)*maxVel/primeDist, maxVel);
+         System.out.println(targetVel);
+         for(int i=-TURN_TRIES; i<TURN_TRIES; i++){
+            th = theta + maxDTheta*i/TURN_TRIES;
+            if(isCloser(th)){
+               theta = th;
+            }
+         }
+      }
+   }
+   
+   private boolean isCloser(double t){
+      double dx = Math.cos(theta)*targetVel, dy = Math.sin(theta)*targetVel;
+      double tdx = Math.cos(t)*targetVel, tdy = Math.sin(t)*targetVel;
+      return target.dist(x+dx, y+dy) > 
+             target.dist(x+tdx, y+tdy);
    }
    
    public void move(){
-      theta += dTheta;
-      fTheta += dFTheta;
+      vel = (ratUp*vel + ratDown*targetVel)/(ratUp+ratDown);
       x += vel*Math.cos(theta);
       y += vel*Math.sin(theta);
-   }
-   
-   public void updatePos(){
-      theta += dTheta;
-      fTheta += dFTheta;
-      x += Math.cos(theta)*vel;
-      y += Math.sin(theta)*vel;
+      System.out.println("LOC: "+x+" / "+y);
+      System.out.println("VEL: "+vel+" / "+theta);
+      System.out.println("TVL: "+targetVel+" / "+theta);
    }
    
    public int getX(){
@@ -45,10 +62,14 @@ public abstract class Entity {
    }
    
    public int getWidth(){
+      if(sprite == null)
+         return 0;
       return sprite.getSpriteWidth();
    }
    
    public int getHeight(){
+      if(sprite == null)
+         return 0;
       return sprite.getSpriteHeight();
    }
    
@@ -67,11 +88,19 @@ public abstract class Entity {
       return Math.sqrt(tx*tx + ty*ty);
    }
    
+   public double dist(double tx, double ty){
+      return Math.sqrt(tx*tx + ty*ty);
+   }
+   
    public Polygon getBounds(){
       int bx = (int)x, by = (int)y;
       int nx=(int)(Math.cos(fTheta)*getWidth()/2 + Math.sin(fTheta)*getHeight()/2), ny=(int)(Math.cos(fTheta)*getHeight()/2 + Math.sin(fTheta)*getWidth()/2);
-      int[] xs = new int[]{-nx+bx, nx+bx, -nx+bx, nx+bx};
+      int[] xs = new int[]{-nx+bx, nx+bx,-nx+bx, nx+bx};
       int[] ys = new int[]{-ny+by, -ny+by, ny+by, ny+by};
+//      int[] xs = new int[]{-nx+bx, nx+bx, nx+bx, -nx+bx};
+//      int[] ys = new int[]{-ny+by, -ny+by, ny+by, ny+by};
+//      int[] xs = new int[]{-nx+bx, -nx+bx, nx+bx, nx+bx};
+//      int[] ys = new int[]{-ny+by, ny+by, ny+by, -ny+by};
       return new Polygon(xs, ys, 4);
    }
    
@@ -80,10 +109,9 @@ public abstract class Entity {
    }
    
    public int intersectionCode(int tx, int ty){
-      int bx = (int)x, by = (int)y;
-      int nx=(int)(Math.cos(fTheta)*getWidth()/2 + Math.sin(fTheta)*getHeight()/2), ny=(int)(Math.cos(fTheta)*getHeight()/2 + Math.sin(fTheta)*getWidth()/2);
-      int[] xs = new int[]{-nx+bx, nx+bx, -nx+bx, nx+bx};
-      int[] ys = new int[]{-ny+by, -ny+by, ny+by, ny+by};
+      Polygon p = getBounds();
+      int[] xs = p.xpoints;
+      int[] ys = p.ypoints;
       int best=0;
       double bestDist = Helper.dist(tx, ty, xs[0], ys[0]), dist;
       for(int i=1; i<4; i++){

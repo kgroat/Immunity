@@ -31,6 +31,7 @@ public class BloodVessel extends GameMode {
    public void update(){
       Helper.Intersection pt;
       Entity e, other;
+      PillBacteria p1, p2;
       int code1, code2;
       double tVel;
       for(int i=0; i<entities.size(); i++){
@@ -48,18 +49,18 @@ public class BloodVessel extends GameMode {
                   code2 = pt.code-4;
                   code1 = e.intersectionCode(pt.x, pt.y);
                }
-               double thet = e.dFTheta - other.dFTheta;
                Helper.Velocity vel = Helper.sum(e.vel, e.theta, other.vel, other.theta);
-               if(code1 % 2 == 0){
-                  e.dFTheta -= thet/25;
-               }else{
-                  e.dFTheta += thet/25;
-               }
-               if(code2 % 2 == 0){
-                  other.dFTheta -= thet/25;
-               }else{
-                  other.dFTheta += thet/25;
-               }
+//               double thet = e.dFTheta - other.dFTheta;
+//               if(code1 % 2 == 0){
+//                  e.dFTheta -= thet/25;
+//               }else{
+//                  e.dFTheta += thet/25;
+//               }
+//               if(code2 % 2 == 0){
+//                  other.dFTheta -= thet/25;
+//               }else{
+//                  other.dFTheta += thet/25;
+//               }
                tVel = Helper.subtract(e, vel, .5).vel;
                tVel += Helper.subtract(other, vel, .5).vel;
                e.vel = vel.vel/2;
@@ -82,7 +83,7 @@ public class BloodVessel extends GameMode {
       }
       for(int i=0; i<entities.size(); i++){
          e = entities.get(i);
-         e.updatePos();
+         e.move();
       }
    }
    
@@ -151,15 +152,15 @@ public class BloodVessel extends GameMode {
    public void render(Graphics2D g) {
       g.setColor(BG);
       g.fillRect(0, 0, Engine.getWidth(), Engine.getHeight());
-      for(Tower t: towers){
-         t.prerender(g);
+      for(int i=0; i<towers.size(); i++){
+         towers.get(i).prerender(g);
       }
-      for(Intruder i: intruders){
-         i.prerender(g);
-         i.render(g);
+      for(int i=0; i<intruders.size(); i++){
+         intruders.get(i).prerender(g);
+         intruders.get(i).render(g);
       }
-      for(Tower t: towers){
-         t.render(g);
+      for(int i=0; i<towers.size(); i++){
+         towers.get(i).render(g);
       }
    }
    
