@@ -9,6 +9,7 @@ package gamejam;
  *
  * @author Clem
  */
+//This Tower stays in place unless something moves it and shoots at a random target every half second.
 public class KillerT extends Tower {
 
     private int rateoffire;
