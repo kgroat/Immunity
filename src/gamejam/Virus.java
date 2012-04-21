@@ -4,14 +4,18 @@
  */
 package gamejam;
 
+import java.awt.Graphics2D;
+
 /**
  *
  * @author dlederle
  */
 public class Virus extends Intruder {
 
-    public static final SpriteSet SP = SpriteSet.load("resources/images/cells.txt");
+    public static final SpriteSet SP = SpriteSet.load("resources/images/particles.txt");
 
+    private String name;
+    
     public Virus() {
         x = Math.random() * Engine.getWidth();
         y = Math.random() * Engine.getHeight();
@@ -23,7 +27,7 @@ public class Virus extends Intruder {
         ratDown = 7;
         primeDist = sprite.getSpriteWidth() / 2;
         hp = 50;
-
+        name = "v"+(int)(Math.random()*4+1);
     }
 
     public Virus(double tx, double ty, double tTheta) {
@@ -46,4 +50,10 @@ public class Virus extends Intruder {
             //And then stop moving
         }
     }
+    
+   @Override
+   public void render(Graphics2D g){
+      sprite.enact(name);
+      super.render(g);
+   }
 }

@@ -1,0 +1,10 @@
+/gamejam/resources/images/particles.png
+8 x 8
+LOOP: p1 (1)  
+LOOP: v1 (1)  ;
+LOOP: p2 (1)  
+LOOP: v2 (1)  ;
+LOOP: p3 (1)  
+LOOP: v3 (1)  ;
+LOOP: p4 (1)  
+LOOP: v4 (1)  ;
