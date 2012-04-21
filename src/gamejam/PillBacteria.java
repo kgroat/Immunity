@@ -29,6 +29,7 @@ public class PillBacteria extends Intruder {
       ratUp = 3;
       ratDown = 7;
       primeDist = sprite.getSpriteWidth()/2;
+      hp = 500;
    }
 
    public enum ColorType {
@@ -42,6 +43,7 @@ public class PillBacteria extends Intruder {
       x = tx;
       y = ty;
       theta = tTheta;
+      hp = 500;
    }
 
    public Point head(){

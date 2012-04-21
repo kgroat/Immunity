@@ -135,4 +135,12 @@ public abstract class Entity {
       double ty = vel*Math.sin(theta);
       theta = Math.atan2(-ty, tx);
    }
+   
+   public boolean damage(double ouch)
+   {
+       hp-=ouch;
+       if (hp<=0)
+           disposable=true;
+       return disposable;
+   }
 }
