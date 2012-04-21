@@ -10,7 +10,8 @@ import java.awt.Graphics2D;
  *
  * @author Kevin
  */
-public class PillBacteria extends Intruder{
+public class PillBacteria extends Intruder {
+   private static final double aggression = 2.0;
 
    public enum ColorType{ green, lime, cyan, violet };
    ColorType col;
@@ -21,13 +22,19 @@ public class PillBacteria extends Intruder{
       theta = tTheta;
    }
    
-   @Override
-   public void prerender(Graphics2D g){
-      //Do nothing
-   }
-   
-   @Override
-   public void render(Graphics2D g) {
-      throw new UnsupportedOperationException("Not supported yet.");
+    @Override
+   public void act(){
+       Tower nTower = null; //Engine.getBloodVessel().nearestTower();
+       Intruder nPill = null; //Engine.getBloodVessel().nearestSameColorIntruder();
+       
+       if(nPill!=null && nTower!=null) {
+           if(dist(nPill)*aggression < dist(nTower)) {
+               target = nPill;
+           } else {
+               target = nTower;
+           }
+       }
+       
+       super.act();
    }
 }
