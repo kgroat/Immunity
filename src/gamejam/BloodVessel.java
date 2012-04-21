@@ -103,6 +103,19 @@ public class BloodVessel extends GameMode {
       return t;
    }
    
+      public Tower nearestUninfectedTower(Entity e){
+      Tower t = null;
+      double best = Double.MAX_VALUE;
+      for(Tower tt: towers){
+         if(e.dist(tt)<best && !tt.isInfected()){
+            best = e.dist(tt);
+            t = tt;
+         }
+      }
+      return t;
+   }
+
+   
    public Tower[] towersNearby(Entity e, double radius)
    {
        ArrayList<Tower> out = new ArrayList();
