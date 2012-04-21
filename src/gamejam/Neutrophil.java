@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
  * @author Clem
  */
 public class Neutrophil extends Tower {
-    public static final SpriteSet SP = SpriteSet.load("resources/images/cells.txt");
+    public static final SpriteSet SP = SpriteSet.load("resources/images/neutrophil.txt");
     
     protected double pTheta, dPTheta;
     

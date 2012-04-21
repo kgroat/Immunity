@@ -1,4 +1,4 @@
-/gamejam/resources/images/cells.png
+/gamejam/resources/images/neutrophil.png
 64 x 64
 LOOP: pre  (1) ;
 LOOP: post (1) ;
