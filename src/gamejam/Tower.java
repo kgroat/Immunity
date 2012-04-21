@@ -9,5 +9,7 @@ package gamejam;
  * @author Kevin
  */
 public abstract class Tower extends Entity {
-   
+   public boolean isInfected() {
+       return false;
+   }
 }

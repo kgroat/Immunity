@@ -10,7 +10,7 @@ package gamejam;
  */
 public class Virus extends Intruder {
 
-    public static final SpriteSet SP = SpriteSet.load("resources/images/virus.txt");
+    public static final SpriteSet SP = SpriteSet.load("resources/images/cells.txt");
 
     public Virus() {
         x = Math.random() * Engine.getWidth();
@@ -35,7 +35,15 @@ public class Virus extends Intruder {
 
     @Override
     public void act() {
-        
+        target = Engine.getBloodVessel().nearestUninfectedTower(this);
         super.act();
+    }
+    
+    @Override
+    public void onCollision(Entity e) {
+        if(e instanceof Tower) {
+            e.infect();
+            //And then stop moving
+        }
     }
 }
