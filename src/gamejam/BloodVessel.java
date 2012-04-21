@@ -91,10 +91,18 @@ public class BloodVessel extends GameMode {
       for(int i=0; i<entities.size(); i++){
          e = entities.get(i);
          if(e.disposable){
-            entities.remove(i);
+            entities.remove(e);
             towers.remove(e);
             intruders.remove(e);
             civilians.remove(e);
+            if(e instanceof Tower){
+               int q = ((Tower)e).numViruses;
+               System.out.println("VIRUSES: "+q + " / "+e);
+               for(int j=0; j<q; j++){
+                  add(new Virus(e.x, e.y));
+               }
+            }
+            i--;
          }
       }
    }

@@ -26,8 +26,9 @@ public class KillerT extends Tower {
         ratUp=0;
         ratDown=1;
         primeDist = 100;
-        hp=500;
+        maxHp = hp=500;
         rateoffire=15;
+        infectionsRemaining = 2;
     }
     
     public KillerT(double placewidth, double placeheight)

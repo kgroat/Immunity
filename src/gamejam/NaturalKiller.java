@@ -28,8 +28,9 @@ public class NaturalKiller extends Tower {
                             //maxVel is a mathematical limit
         //less than 100 pixels means it will only try to accelerate as much as needed to
         //get that distance
-        hp=150;
+        maxHp = hp=150;
         bounces = true;
+        infectionsRemaining = 3;
     }
     
     public NaturalKiller(double placewidth, double placeheight)

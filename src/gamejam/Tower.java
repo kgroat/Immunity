@@ -17,13 +17,12 @@ public abstract class Tower extends Entity {
    }
    
    public void infect(){
-       infectionsRemaining--;
+       System.out.println((infectionsRemaining--)+" / "+this);
    }
    
    @Override
    public void act() {
        if(isInfected()) {
-           //System.out.println("Infected! with " + hp + " hp left");
            this.damage((50));
            numViruses++;
        }

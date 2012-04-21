@@ -23,14 +23,23 @@ public class Virus extends Intruder {
         vel = Math.random() * maxVel;
         theta = fTheta = Math.random() * Math.PI * 2;
         sprite = SP;
-        ratUp = 3;
+        ratUp = 0;
         ratDown = 7;
         primeDist = sprite.getSpriteWidth() / 2;
-        hp = 50;
+        maxHp = hp = 50;
         name = "v"+(int)(Math.random()*4+1);
     }
 
+    public Virus(double tx, double ty) {
+        this();
+        x = tx;
+        y = ty;
+        vel = Math.random() * maxVel * 5;
+        hp = 500;
+    }
+    
     public Virus(double tx, double ty, double tTheta) {
+        this();
         x = tx;
         y = ty;
         theta = tTheta;
@@ -39,13 +48,13 @@ public class Virus extends Intruder {
 
     @Override
     public void act() {
-        target = Engine.getBloodVessel().nearestUninfectedTower(this);
-        super.act();
+//        target = Engine.getBloodVessel().nearestUninfectedTower(this);
+//        super.act();
     }
     
     @Override
     public void onCollision(Entity e) {
-        if(e instanceof Tower && !disposable && !e.disposable) {
+        if(e instanceof Tower) {
             ((Tower)e).infect();
             disposable = true;
         }

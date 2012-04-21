@@ -24,7 +24,7 @@ public class Lymphocyte extends Tower {
         ratUp=2;
         ratDown=8;
         primeDist = 100;
-        hp=430;
+        maxHp = hp=430;
         bounces = false;
         infectionsRemaining = 2;
     }

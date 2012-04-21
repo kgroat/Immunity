@@ -24,8 +24,9 @@ public class Macrophage extends Tower{
         ratUp=5;
         ratDown=9;
         primeDist = 100;
-        hp=300;
+        maxHp = hp=300;
         bounces = true;
+        infectionsRemaining = 3;
     }
     
     public Macrophage(double startwidth, double startheight)

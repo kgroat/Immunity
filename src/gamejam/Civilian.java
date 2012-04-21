@@ -24,7 +24,7 @@ public class Civilian extends Tower {
    
    public Civilian() {
       bounces = true;
-      hp = 10000;
+      maxHp = hp = 2000;
       maxDTheta = 0;
       maxVel = 0;
       mass = 100;
@@ -36,6 +36,8 @@ public class Civilian extends Tower {
       pTheta = fTheta = Math.random()*Math.PI*2;
       dPTheta = Math.random()*Math.PI/50;
       infectionsRemaining = 10;
+      ratUp = 1;
+      ratDown = 5;
 
    }
    

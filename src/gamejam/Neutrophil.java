@@ -27,13 +27,14 @@ public class Neutrophil extends Tower {
         theta = 0;
         sprite = SP;
         ratUp=1;
-        ratDown=9;
+        ratDown=29;
         primeDist = 100;
-        hp=670;
+        maxHp = hp=670;
         bounces = false;
         pTheta = Math.random()*Math.PI*2;
         dPTheta = (Math.random()*2-1)*Math.PI/50;
         maxDTheta = Math.PI/50;
+        infectionsRemaining = 4;
     }
     
     public Neutrophil(double placewidth, double placeheight)
