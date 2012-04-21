@@ -41,35 +41,39 @@ public class BloodVessel extends GameMode {
             other = entities.get(j);
             pt = e.intersectPoint(other);
             if(pt != null && pt.code >= 0){
-               System.out.println(i + " / " + j);
-               if(pt.code < 4){
-                  code1 = pt.code;
-                  code2 = other.intersectionCode(pt.x, pt.y);
-               }else{
-                  code2 = pt.code-4;
-                  code1 = e.intersectionCode(pt.x, pt.y);
+               e.onCollision(other);
+               other.onCollision(e);
+               if(e.bounces && other.bounces){
+                  System.out.println(i + " / " + j);
+                  if(pt.code < 4){
+                     code1 = pt.code;
+                     code2 = other.intersectionCode(pt.x, pt.y);
+                  }else{
+                     code2 = pt.code-4;
+                     code1 = e.intersectionCode(pt.x, pt.y);
+                  }
+                  Helper.Velocity vel = Helper.sum(e.vel, e.theta, other.vel, other.theta);
+   //               double thet = e.dFTheta - other.dFTheta;
+   //               if(code1 % 2 == 0){
+   //                  e.dFTheta -= thet/25;
+   //               }else{
+   //                  e.dFTheta += thet/25;
+   //               }
+   //               if(code2 % 2 == 0){
+   //                  other.dFTheta -= thet/25;
+   //               }else{
+   //                  other.dFTheta += thet/25;
+   //               }
+                  tVel = Helper.subtract(e, vel, .5).vel;
+                  tVel += Helper.subtract(other, vel, .5).vel;
+                  e.vel = vel.vel/2;
+                  e.theta = vel.theta;
+                  other.vel = vel.vel/2;
+                  other.theta = vel.theta;
+                  vel = Helper.collisionVel(e, other, tVel);
+                  Helper.add(e, vel, .5);
+                  Helper.add(other, vel, -.5);
                }
-               Helper.Velocity vel = Helper.sum(e.vel, e.theta, other.vel, other.theta);
-//               double thet = e.dFTheta - other.dFTheta;
-//               if(code1 % 2 == 0){
-//                  e.dFTheta -= thet/25;
-//               }else{
-//                  e.dFTheta += thet/25;
-//               }
-//               if(code2 % 2 == 0){
-//                  other.dFTheta -= thet/25;
-//               }else{
-//                  other.dFTheta += thet/25;
-//               }
-               tVel = Helper.subtract(e, vel, .5).vel;
-               tVel += Helper.subtract(other, vel, .5).vel;
-               e.vel = vel.vel/2;
-               e.theta = vel.theta;
-               other.vel = vel.vel/2;
-               other.theta = vel.theta;
-               vel = Helper.collisionVel(e, other, tVel);
-               Helper.add(e, vel, .5);
-               Helper.add(other, vel, -.5);
             }
          }
          double newX = e.x + e.vel * Math.cos(e.theta);
