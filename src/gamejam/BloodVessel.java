@@ -57,4 +57,19 @@ public class BloodVessel {
       }
       return ne;
    }
+   
+   public PillBacteria nearestPill(PillBacteria p){
+      PillBacteria out = null, tmp;
+      double dist = Double.MAX_VALUE;
+      for(Intruder i: intruders){
+         if(i instanceof PillBacteria){
+            tmp = (PillBacteria)i;
+            if(tmp.col == p.col && tmp.dist(p)<dist){
+               dist = tmp.dist(p);
+               out = tmp;
+            }
+         }
+      }
+      return out;
+   }
 }

@@ -125,4 +125,8 @@ public final class Engine {
       return currentMode;
    }
    
+   public static BloodVessel getBloodVessel(){
+      return null;
+   }
+   
 }
