@@ -18,7 +18,7 @@ public class Neutrophil extends Tower {
     {
         x=Math.random()*Engine.getWidth();
         y = Math.random() * Engine.getHeight();
-        maxVel=.75;
+        maxVel=4.5;
         vel = 0;
         fTheta =Math.random() * Math.PI * 2;
         theta = 0;

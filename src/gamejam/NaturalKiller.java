@@ -15,7 +15,7 @@ public class NaturalKiller extends Tower {
     {
         x = Math.random()*Engine.getWidth();
         y = Math.random() * Engine.getHeight();
-        maxVel = .9;
+        maxVel = 5.4;
         vel = 0;
         fTheta =Math.random() * Math.PI * 2;
         theta = 0;
@@ -28,17 +28,9 @@ public class NaturalKiller extends Tower {
     
     public NaturalKiller(double placewidth, double placeheight)
     {
+        this();
         x = placewidth;
         y = placeheight;
-        maxVel = .9;
-        vel = 0;
-        fTheta =Math.random() * Math.PI * 2;
-        theta = 0;
-        sprite = null;
-        ratUp=5;
-        ratDown=7;
-        primeDist = 100;
-        hp=150;
     }
     
     @Override
