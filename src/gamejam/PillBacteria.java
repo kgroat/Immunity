@@ -24,8 +24,8 @@ public class PillBacteria extends Intruder {
    
     @Override
    public void act(){
-       Tower nTower = null; //Engine.getBloodVessel().nearestTower();
-       Intruder nPill = null; //Engine.getBloodVessel().nearestSameColorIntruder();
+       Tower nTower = Engine.getBloodVessel().nearestTower(this);
+       Intruder nPill = Engine.getBloodVessel().nearestPill(this);
        
        if(nPill!=null && nTower!=null) {
            if(dist(nPill)*aggression < dist(nTower)) {
@@ -33,6 +33,8 @@ public class PillBacteria extends Intruder {
            } else {
                target = nTower;
            }
+       } else if(nPill!=null) {
+           target = nPill;
        }
        
        super.act();
