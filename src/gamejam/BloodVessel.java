@@ -122,6 +122,17 @@ public class BloodVessel extends GameMode {
       return i;
    }
    
+   public Intruder[] intrudersNearby(Entity e, double radius)
+   {
+       ArrayList<Intruder> targets = new ArrayList();
+       for (int j=0; j<intruders.size(); j++)
+       {
+           if ((e.dist(intruders.get(j))<=radius) && (intruders.get(j)!=e))
+               targets.add(intruders.get(j));
+       }
+       return targets.toArray(new Intruder[targets.size()]);
+   }
+   
    public Entity nearestEntity(Entity e){
       Entity ne = null;
       double best = Double.MAX_VALUE;
@@ -132,6 +143,17 @@ public class BloodVessel extends GameMode {
          }
       }
       return ne;
+   }
+   
+   public Entity[] entitiesNearby(Entity e, double radius)
+   {
+       ArrayList<Entity> targets = new ArrayList();
+       for (int j=0; j<entities.size(); j++)
+       {
+           if ((e.dist(entities.get(j))<=radius) && (entities.get(j)!=e))
+               targets.add(entities.get(j));
+       }
+       return targets.toArray(new Entity[targets.size()]);
    }
    
    public PillBacteria nearestPill(PillBacteria p){
