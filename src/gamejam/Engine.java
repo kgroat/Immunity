@@ -42,8 +42,6 @@ public final class Engine {
          bv.add(new Civilian());
       for(int i=0; i<10; i++)
           bv.add(new Neutrophil());
-      for(int i=0; i<50; i++)
-          bv.add(new Virus());
       mainLoop = new Thread(){
          public void run(){
             while(running){

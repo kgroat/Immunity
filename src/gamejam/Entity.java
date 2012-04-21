@@ -147,8 +147,4 @@ public abstract class Entity {
    public void onCollision(Entity other){
       
    }
-   
-   public void infect(){
-      
-   }
 }
