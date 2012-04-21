@@ -27,21 +27,14 @@ public class Neutrophil extends Tower {
         ratDown=9;
         primeDist = 100;
         hp=670;
+        bounces = false;
     }
     
     public Neutrophil(double placewidth, double placeheight)
     {
+        this();
         x=placewidth;
         y=placeheight;
-        maxVel=.75;
-        vel = 0;
-        fTheta =Math.random() * Math.PI * 2;
-        theta = 0;
-        sprite = SP;
-        ratUp=1;
-        ratDown=9;
-        primeDist = 100;
-        hp=670;
     }
     
     public void act()

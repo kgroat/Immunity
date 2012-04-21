@@ -15,32 +15,25 @@ public class Civilian extends Tower {
    
    double pTheta, dPTheta;
    public Civilian(double tx, double ty){
+      this();
+      x = tx;
+      y = ty;
+   }
+   
+   
+   public Civilian() {
+      bounces = true;
       hp = 10000;
       maxDTheta = 0;
       maxVel = 0;
       mass = 100;
       theta = fTheta = Math.random()*Math.PI*2;
       vel = Math.random()*.5;
-      x = tx;
-      y = ty;
+      x = Math.random() * Engine.getWidth();
+      y = Math.random() * Engine.getHeight();
       sprite = SP;
       pTheta = fTheta = Math.random()*Math.PI*2;
       dPTheta = Math.random()*Math.PI/50;
-   }
-   
-   
-   public Civilian() {
-      x = Math.random() * Engine.getWidth();
-      y = Math.random() * Engine.getHeight();
-      maxVel = .5;
-      vel = Math.random() * maxVel;
-      theta = fTheta = Math.random() * Math.PI * 2;
-      sprite = SP;
-      ratUp = 3;
-      ratDown = 7;
-      primeDist = sprite.getSpriteWidth()/2;
-      pTheta = fTheta = Math.random()*Math.PI*2;
-      dPTheta = (Math.random()*2-1)*Math.PI/50;
    }
    
    public void act(){

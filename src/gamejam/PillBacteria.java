@@ -19,6 +19,7 @@ public class PillBacteria extends Intruder {
    private static final double aggression = 2.0;
 
    public PillBacteria() {
+      bounces = true;
       x = Math.random() * Engine.getWidth();
       y = Math.random() * Engine.getHeight();
       maxVel = .5;
@@ -30,6 +31,7 @@ public class PillBacteria extends Intruder {
       ratDown = 7;
       primeDist = sprite.getSpriteWidth()/2;
       hp = 500;
+      bounces = true;
    }
 
    public enum ColorType {
@@ -39,6 +41,7 @@ public class PillBacteria extends Intruder {
    ColorType col;
 
    public PillBacteria(double tx, double ty, double tTheta, ColorType c) {
+      this();
       col = c;
       x = tx;
       y = ty;
