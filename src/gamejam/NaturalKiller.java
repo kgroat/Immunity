@@ -13,17 +13,22 @@ public class NaturalKiller extends Tower {
     
     public NaturalKiller()
     {
-        x = Math.random()*Engine.getWidth();
-        y = Math.random() * Engine.getHeight();
-        maxVel = 5.4;
-        vel = 0;
-        fTheta =Math.random() * Math.PI * 2;
-        theta = 0;
-        sprite = null;
-        ratUp=5;
+        x = Math.random()*Engine.getWidth();        //width of the window
+        y = Math.random() * Engine.getHeight();     //height of the window
+        maxVel = 5.4;           //maximum possible velocity
+        vel = 0;                //starting velocity
+        fTheta =Math.random() * Math.PI * 2;    //direction in which it is facing
+        theta = 0;              //dircetion in which it is travelling
+        sprite = null;          //the image - do not manipulate
+        ratUp=5;            //acceleration rate w/ respect to ratDown
         ratDown=7;
-        primeDist = 100;
+        primeDist = 100;    //if the target distance is over 100 pixels, it will
+                            //try to achieve maxVel by the time it reaches the target;
+                            //maxVel is a mathematical limit
+        //less than 100 pixels means it will only try to accelerate as much as needed to
+        //get that distance
         hp=150;
+        bounces = true;
     }
     
     public NaturalKiller(double placewidth, double placeheight)
@@ -56,5 +61,15 @@ public class NaturalKiller extends Tower {
             }
             disposable = true;
         }
+    }
+    
+    //called whenever this() collides with ANYTHING else (friend or foe)
+    public void onCollision(Entity other){
+        if (other instanceof Intruder && !disposable){
+            Entity[] e = Engine.getBloodVessel().entitiesNearby(this, 200);            
+            for(int i=0; i<e.length; i++){
+                e[i].damage(50);
+            }
+        }    
     }
 }
