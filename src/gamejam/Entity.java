@@ -14,17 +14,9 @@ import java.awt.Polygon;
 public abstract class Entity {
    
    SpriteSet preSprite, sprite;
-   
    protected double hp, x, y, vel, theta, fTheta, targetVel, dTheta, targetDTheta, dFTheta, targetDFTheta, maxDVel, maxDTheta, maxDFTheta, maxVel, mass;
    
-   public void act(){
-      final int CURR = 9;
-      final int MAX = 1;
-      final int TOTAL = CURR+MAX;
-         vel = (CURR*vel+MAX*targetVel)/TOTAL;
-         dTheta = (CURR*dTheta+MAX*targetDTheta)/TOTAL;
-         dFTheta = (CURR*dFTheta+MAX*targetDFTheta)/TOTAL;
-   }
+   public abstract void act();
    
    public void move(){
       theta += dTheta;
