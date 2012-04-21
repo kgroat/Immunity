@@ -7,13 +7,14 @@ package gamejam;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 /**
  *
  * @author Kevin
  */
-public final class AQEngine {
+public final class Engine {
    
    private static int LOGIC_DELAY = 30;
    private static int PAINT_DELAY = 30;
@@ -26,7 +27,7 @@ public final class AQEngine {
    
    private static int vWidth, vHeight;
    
-   private AQEngine(){
+   private Engine(){
       //DO NOTHING
    }
    
@@ -82,6 +83,14 @@ public final class AQEngine {
    static void releaseKey(KeyEvent e) {
       if(currentMode != null)
          currentMode.release(e);
+   }
+   
+   static void pressMouse(MouseEvent e){
+      
+   }
+   
+   static void releaseMouse(MouseEvent e){
+      
    }
 
    static void setMode(GameMode g){

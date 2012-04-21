@@ -24,16 +24,37 @@ public class BloodVessel {
    
    public Tower nearestTower(Entity e){
       Tower t = null;
+      double best = Double.MAX_VALUE;
+      for(Tower tt: towers){
+         if(e.dist(tt)<best){
+            best = e.dist(tt);
+            t = tt;
+         }
+      }
       return t;
    }
    
    public Intruder nearestIntruder(Entity e){
       Intruder i = null;
+      double best = Double.MAX_VALUE;
+      for(Intruder ti: intruders){
+         if(e.dist(ti)<best){
+            best = e.dist(ti);
+            i = ti;
+         }
+      }
       return i;
    }
    
    public Entity nearestEntity(Entity e){
       Entity ne = null;
+      double best = Double.MAX_VALUE;
+      for(Entity te: entities){
+         if(e.dist(te)<best){
+            best = e.dist(te);
+            ne = te;
+         }
+      }
       return ne;
    }
 }

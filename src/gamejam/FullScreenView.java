@@ -152,7 +152,7 @@ public class FullScreenView extends JFrame {
       if (e.getKeyCode() == KeyEvent.VK_ESCAPE && e.isShiftDown()) {
          escape();
       } else {
-         AQEngine.pressKey(e);
+         Engine.pressKey(e);
       }
    }
 
@@ -161,7 +161,7 @@ public class FullScreenView extends JFrame {
     * @param e the KeyEvent containing the key information.
     */
    public void release(KeyEvent e) {
-      AQEngine.releaseKey(e);
+      Engine.releaseKey(e);
    }
 
    /**
@@ -213,7 +213,7 @@ public class FullScreenView extends JFrame {
             System.err.println(e);
          }
          System.out.println("View initialized");
-         AQEngine.start();
+         Engine.start();
       }
    }
 
@@ -240,7 +240,7 @@ public class FullScreenView extends JFrame {
     * <FONT COLOR="#FF0000"><b>Do not alter this method!</b></FONT>
     */
    void closeProgram() {
-      AQEngine.stop();
+      Engine.stop();
       if (isFullScreen) {
          screen.setDisplayMode(originalDisplayMode);
       }

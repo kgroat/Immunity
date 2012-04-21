@@ -14,9 +14,12 @@ import java.awt.Polygon;
 public abstract class Entity {
    
    SpriteSet preSprite, sprite;
+   Entity target;
    protected double hp, x, y, vel, theta, fTheta, targetVel, dTheta, targetDTheta, dFTheta, targetDFTheta, maxDVel, maxDTheta, maxDFTheta, maxVel, mass;
    
-   public abstract void act();
+   public void act(){
+      
+   }
    
    public void move(){
       theta += dTheta;
@@ -52,6 +55,11 @@ public abstract class Entity {
    
    public void render(Graphics2D g){
       sprite.drawRot(g, (int)x, (int)y, theta);
+   }
+   
+   public double dist(Entity other){
+      double tx = x-other.x, ty = y-other.y;
+      return Math.sqrt(tx*tx + ty*ty);
    }
    
    public Polygon getBounds(){
