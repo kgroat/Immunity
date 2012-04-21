@@ -28,17 +28,9 @@ public class Monocyte extends Tower {
     
     public Monocyte (double placewidth, double placeheight)
     {
+        this();
         x=placewidth;
         y=placeheight;
-        maxVel=0;
-        vel = 0;
-        fTheta =Math.random() * Math.PI * 2;
-        theta = 0;
-        sprite = null;
-        ratUp=0;
-        ratDown=1;
-        primeDist = 100;
-        hp=400;
     }
     
     public void act()
