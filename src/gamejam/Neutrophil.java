@@ -49,15 +49,7 @@ public class Neutrophil extends Tower {
        pTheta += dPTheta;
         if (target != null && target.disposable)
             target=null;
-        if (target==null)
-        {
-            if ((target = Engine.getBloodVessel().nearestIntruder(this))!=null)
-                super.act();
-            else
-            {
-                targetVel = 0;
-            }
-        }
+        super.act();
     }
     
    @Override

@@ -23,7 +23,7 @@ public abstract class Tower extends Entity {
    @Override
    public void act() {
        if(isInfected()) {
-           this.damage((50));
+           this.damage((80));
            numViruses++;
        }
        super.act();

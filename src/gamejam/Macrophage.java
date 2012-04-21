@@ -40,15 +40,7 @@ public class Macrophage extends Tower{
     {
         if (target != null && target.disposable)
             target=null;
-        if (target==null)
-        {
-            if ((target = Engine.getBloodVessel().nearestIntruder(this))!=null)
-                super.act();
-            else
-            {
-                targetVel = 0;
-            }
-        }
+        super.act();
     }
     
     public void onCollision(Entity other)

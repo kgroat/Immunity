@@ -46,7 +46,6 @@ public class PillBacteria extends Intruder {
       x = tx;
       y = ty;
       theta = tTheta;
-      hp = 500;
    }
 
    public Point head(){

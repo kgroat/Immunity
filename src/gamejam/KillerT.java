@@ -51,5 +51,6 @@ public class KillerT extends Tower {
         }
         else
             rateoffire--;
+        super.act();
     }
 }

@@ -42,13 +42,9 @@ public class Lymphocyte extends Tower {
             target=null;
         if (target==null)
         {
-            if ((target = Engine.getBloodVessel().nearestIntruder(this))!=null)
-                super.act();
-            else
-            {
-                targetVel = 0;
-            }
+            target = Engine.getBloodVessel().nearestIntruder(this);
         }
+        super.act();
         //hits the target lightly, then calls nearby towers for help
         if (target != null && Helper.intersects(this.getBounds(), target.getBounds()))
         {

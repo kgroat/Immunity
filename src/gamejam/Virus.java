@@ -34,8 +34,7 @@ public class Virus extends Intruder {
         this();
         x = tx;
         y = ty;
-        vel = Math.random() * maxVel * 5;
-        hp = 500;
+        vel *= 5;
     }
     
     public Virus(double tx, double ty, double tTheta) {
@@ -43,7 +42,6 @@ public class Virus extends Intruder {
         x = tx;
         y = ty;
         theta = tTheta;
-        hp = 500;
     }
 
     @Override

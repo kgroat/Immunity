@@ -40,11 +40,14 @@ public final class Engine {
          bv.add(new PillBacteria());
       for(int i=0; i<10; i++)
          bv.add(new Civilian());
+      Neutrophil temp = new Neutrophil();
+      temp.infectionsRemaining = 0;
+      bv.add(temp);
       for(int i=0; i<10; i++)
           bv.add(new Neutrophil());
       for(int i=0; i<10; i++)
           bv.add(new Monocyte());
-      for(int i=0; i<200; i++)
+      for(int i=0; i<20; i++)
           bv.add(new Virus());
       mainLoop = new Thread(){
          public void run(){

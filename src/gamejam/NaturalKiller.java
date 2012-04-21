@@ -45,15 +45,7 @@ public class NaturalKiller extends Tower {
     {
         if (target != null && target.disposable)
             target=null;
-        if (target==null)
-        {
-            if ((target = Engine.getBloodVessel().nearestIntruder(this))!=null)
-                super.act();
-            else
-            {
-                targetVel = 0;
-            }
-        }
+        super.act();
         if (target != null && Helper.intersects(this.getBounds(), target.getBounds()))
         {
             Entity [] victims = Engine.getBloodVessel().entitiesNearby(this, 150);
