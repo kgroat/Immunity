@@ -24,6 +24,7 @@ public class Lymphocyte extends Tower {
         primeDist = 100;
         hp=430;
         bounces = false;
+        infectionsRemaining = 2;
     }
     
     public Lymphocyte(double placewidth, double placeheight)
