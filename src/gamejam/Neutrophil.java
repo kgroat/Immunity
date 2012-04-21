@@ -65,10 +65,7 @@ public class Neutrophil extends Tower {
    }
    
    @Override
-   public void onCollision(){
-      Intruder[] trudes = Engine.getBloodVessel().intrudersNearby(this, 128);
-      for(int i=0; i<trudes.length; i++){
-         trudes[i].damage(10);
-      }
+   public void onCollision(Entity other){
+      other.damage(10);
    }
 }
