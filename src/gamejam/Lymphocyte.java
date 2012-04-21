@@ -62,6 +62,7 @@ public class Lymphocyte extends Tower {
     
    @Override
    public void onCollision(Entity other){
-      other.damage(10);
+      if(other instanceof Intruder)
+         other.damage(7);
    }
 }

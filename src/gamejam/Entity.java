@@ -28,7 +28,6 @@ public abstract class Entity {
       if(target != null){
          double th;
          targetVel = Math.min(dist(target)*maxVel/primeDist, maxVel);
-         System.out.println(targetVel);
          for(int i=-TURN_TRIES; i<TURN_TRIES; i++){
             th = theta + maxDTheta*i/TURN_TRIES;
             if(isCloser(th)){
@@ -49,9 +48,6 @@ public abstract class Entity {
       vel = (ratUp*vel + ratDown*targetVel)/(ratUp+ratDown);
       x += vel*Math.cos(theta);
       y += vel*Math.sin(theta);
-      System.out.println("LOC: "+x+" / "+y);
-      System.out.println("VEL: "+vel+" / "+theta);
-      System.out.println("TVL: "+targetVel+" / "+theta);
    }
    
    public int getX(){

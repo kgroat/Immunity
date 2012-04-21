@@ -66,6 +66,7 @@ public class Neutrophil extends Tower {
    
    @Override
    public void onCollision(Entity other){
-      other.damage(10);
+      if(other instanceof Intruder)
+         other.damage(10);
    }
 }

@@ -44,7 +44,6 @@ public class BloodVessel extends GameMode {
                e.onCollision(other);
                other.onCollision(e);
                if(e.bounces && other.bounces){
-                  System.out.println(i + " / " + j);
                   if(pt.code < 4){
                      code1 = pt.code;
                      code2 = other.intersectionCode(pt.x, pt.y);
@@ -88,6 +87,15 @@ public class BloodVessel extends GameMode {
       for(int i=0; i<entities.size(); i++){
          e = entities.get(i);
          e.move();
+      }
+      for(int i=0; i<entities.size(); i++){
+         e = entities.get(i);
+         if(e.disposable){
+            entities.remove(i);
+            towers.remove(e);
+            intruders.remove(e);
+            civilians.remove(e);
+         }
       }
    }
    
