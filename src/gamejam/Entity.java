@@ -22,6 +22,7 @@ public abstract class Entity {
    protected double hp, x, y, vel, targetVel, theta, fTheta, maxDTheta, maxVel, mass;
    protected boolean disposable;
    protected double primeDist, ratUp, ratDown;
+   protected boolean bounces;
    
    public void act(){
       if(target != null){
@@ -143,4 +144,6 @@ public abstract class Entity {
            disposable=true;
        return disposable;
    }
+   
+   public abstract void onCollision();
 }
