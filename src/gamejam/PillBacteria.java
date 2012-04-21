@@ -74,7 +74,7 @@ public class PillBacteria extends Intruder {
          Tower nTower = Engine.getBloodVessel().nearestTower(this);
          PillBacteria nPill = Engine.getBloodVessel().nearestPill(this);
       
-         if(dist(nPill)<DIST_CUTOFF){
+         if(nPill != null && dist(nPill)<DIST_CUTOFF){
             parent = nPill;
             target = nPill;
          }else if (nPill != null && nTower != null) {
