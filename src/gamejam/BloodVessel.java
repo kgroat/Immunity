@@ -13,5 +13,12 @@ import java.util.ArrayList;
 public class BloodVessel {
    ArrayList<Entity> entities;
    ArrayList<Tower> towers;
+   ArrayList<Civilian> civilians;
    ArrayList<Intruder> intruders;
+   
+   public void update(){
+      for(Entity e: entities){
+         e.act();
+      }
+   }
 }

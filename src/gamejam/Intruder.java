@@ -8,6 +8,6 @@ package gamejam;
  *
  * @author Kevin
  */
-public class Intruder {
+public abstract class Intruder extends Entity {
    
 }
