@@ -4,21 +4,85 @@
  */
 package gamejam;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
  *
  * @author Kevin
  */
-public class BloodVessel {
+public class BloodVessel extends GameMode {
+   public static final Color BG = new Color(201, 58, 58);
    ArrayList<Entity> entities;
    ArrayList<Tower> towers;
    ArrayList<Civilian> civilians;
    ArrayList<Intruder> intruders;
    
+   public BloodVessel(){
+      entities = new ArrayList();
+      towers = new ArrayList();
+      civilians = new ArrayList();
+      intruders = new ArrayList();
+   }
+   
+   @Override
    public void update(){
-      for(Entity e: entities){
+      Helper.Intersection pt;
+      Entity e, other;
+      int code1, code2;
+      double tVel;
+      for(int i=0; i<entities.size(); i++){
+         e = entities.get(i);
          e.act();
+         for(int j=i+1; j<entities.size(); j++){
+            other = entities.get(j);
+            pt = e.intersectPoint(other);
+            if(pt != null && pt.code >= 0){
+               System.out.println(i + " / " + j);
+               if(pt.code < 4){
+                  code1 = pt.code;
+                  code2 = other.intersectionCode(pt.x, pt.y);
+               }else{
+                  code2 = pt.code-4;
+                  code1 = e.intersectionCode(pt.x, pt.y);
+               }
+               double thet = e.dFTheta - other.dFTheta;
+               Helper.Velocity vel = Helper.sum(e.vel, e.theta, other.vel, other.theta);
+               if(code1 % 2 == 0){
+                  e.dFTheta -= thet/25;
+               }else{
+                  e.dFTheta += thet/25;
+               }
+               if(code2 % 2 == 0){
+                  other.dFTheta -= thet/25;
+               }else{
+                  other.dFTheta += thet/25;
+               }
+               tVel = Helper.subtract(e, vel, .5).vel;
+               tVel += Helper.subtract(other, vel, .5).vel;
+               e.vel = vel.vel/2;
+               e.theta = vel.theta;
+               other.vel = vel.vel/2;
+               other.theta = vel.theta;
+               vel = Helper.collisionVel(e, other, tVel);
+               Helper.add(e, vel, .5);
+               Helper.add(other, vel, -.5);
+            }
+         }
+         double newX = e.x + e.vel * Math.cos(e.theta);
+         double newY = e.y + e.vel * Math.sin(e.theta);
+         if(newX < 0 || newX > Engine.getWidth()){
+            e.bounceX();
+         }
+         if(newY < 0 || newY > Engine.getHeight()){
+            e.bounceY();
+         }
+      }
+      for(int i=0; i<entities.size(); i++){
+         e = entities.get(i);
+         e.updatePos();
       }
    }
    
@@ -71,5 +135,49 @@ public class BloodVessel {
          }
       }
       return out;
+   }
+
+   @Override
+   public void press(KeyEvent e) {
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   @Override
+   public void release(KeyEvent e) {
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   @Override
+   public void render(Graphics2D g) {
+      g.setColor(BG);
+      g.fillRect(0, 0, Engine.getWidth(), Engine.getHeight());
+      for(Tower t: towers){
+         t.prerender(g);
+      }
+      for(Intruder i: intruders){
+         i.prerender(g);
+         i.render(g);
+      }
+      for(Tower t: towers){
+         t.render(g);
+      }
+   }
+   
+   public void add(Entity e){
+      if(e instanceof Tower){
+         towers.add((Tower)e);
+         if(e instanceof Civilian){
+            civilians.add((Civilian)e);
+         }
+      }
+      if(e instanceof Intruder){
+         intruders.add((Intruder)e);
+      }
+      entities.add(e);
+   }
+
+   @Override
+   public GameMode escape() {
+      throw new UnsupportedOperationException("Not supported yet.");
    }
 }

@@ -5,6 +5,7 @@
 package gamejam;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Polygon;
 
 /**
@@ -29,6 +30,8 @@ public abstract class Entity {
    }
    
    public void updatePos(){
+      theta += dTheta;
+      fTheta += dFTheta;
       x += Math.cos(theta)*vel;
       y += Math.sin(theta)*vel;
    }
@@ -50,11 +53,13 @@ public abstract class Entity {
    }
    
    public void prerender(Graphics2D g){
-      preSprite.drawRot(g, (int)x, (int)y, theta);
+      if(preSprite != null)
+         preSprite.drawRot(g, (int)x, (int)y, fTheta);
    }
    
    public void render(Graphics2D g){
-      sprite.drawRot(g, (int)x, (int)y, theta);
+      if(sprite != null)
+         sprite.drawRot(g, (int)x, (int)y, fTheta);
    }
    
    public double dist(Entity other){
@@ -63,13 +68,43 @@ public abstract class Entity {
    }
    
    public Polygon getBounds(){
+      int bx = (int)x, by = (int)y;
       int nx=(int)(Math.cos(fTheta)*getWidth()/2 + Math.sin(fTheta)*getHeight()/2), ny=(int)(Math.cos(fTheta)*getHeight()/2 + Math.sin(fTheta)*getWidth()/2);
-      int[] xs = new int[]{nx, -nx, nx, -nx};
-      int[] ys = new int[]{ny, ny, -ny, -ny};
+      int[] xs = new int[]{-nx+bx, nx+bx, -nx+bx, nx+bx};
+      int[] ys = new int[]{-ny+by, -ny+by, ny+by, ny+by};
       return new Polygon(xs, ys, 4);
    }
    
-   public boolean intersects(Entity other){
-      return Helper.intersects(getBounds(), other.getBounds());
+   public Helper.Intersection intersectPoint(Entity other){
+      return Helper.intersectPoint(getBounds(), other.getBounds());
+   }
+   
+   public int intersectionCode(int tx, int ty){
+      int bx = (int)x, by = (int)y;
+      int nx=(int)(Math.cos(fTheta)*getWidth()/2 + Math.sin(fTheta)*getHeight()/2), ny=(int)(Math.cos(fTheta)*getHeight()/2 + Math.sin(fTheta)*getWidth()/2);
+      int[] xs = new int[]{-nx+bx, nx+bx, -nx+bx, nx+bx};
+      int[] ys = new int[]{-ny+by, -ny+by, ny+by, ny+by};
+      int best=0;
+      double bestDist = Helper.dist(tx, ty, xs[0], ys[0]), dist;
+      for(int i=1; i<4; i++){
+         dist = Helper.dist(tx, ty, xs[i], ys[i]);
+         if(dist < bestDist){
+            bestDist = dist;
+            best = i;
+         }
+      }
+      return best;
+   }
+   
+   public void bounceX(){
+      double tx = vel*Math.cos(theta);
+      double ty = vel*Math.sin(theta);
+      theta = Math.atan2(ty, -tx);
+   }
+   
+   public void bounceY(){
+      double tx = vel*Math.cos(theta);
+      double ty = vel*Math.sin(theta);
+      theta = Math.atan2(-ty, tx);
    }
 }

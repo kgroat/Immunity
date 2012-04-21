@@ -173,7 +173,7 @@ public class SpriteSet {
       xform.rotate(theta, x, y);
       Graphics2D g2 = (Graphics2D)g;
       g2.setTransform(xform);
-      g2.drawImage(toDraw.frame[currentFrame], x-spriteHeight/2, y-spriteWidth/2, null);
+      g2.drawImage(toDraw.frame[currentFrame], x-spriteWidth/2, y-spriteHeight/2, null);
       g2.setTransform(new AffineTransform());
    }
    

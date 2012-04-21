@@ -1,0 +1,6 @@
+/gamejam/resources/images/bacteria.png
+34 x 18
+LOOP: green  (1) ;
+LOOP: lime   (1) ;
+LOOP: cyan   (1) ;
+LOOP: violet (1) ;

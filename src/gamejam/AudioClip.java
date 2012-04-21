@@ -23,7 +23,7 @@ import org.lwjgl.util.WaveData;
  */
 public class AudioClip {
    
-   public static final String LOC = "/antquest/resources/audio/";
+   public static final String LOC = "resources/audio/";
 
    public static final double DISTANCER = 100;
    

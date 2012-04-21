@@ -34,7 +34,10 @@ public final class Engine {
    static void start() {
       running = true;
       resize();
-      currentMode = null; //new MainMenu();
+      BloodVessel bv;
+      currentMode = bv = new BloodVessel();
+      for(int i=0; i<30; i++)
+         bv.add(new PillBacteria());
       mainLoop = new Thread(){
          public void run(){
             while(running){
@@ -102,7 +105,12 @@ public final class Engine {
          Graphics2D g = buffer.createGraphics();
          g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
          g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+         g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);
+         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+         g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+         g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
          currentMode.render(g);
       }
       return buffer;
@@ -126,6 +134,9 @@ public final class Engine {
    }
    
    public static BloodVessel getBloodVessel(){
+      if(currentMode instanceof BloodVessel){
+         return (BloodVessel)currentMode;
+      }
       return null;
    }
    

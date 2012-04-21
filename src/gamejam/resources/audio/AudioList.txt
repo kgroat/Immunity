@@ -1,0 +1,11 @@
+8
+0.6
+0.9
+Error1.ogg;       SFX;   ONCE;   0.7;   0;
+Error2.ogg;       SFX;   ONCE;   0.7;   0;
+MoveCursor.ogg;   SFX;   ONCE;   0.7;   0;
+Select1.ogg;      SFX;   ONCE;   0.7;   0;
+Select2.ogg;      SFX;   ONCE;   0.7;   0;
+Select3.ogg;      SFX;   ONCE;   0.7;   0;
+Select4.ogg;      SFX;   ONCE;   0.7;   0;
+Fun.ogg;          MUSIC; LOOP;   1.0;   0;
