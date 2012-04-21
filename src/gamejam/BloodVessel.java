@@ -99,6 +99,17 @@ public class BloodVessel extends GameMode {
       return t;
    }
    
+   public Tower[] towersNearby(Entity e, double radius)
+   {
+       ArrayList<Tower> out = new ArrayList();
+       for (int j=0; j<towers.size(); j++)
+       {
+           if ((e.dist(towers.get(j))<=radius) && (towers.get(j) != e))
+               out.add(towers.get(j));
+       }
+       return out.toArray(new Tower[out.size()]);
+   }
+   
    public Intruder nearestIntruder(Entity e){
       Intruder i = null;
       double best = Double.MAX_VALUE;

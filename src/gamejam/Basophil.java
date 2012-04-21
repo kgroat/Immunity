@@ -5,43 +5,39 @@
 
 package gamejam;
 
-import java.awt.Graphics2D;
-
 /**
  *
  * @author Clem
  */
-public class Macrophage extends Tower {
-    public static final SpriteSet SP = SpriteSet.load("resources/images/cells.txt");
-    
-    public Macrophage ()
+public class Basophil extends Tower {
+    public Basophil()
     {
-        x=Math.random()*Engine.getWidth();
+        x = Math.random()*Engine.getWidth();
         y = Math.random() * Engine.getHeight();
-        maxVel=.75;
+        maxVel = .68;
         vel = 0;
         fTheta =Math.random() * Math.PI * 2;
         theta = 0;
-        sprite = SP;
-        ratUp=1;
-        ratDown=9;
+        sprite = null;
+        ratUp=2;
+        ratDown=8;
         primeDist = 100;
-        hp=670;
+        hp=430;
     }
     
-    public Macrophage(double placewidth, double placeheight)
+    public Basophil(double placewidth, double placeheight)
     {
-        x=placewidth;
-        y=placeheight;
-        maxVel=.75;
+        x = placewidth;
+        y = placeheight;
+        maxVel = .68;
         vel = 0;
         fTheta =Math.random() * Math.PI * 2;
         theta = 0;
-        sprite = SP;
-        ratUp=1;
-        ratDown=9;
+        sprite = null;
+        ratUp=2;
+        ratDown=8;
         primeDist = 100;
-        hp=670;
+        hp=430;
     }
     
     public void act()
@@ -57,21 +53,18 @@ public class Macrophage extends Tower {
                 targetVel = 0;
             }
         }
+        //hits the target lightly, then calls nearby towers for help
         if (target != null && Helper.intersects(this.getBounds(), target.getBounds()))
         {
-            target.damage(10);
+            target.damage(7);
+            if (!target.disposable)
+            {
+                Tower[] heyyou = Engine.getBloodVessel().towersNearby(this, 200);
+                for (int j=0; j<heyyou.length; j++)
+                {
+                    heyyou[j].target=this.target;
+                }
+            }
         }
     }
-    
-   @Override
-   public void prerender(Graphics2D g) {
-      sprite.enact("pre");
-      sprite.drawRot(g, (int)x, (int)y, fTheta);
-   }
-
-   @Override
-   public void render(Graphics2D g) {
-      sprite.enact("post");
-      sprite.drawRot(g, (int)x, (int)y, fTheta);
-   }
 }
