@@ -41,7 +41,7 @@ public final class Engine {
       for(int i=0; i<10; i++)
          bv.add(new Civilian());
       for(int i=0; i<10; i++)
-          bv.add(new Macrophage());
+          bv.add(new Neutrophil());
       mainLoop = new Thread(){
          public void run(){
             while(running){
