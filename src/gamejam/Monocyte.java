@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
  *
  * @author Clem
  */
+//This Tower stands still and heals other Towers near it.
 public class Monocyte extends Tower {
     public static final SpriteSet SP = SpriteSet.load("resources/images/monocyte.txt");
 

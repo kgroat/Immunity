@@ -45,9 +45,9 @@ public class Virus extends Intruder {
     
     @Override
     public void onCollision(Entity e) {
-        if(e instanceof Tower) {
-            e.infect();
-            //And then stop moving
+        if(e instanceof Tower && !disposable && !e.disposable) {
+            ((Tower)e).infect();
+            disposable = true;
         }
     }
     

@@ -9,6 +9,8 @@ package gamejam;
  *
  * @author Clem
  */
+//This Tower moves towards the nearest Intruder and damages it on contact.
+//Additionally, this Tower calls nearby Towers to attack the Intruder it is attacking.
 public class Lymphocyte extends Tower {
     public Lymphocyte()
     {
@@ -24,6 +26,7 @@ public class Lymphocyte extends Tower {
         primeDist = 100;
         hp=430;
         bounces = false;
+        infectionsRemaining = 2;
     }
     
     public Lymphocyte(double placewidth, double placeheight)

@@ -18,6 +18,7 @@ public class Civilian extends Tower {
       this();
       x = tx;
       y = ty;
+      infectionsRemaining = 10;
    }
    
    
@@ -34,6 +35,8 @@ public class Civilian extends Tower {
       sprite = SP;
       pTheta = fTheta = Math.random()*Math.PI*2;
       dPTheta = Math.random()*Math.PI/50;
+      infectionsRemaining = 10;
+
    }
    
    public void act(){
