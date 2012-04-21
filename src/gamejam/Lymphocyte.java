@@ -57,7 +57,6 @@ public class Lymphocyte extends Tower {
         //hits the target lightly, then calls nearby towers for help
         if (target != null && Helper.intersects(this.getBounds(), target.getBounds()))
         {
-            target.damage(7);
             if (!target.disposable)
             {
                 Tower[] heyyou = Engine.getBloodVessel().towersNearby(this, 200);
@@ -68,4 +67,12 @@ public class Lymphocyte extends Tower {
             }
         }
     }
+    
+   @Override
+   public void onCollision(){
+      Intruder[] trudes = Engine.getBloodVessel().intrudersNearby(this, 128);
+      for(int i=0; i<trudes.length; i++){
+         trudes[i].damage(10);
+      }
+   }
 }

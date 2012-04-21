@@ -145,7 +145,7 @@ public abstract class Entity {
        return disposable;
    }
    
-   public void onCollision(){
+   public void onCollision(Entity other){
       
    }
 }

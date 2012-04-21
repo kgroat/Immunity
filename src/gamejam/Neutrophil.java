@@ -50,10 +50,6 @@ public class Neutrophil extends Tower {
                 targetVel = 0;
             }
         }
-        if (target != null && Helper.intersects(this.getBounds(), target.getBounds()))
-        {
-            target.damage(10);
-        }
     }
     
    @Override
@@ -66,5 +62,13 @@ public class Neutrophil extends Tower {
    public void render(Graphics2D g) {
       sprite.enact("post");
       sprite.drawRot(g, (int)x, (int)y, fTheta);
+   }
+   
+   @Override
+   public void onCollision(){
+      Intruder[] trudes = Engine.getBloodVessel().intrudersNearby(this, 128);
+      for(int i=0; i<trudes.length; i++){
+         trudes[i].damage(10);
+      }
    }
 }
