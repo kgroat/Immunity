@@ -9,6 +9,7 @@ package gamejam;
  *
  * @author Clem
  */
+//This Tower stands still and heals other Towers near it.
 public class Monocyte extends Tower {
 
     public Monocyte ()

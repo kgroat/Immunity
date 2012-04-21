@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
  *
  * @author Clem
  */
+//The most basic Tower.  It chases nearby enemies and damages them on contact.
 public class Neutrophil extends Tower {
     public static final SpriteSet SP = SpriteSet.load("resources/images/cells.txt");
     

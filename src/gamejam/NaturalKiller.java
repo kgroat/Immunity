@@ -9,6 +9,7 @@ package gamejam;
  *
  * @author Clem
  */
+//This Tower flies at the nearest enemy and then explodes, dealing damage to everything nearby (friendly and enemy).
 public class NaturalKiller extends Tower {
     
     public NaturalKiller()
