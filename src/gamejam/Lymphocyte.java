@@ -9,8 +9,8 @@ package gamejam;
  *
  * @author Clem
  */
-public class Basophil extends Tower {
-    public Basophil()
+public class Lymphocyte extends Tower {
+    public Lymphocyte()
     {
         x = Math.random()*Engine.getWidth();
         y = Math.random() * Engine.getHeight();
@@ -25,7 +25,7 @@ public class Basophil extends Tower {
         hp=430;
     }
     
-    public Basophil(double placewidth, double placeheight)
+    public Lymphocyte(double placewidth, double placeheight)
     {
         x = placewidth;
         y = placeheight;
