@@ -27,6 +27,7 @@ public class Macrophage extends Tower{
         maxHp = hp=300;
         bounces = true;
         infectionsRemaining = 3;
+        maxDTheta = Math.PI / 14;
     }
     
     public Macrophage(double startwidth, double startheight)

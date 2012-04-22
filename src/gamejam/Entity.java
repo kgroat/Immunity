@@ -13,10 +13,12 @@ import java.awt.Polygon;
  * @author Kevin
  */
 public abstract class Entity {
+   //physics base variables
    public static final double VFRICTION = 1.00;
    public static final double TFRICTION = 1.03;
    public static final int TURN_TRIES = 5;
    
+   //entity base variables
    protected SpriteSet preSprite, sprite;
    protected Entity target;
    protected double hp, maxHp, x, y, vel, targetVel, theta, fTheta, dFTheta, maxDTheta, maxVel, mass, pTheta, dPTheta;
@@ -31,6 +33,7 @@ public abstract class Entity {
       dPTheta = (Math.random()*2-1)*Math.PI/50;
    }
    
+   //act sets an entity's target and moves it
    public void act(){
       if(target != null){
          double th;
@@ -44,6 +47,9 @@ public abstract class Entity {
       }
    }
    
+   //changes the direction of an object calling this function by checking to
+   //see whether a new direction will get it closer to the heading that it wants;
+   //double t is the current heading
    private boolean isCloser(double t){
       double dx = Math.cos(theta)*targetVel, dy = Math.sin(theta)*targetVel;
       double tdx = Math.cos(t)*targetVel, tdy = Math.sin(t)*targetVel;
@@ -51,6 +57,7 @@ public abstract class Entity {
              target.dist(x+tdx, y+tdy);
    }
    
+   //move the object calling this method by modifying vel, x-direction, and y-direction
    public void move(){
       pTheta += dPTheta;
       fTheta += dFTheta;
@@ -65,10 +72,12 @@ public abstract class Entity {
       y += vel*Math.sin(theta);
    }
    
+   //casts the x-location pixel as an int
    public int getX(){
       return (int)x;
    }
    
+   //casts the y-location pixel as an int
    public int getY(){
       return (int)y;
    }
@@ -136,18 +145,21 @@ public abstract class Entity {
       return best;
    }
    
+   //calculate the x-direction on collision
    public void bounceX(){
       double tx = vel*Math.cos(theta);
       double ty = vel*Math.sin(theta);
       theta = Math.atan2(ty, -tx);
    }
    
+   //calculate the y-direction on collision
    public void bounceY(){
       double tx = vel*Math.cos(theta);
       double ty = vel*Math.sin(theta);
       theta = Math.atan2(-ty, tx);
    }
    
+   //calculate damage and decrease health accordingly
    public boolean damage(double ouch)
    {
        System.out.println(hp+" / "+(hp-=ouch));
@@ -157,6 +169,7 @@ public abstract class Entity {
    }
    
    public void onCollision(Entity other){
-       
+       //placeholder function for entities to use;
+       //no actual function written here
    }
 }

@@ -12,6 +12,7 @@ package gamejam;
 //This Tower flies at the nearest enemy and then explodes, dealing damage to everything nearby (friendly and enemy).
 public class NaturalKiller extends Tower {
     
+    //default constructor
     public NaturalKiller()
     {
         x = Math.random()*Engine.getWidth();        //width of the window
@@ -31,8 +32,11 @@ public class NaturalKiller extends Tower {
         maxHp = hp=150;
         bounces = true;
         infectionsRemaining = 3;
+        maxDTheta = Math.PI / 17;
     }
     
+    //alternate contructor that lets you set the initial location rather than
+    //a random location
     public NaturalKiller(double placewidth, double placeheight)
     {
         this();
@@ -41,11 +45,14 @@ public class NaturalKiller extends Tower {
     }
     
     @Override
+    //act on an enemy unit
     public void act()
     {
+        //if you have a target but it's about to die, forget that target
         if (target != null && target.disposable)
             target=null;
         super.act();
+        //then go get a new target
         if (target != null && Helper.intersects(this.getBounds(), target.getBounds()))
         {
             Entity [] victims = Engine.getBloodVessel().entitiesNearby(this, 150);
@@ -59,6 +66,8 @@ public class NaturalKiller extends Tower {
     
     //called whenever this() collides with ANYTHING else (friend or foe)
     public void onCollision(Entity other){
+        //and if it collides with an enemy, it explodes and tries to kill it
+        //(50 damage)
         if (other instanceof Intruder && !disposable){
             Entity[] e = Engine.getBloodVessel().entitiesNearby(this, 200);            
             for(int i=0; i<e.length; i++){
