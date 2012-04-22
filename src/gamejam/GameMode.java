@@ -6,6 +6,7 @@ package gamejam;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -20,6 +21,10 @@ public abstract class GameMode {
    public abstract void press(KeyEvent e);
    
    public abstract void release(KeyEvent e);
+   
+   public abstract void mousePress(MouseEvent e);
+   
+   public abstract void mouseRelease(MouseEvent e);
    
    public abstract void render(Graphics2D g);
    

@@ -7,6 +7,7 @@ package gamejam;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 /**
@@ -259,6 +260,16 @@ public class BloodVessel extends GameMode {
 
    @Override
    public GameMode escape() {
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   @Override
+   public void mousePress(MouseEvent e) {
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   @Override
+   public void mouseRelease(MouseEvent e) {
       throw new UnsupportedOperationException("Not supported yet.");
    }
 }

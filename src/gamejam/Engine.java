@@ -151,4 +151,12 @@ public final class Engine {
       return null;
    }
    
+   public static void mousePress(MouseEvent e){
+      currentMode.mousePress(e);
+   }
+   
+   public static void mouseRelease(MouseEvent e){
+      currentMode.mouseRelease(e);
+   }
+   
 }
