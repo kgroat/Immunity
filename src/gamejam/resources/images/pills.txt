@@ -5,6 +5,7 @@ LOOP: peagreen    (1)
 LOOP: green       (1) ;
 LOOP: aqua        (1) 
 LOOP: cyan        (1) 
+LOOP: violet      (1) ;
 LOOP: flagellate  (3) ;
 LOOP: ciliate     (3) ;
 LOOP: spirillum   (3) ;
