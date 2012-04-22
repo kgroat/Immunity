@@ -16,6 +16,14 @@ import java.awt.image.BufferedImage;
  */
 public class ADVMode extends GameMode {
 
+    protected BufferedImage cutinRight, cutinLeft;
+    
+    public ADVMode()
+    {
+        cutinRight=null;
+        cutinLeft=null;
+    }
+    
     @Override
     public void press(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -28,9 +36,8 @@ public class ADVMode extends GameMode {
 
     @Override
     public void render(Graphics2D g) {
-        BufferedImage bi = FileUtility.loadImage("resources/images/particles.png");
-        g.drawImage(bi, 0, 0, null);
-        throw new UnsupportedOperationException("Not supported yet.");
+        g.drawImage(cutinRight, 200, 160, null);
+        g.drawImage(cutinLeft, 400, 160, null);
     }
 
     @Override
