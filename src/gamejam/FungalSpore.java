@@ -24,6 +24,7 @@ public class FungalSpore extends Intruder {
       ratDown = 7;
       primeDist = sprite.getSpriteWidth()/2;
       maxHp = hp = 1000;
+      drops = 50;
     }
     
     public boolean damage(double ouch)

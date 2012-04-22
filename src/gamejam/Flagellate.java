@@ -28,6 +28,7 @@ public class Flagellate extends Intruder{
       primeDist = sprite.getSpriteWidth()/2;
       maxHp = hp = 500;
       hascrashed=true;
+      drops = 40;
     }
     
     public void act()

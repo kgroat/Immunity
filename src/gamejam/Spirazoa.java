@@ -27,6 +27,7 @@ public class Spirazoa extends Intruder{
       primeDist = sprite.getSpriteWidth()/2;
       maxHp = hp = 450;
       rateoffire = 15;
+      drops=35;
     }
     
     public void act()
@@ -44,5 +45,5 @@ public class Spirazoa extends Intruder{
             rateoffire--;
         super.act();
     }
-
+    
 }

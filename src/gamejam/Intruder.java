@@ -9,5 +9,13 @@ package gamejam;
  * @author Kevin
  */
 public abstract class Intruder extends Entity {
+   protected int drops;
    
+   public boolean damage(double ouch)
+   {
+       boolean result = super.damage(ouch);
+       if (disposable)
+           Engine.getBloodVessel().aminoAcids+=drops;
+       return result;
+   }
 }

@@ -25,6 +25,7 @@ public class Ciliate extends Intruder {
       primeDist = sprite.getSpriteWidth()/2;
       maxHp = hp = 600;
       maxDTheta = Math.PI / 10;
+      drops = 35;
     }
     
     public void act()

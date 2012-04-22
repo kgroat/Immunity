@@ -29,6 +29,7 @@ public class Parasite extends Intruder {
       maxHp = hp = 2000;
       wanderlust = 90;
       maxDTheta = Math.PI/15;
+      drops = 75;
     }
     
     @Override
