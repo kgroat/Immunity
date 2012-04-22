@@ -41,7 +41,7 @@ public class Parasite extends Intruder {
     public void act()
     {
         Tower[] taunt = Engine.getBloodVessel().towersNearby(this, 150);
-        for (int j=0; j<taunt.length, j++)
+        for (int j=0; j<taunt.length; j++)
             taunt [j].target=this;
     }
     
