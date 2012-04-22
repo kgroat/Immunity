@@ -47,7 +47,6 @@ public class Neutrophil extends Tower {
             target=null;
         if(target == null)
            target = Engine.getBloodVessel().nearestIntruder(this);
-        System.out.println(target.x + " / " + target.y + " / " + target);
         super.act();
     }
    

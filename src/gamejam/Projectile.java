@@ -33,7 +33,7 @@ public class Projectile extends Entity {
       shooter = null;
       bounces = false;
       radius=5;
-      bounced = false;
+      bounced = true;
    }
 
    public Projectile(double startwidth, double startheight, double starttheta, Entity e) {
@@ -49,8 +49,6 @@ public class Projectile extends Entity {
       final double DAMAGE = 50;
       if (other == shooter) {
          return;
-      }else{
-         System.out.println("Collision");
       }
       if (shooter instanceof Tower) {
          if (other instanceof Intruder) {

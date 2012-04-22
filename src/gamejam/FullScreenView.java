@@ -178,11 +178,13 @@ public class FullScreenView extends JFrame {
    }
    
    public void mousePress(MouseEvent e){
-         Engine.mousePress(e);
+      MouseEvent tmp = new MouseEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiers(), e.getX()-insetLeft, e.getY()-insetTop, e.getClickCount(), e.isPopupTrigger(), e.getButton());
+      Engine.mousePress(tmp);
    }
    
    public void mouseRelease(MouseEvent e){
-         Engine.mouseRelease(e);
+      MouseEvent tmp = new MouseEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiers(), e.getX()-insetLeft, e.getY()-insetTop, e.getClickCount(), e.isPopupTrigger(), e.getButton());
+      Engine.mouseRelease(tmp);
    }
 
    /**

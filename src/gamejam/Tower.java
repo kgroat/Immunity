@@ -19,7 +19,7 @@ public abstract class Tower extends Entity {
    }
    
    public void infect(){
-       System.out.println((infectionsRemaining--)+" / "+this);
+       infectionsRemaining--;
    }
    
    @Override

@@ -35,25 +35,7 @@ public final class Engine {
       debug = true;
       running = true;
       resize();
-      BloodVessel bv;
-      currentMode = bv = new BloodVessel();
-      for(int i=0; i<50; i++)
-         bv.add(new PillBacteria());
-      for(int i=0; i<10; i++)
-         bv.add(new Civilian());
-      Neutrophil temp = new Neutrophil();
-      temp.infectionsRemaining = 0;
-      bv.add(temp);
-      for(int i=0; i<10; i++)
-          bv.add(new Neutrophil());
-      for(int i=0; i<10; i++)
-          bv.add(new Monocyte());
-      for(int i=0; i<20; i++)
-          bv.add(new Virus());
-      for(int i=0; i<10; i++)
-          bv.add(new Lymphocyte());
-      for(int i=0; i<10; i++)
-          bv.add(new KillerT());
+      currentMode = new MainMenu();
       mainLoop = new Thread(){
          public void run(){
             while(running){
@@ -82,6 +64,28 @@ public final class Engine {
       renderLoop.setDaemon(true);
       mainLoop.start();
       renderLoop.start();
+   }
+   
+   static void start2(){
+      BloodVessel bv;
+      currentMode = bv = new BloodVessel();
+      for(int i=0; i<50; i++)
+         bv.add(new PillBacteria());
+      for(int i=0; i<10; i++)
+         bv.add(new Civilian());
+      Neutrophil temp = new Neutrophil();
+      temp.infectionsRemaining = 0;
+      bv.add(temp);
+      for(int i=0; i<10; i++)
+          bv.add(new Neutrophil());
+      for(int i=0; i<10; i++)
+          bv.add(new Monocyte());
+      for(int i=0; i<20; i++)
+          bv.add(new Virus());
+      for(int i=0; i<10; i++)
+          bv.add(new Lymphocyte());
+      for(int i=0; i<10; i++)
+          bv.add(new KillerT());
    }
    
    static void stop(){

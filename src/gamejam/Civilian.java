@@ -34,15 +34,18 @@ public class Civilian extends Tower {
       y = Math.random() * Engine.getHeight();
       sprite = SP;
       pTheta = fTheta = Math.random()*Math.PI*2;
-      dPTheta = Math.random()*Math.PI/50;
+      dPTheta = (Math.random()*2-1)*Math.PI/50;
+      dFTheta = (Math.random()*2-1)*Math.PI/50;
       infectionsRemaining = 10;
       ratUp = 1;
       ratDown = 19;
       radius = 25;
    }
    
+   @Override
    public void act(){
       target = null;
+      pTheta += dPTheta;
       super.act();
    }
 

@@ -84,7 +84,6 @@ public class BloodVessel extends GameMode {
             projectiles.remove(e);
             if(e instanceof Tower){
                int q = ((Tower)e).numViruses;
-               System.out.println("VIRUSES: "+q + " / "+e);
                for(int j=0; j<q; j++){
                   add(new Virus(e.x, e.y));
                }

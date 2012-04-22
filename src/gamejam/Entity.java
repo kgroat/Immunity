@@ -39,14 +39,12 @@ public abstract class Entity {
       if(target != null){
          double th, baseTh = theta;
          targetVel = Math.min(dist(target)*maxVel/primeDist, maxVel);
-         System.out.println("VEL: "+targetVel);
          for(int i=-TURN_TRIES; i<TURN_TRIES; i++){
             th = baseTh + maxDTheta*i/TURN_TRIES;
             if(isCloser(th)){
                theta = th;
             }
          }
-         System.out.println("THETA: "+theta);
       }
    }
    
