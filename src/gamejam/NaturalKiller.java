@@ -32,6 +32,7 @@ public class NaturalKiller extends Tower {
         maxHp = hp=150;
         bounces = true;
         infectionsRemaining = 3;
+        maxDTheta = Math.PI / 17;
     }
     
     //alternate contructor that lets you set the initial location rather than
