@@ -7,6 +7,7 @@ package gamejam;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 /**
@@ -41,6 +42,16 @@ public class ADVMode extends GameMode {
     public GameMode escape() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+   @Override
+   public void mousePress(MouseEvent e) {
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   @Override
+   public void mouseRelease(MouseEvent e) {
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
     
 
 }

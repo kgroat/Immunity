@@ -125,6 +125,19 @@ public class FullScreenView extends JFrame {
             release(ke);
          }
       });
+      addMouseListener(new MouseAdapter(){
+
+         @Override
+         public void mousePressed(MouseEvent e) {
+            mousePress(e);
+         }
+
+         @Override
+         public void mouseReleased(MouseEvent e) {
+            mouseRelease(e);
+         }
+         
+      });
       this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
       addWindowListener(new WindowAdapter(){
          @Override
@@ -162,6 +175,14 @@ public class FullScreenView extends JFrame {
     */
    public void release(KeyEvent e) {
       Engine.releaseKey(e);
+   }
+   
+   public void mousePress(MouseEvent e){
+         Engine.mousePress(e);
+   }
+   
+   public void mouseRelease(MouseEvent e){
+         Engine.mouseRelease(e);
    }
 
    /**
