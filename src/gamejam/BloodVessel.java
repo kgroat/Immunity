@@ -20,6 +20,8 @@ public class BloodVessel extends GameMode {
    ArrayList<Civilian> civilians;
    ArrayList<Intruder> intruders;
    
+   int aminoAcids;
+   
    public BloodVessel(){
       entities = new ArrayList();
       towers = new ArrayList();

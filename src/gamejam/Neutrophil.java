@@ -15,8 +15,6 @@ import java.awt.Graphics2D;
 public class Neutrophil extends Tower {
     public static final SpriteSet SP = SpriteSet.load("resources/images/neutrophil.txt");
     
-    protected double pTheta, dPTheta;
-    
     public Neutrophil ()
     {
         x=Math.random()*Engine.getWidth();
@@ -31,8 +29,6 @@ public class Neutrophil extends Tower {
         primeDist = 100;
         maxHp = hp=670;
         bounces = false;
-        pTheta = Math.random()*Math.PI*2;
-        dPTheta = (Math.random()*2-1)*Math.PI/50;
         maxDTheta = Math.PI/50;
         infectionsRemaining = 4;
     }
@@ -46,7 +42,6 @@ public class Neutrophil extends Tower {
     
     public void act()
     {
-       pTheta += dPTheta;
         if (target != null && target.disposable)
             target=null;
         super.act();
