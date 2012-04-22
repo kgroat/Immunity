@@ -10,6 +10,7 @@ package gamejam;
  * @author Clem
  */
 public class Dendritic extends Tower {
+   public static final SpriteSet SP = SpriteSet.load("resources/images/friendly.txt");
     
     private int cooldown;
     

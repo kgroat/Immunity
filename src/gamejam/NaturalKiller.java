@@ -11,6 +11,7 @@ package gamejam;
  */
 //This Tower flies at the nearest enemy and then explodes, dealing damage to everything nearby (friendly and enemy).
 public class NaturalKiller extends Tower {
+   public static final SpriteSet SP = SpriteSet.load("resources/images/friendly.txt");
     
     //default constructor
     public NaturalKiller()
