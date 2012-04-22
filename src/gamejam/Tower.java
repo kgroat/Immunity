@@ -4,6 +4,8 @@
  */
 package gamejam;
 
+import java.awt.Graphics2D;
+
 /**
  *
  * @author Kevin
@@ -27,5 +29,17 @@ public abstract class Tower extends Entity {
            numViruses++;
        }
        super.act();
+   }
+   
+   @Override
+   public void prerender(Graphics2D g) {
+      sprite.enact("pre");
+      sprite.drawRot(g, (int)x, (int)y, pTheta);
+   }
+
+   @Override
+   public void render(Graphics2D g) {
+      sprite.enact("post");
+      sprite.drawRot(g, (int)x, (int)y, fTheta);
    }
 }

@@ -20,6 +20,7 @@ public class BloodVessel extends GameMode {
    ArrayList<Tower> towers;
    ArrayList<Civilian> civilians;
    ArrayList<Intruder> intruders;
+   ArrayList<Projectile> projectiles;
    
    int aminoAcids;
    
@@ -28,6 +29,7 @@ public class BloodVessel extends GameMode {
       towers = new ArrayList();
       civilians = new ArrayList();
       intruders = new ArrayList();
+      projectiles = new ArrayList();
    }
    
    @Override
@@ -42,30 +44,11 @@ public class BloodVessel extends GameMode {
          e.act();
          for(int j=i+1; j<entities.size(); j++){
             other = entities.get(j);
-            pt = e.intersectPoint(other);
-            if(pt != null && pt.code >= 0){
+            if(e.collides(other)){
                e.onCollision(other);
                other.onCollision(e);
-               if(e.bounces && other.bounces){
-                  if(pt.code < 4){
-                     code1 = pt.code;
-                     code2 = other.intersectionCode(pt.x, pt.y);
-                  }else{
-                     code2 = pt.code-4;
-                     code1 = e.intersectionCode(pt.x, pt.y);
-                  }
+               if(!(e instanceof Virus || other instanceof Virus) && (e.bounces && other.bounces || e.getClass() == other.getClass())){
                   Helper.Velocity vel = Helper.sum(e.vel, e.theta, other.vel, other.theta);
-   //               double thet = e.dFTheta - other.dFTheta;
-   //               if(code1 % 2 == 0){
-   //                  e.dFTheta -= thet/25;
-   //               }else{
-   //                  e.dFTheta += thet/25;
-   //               }
-   //               if(code2 % 2 == 0){
-   //                  other.dFTheta -= thet/25;
-   //               }else{
-   //                  other.dFTheta += thet/25;
-   //               }
                   tVel = Helper.subtract(e, vel, .5).vel;
                   tVel += Helper.subtract(other, vel, .5).vel;
                   e.vel = vel.vel/2;
@@ -98,6 +81,7 @@ public class BloodVessel extends GameMode {
             towers.remove(e);
             intruders.remove(e);
             civilians.remove(e);
+            projectiles.remove(e);
             if(e instanceof Tower){
                int q = ((Tower)e).numViruses;
                System.out.println("VIRUSES: "+q + " / "+e);
@@ -252,6 +236,10 @@ public class BloodVessel extends GameMode {
          intruders.get(i).prerender(g);
          intruders.get(i).render(g);
       }
+      for(int i=0; i<projectiles.size(); i++){
+         projectiles.get(i).prerender(g);
+         projectiles.get(i).render(g);
+      }
       for(int i=0; i<towers.size(); i++){
          towers.get(i).render(g);
       }
@@ -266,6 +254,9 @@ public class BloodVessel extends GameMode {
       }
       if(e instanceof Intruder){
          intruders.add((Intruder)e);
+      }
+      if(e instanceof Projectile){
+         projectiles.add((Projectile)e);
       }
       entities.add(e);
    }

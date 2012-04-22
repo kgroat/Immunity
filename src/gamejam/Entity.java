@@ -25,6 +25,7 @@ public abstract class Entity {
    protected boolean disposable;
    protected double primeDist, ratUp, ratDown;
    protected boolean bounces;
+   protected double radius;
    
    public Entity(){
       fTheta = Math.random()*Math.PI*2;
@@ -36,14 +37,16 @@ public abstract class Entity {
    //act sets an entity's target and moves it
    public void act(){
       if(target != null){
-         double th;
+         double th, baseTh = theta;
          targetVel = Math.min(dist(target)*maxVel/primeDist, maxVel);
+         System.out.println("VEL: "+targetVel);
          for(int i=-TURN_TRIES; i<TURN_TRIES; i++){
-            th = theta + maxDTheta*i/TURN_TRIES;
+            th = baseTh + maxDTheta*i/TURN_TRIES;
             if(isCloser(th)){
                theta = th;
             }
          }
+         System.out.println("THETA: "+theta);
       }
    }
    
@@ -110,6 +113,7 @@ public abstract class Entity {
    }
    
    public double dist(double tx, double ty){
+      tx -= x; ty -= y;
       return Math.sqrt(tx*tx + ty*ty);
    }
    
@@ -162,10 +166,14 @@ public abstract class Entity {
    //calculate damage and decrease health accordingly
    public boolean damage(double ouch)
    {
-       System.out.println(hp+" / "+(hp-=ouch));
+       hp-=ouch;
        hp = Math.min(hp, maxHp);
        disposable=hp<=0;
        return disposable;
+   }
+   
+   public final boolean collides(Entity other){
+      return other.dist(this)<radius+other.radius;
    }
    
    public void onCollision(Entity other){

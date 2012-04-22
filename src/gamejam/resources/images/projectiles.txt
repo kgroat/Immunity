@@ -1,0 +1,4 @@
+/gamejam/resources/images/projectiles.png
+16 x 16
+LOOP: tower     (1) 
+LOOP: intruder  (1) ;

@@ -29,6 +29,7 @@ public class Virus extends Intruder {
         maxHp = hp = 50;
         name = "v"+(int)(Math.random()*4+1);
         drops=5;
+        radius = 4;
     }
 
     public Virus(double tx, double ty) {

@@ -32,6 +32,7 @@ public class PillBacteria extends Intruder {
       primeDist = sprite.getSpriteWidth()/2;
       maxHp = hp = 500;
       drops = 30;
+      radius = 12;
    }
 
    public enum ColorType {

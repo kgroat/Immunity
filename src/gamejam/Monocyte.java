@@ -26,12 +26,14 @@ public class Monocyte extends Tower {
         fTheta =Math.random() * Math.PI * 2;
         theta = 0;
         sprite = SP;
-        ratUp=0;
-        ratDown=1;
+        ratUp=1;
+        ratDown=19;
         primeDist = 100;
         maxHp = hp=400;
         maxDTheta = Math.PI/50;
         infectionsRemaining = 4;
+        radius = 22;
+        bounces = true;
     }
     
     public Monocyte (double placewidth, double placeheight)
@@ -61,7 +63,7 @@ public class Monocyte extends Tower {
    public void render(Graphics2D g) {
       sprite.enact("post");
       sprite.drawRot(g, (int)x, (int)y, fTheta);
-      if(patients != null){
+      if(patients != null && Engine.isDebug()){
          g.setColor(Color.GREEN);
          for(int i=0; i<patients.length; i++){
             g.drawLine((int)x, (int)y, (int)patients[i].x, (int)patients[i].y);

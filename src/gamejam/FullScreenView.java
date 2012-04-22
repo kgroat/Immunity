@@ -189,8 +189,8 @@ public class FullScreenView extends JFrame {
     * Gets the screen dimension information, and makes an Image to buffer with.
     */
    private void initializeGraphics() {
-      screenWidth = screen.getDisplayMode().getWidth();
-      screenHeight = screen.getDisplayMode().getHeight();
+      screenWidth = 800;
+      screenHeight = 600;
    }
 
    /**
@@ -218,16 +218,16 @@ public class FullScreenView extends JFrame {
                instance.isFullScreen = true;
                instance.insetLeft = instance.insetTop = 0;
             } else {
-               instance.setBounds(50, 50, instance.screenWidth-100, instance.screenHeight-100);
                instance.setUndecorated(false);
-               instance.setVisible(true);
-               instance.setResizable(false);
-               Insets i = instance.getInsets();
-               instance.screenWidth = instance.getWidth() - (i.right + i.left);
-               instance.screenHeight = instance.getHeight() - (i.top + i.bottom);
                instance.isFullScreen = false;
+               instance.setVisible(true);
+               Insets i = instance.getInsets();
                instance.insetLeft = i.left;
                instance.insetTop = i.top;
+               System.out.println(i.left + " / " + i.top);
+               //instance.setSize(800+i.left+i.right, 600+i.top+i.bottom);
+               instance.setBounds(50, 50, 800+i.left+i.right, 600+i.top+i.bottom);
+               instance.setResizable(false);
             }
          } catch (Exception e) {
             instance.closeProgram();

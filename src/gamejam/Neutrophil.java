@@ -31,6 +31,7 @@ public class Neutrophil extends Tower {
         bounces = false;
         maxDTheta = Math.PI/50;
         infectionsRemaining = 4;
+        radius = 31;
     }
     
     public Neutrophil(double placewidth, double placeheight)
@@ -44,20 +45,11 @@ public class Neutrophil extends Tower {
     {
         if (target != null && target.disposable)
             target=null;
+        if(target == null)
+           target = Engine.getBloodVessel().nearestIntruder(this);
+        System.out.println(target.x + " / " + target.y + " / " + target);
         super.act();
     }
-    
-   @Override
-   public void prerender(Graphics2D g) {
-      sprite.enact("pre");
-      sprite.drawRot(g, (int)x, (int)y, pTheta);
-   }
-
-   @Override
-   public void render(Graphics2D g) {
-      sprite.enact("post");
-      sprite.drawRot(g, (int)x, (int)y, fTheta);
-   }
    
    @Override
    public void onCollision(Entity other){

@@ -1,0 +1,4 @@
+/gamejam/resources/images/killerT.png
+64 x 64
+LOOP: pre   (1) ;
+LOOP: post  (1) ;

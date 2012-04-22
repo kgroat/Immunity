@@ -23,7 +23,7 @@ public final class Engine {
    private static GameMode currentMode;
    private static BufferedImage buffer;
    
-   private static boolean running;
+   private static boolean running, debug;
    
    private static int vWidth, vHeight;
    
@@ -32,6 +32,7 @@ public final class Engine {
    }
    
    static void start() {
+      debug = true;
       running = true;
       resize();
       BloodVessel bv;
@@ -49,6 +50,10 @@ public final class Engine {
           bv.add(new Monocyte());
       for(int i=0; i<20; i++)
           bv.add(new Virus());
+      for(int i=0; i<10; i++)
+          bv.add(new Lymphocyte());
+      for(int i=0; i<10; i++)
+          bv.add(new KillerT());
       mainLoop = new Thread(){
          public void run(){
             while(running){
@@ -83,9 +88,13 @@ public final class Engine {
       running = false;
    }
    
+   public static boolean isDebug(){
+      return debug;
+   }
+   
    static void resize(){
-      vWidth = FullScreenView.instance().getScreenWidth()/2;
-      vHeight = FullScreenView.instance().getScreenHeight()/2;
+      vWidth = FullScreenView.instance().getScreenWidth();
+      vHeight = FullScreenView.instance().getScreenHeight();
       buffer = new BufferedImage(vWidth, vHeight, BufferedImage.TYPE_INT_RGB);
    }
    

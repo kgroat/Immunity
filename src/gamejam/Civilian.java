@@ -37,14 +37,13 @@ public class Civilian extends Tower {
       dPTheta = Math.random()*Math.PI/50;
       infectionsRemaining = 10;
       ratUp = 1;
-      ratDown = 5;
-
+      ratDown = 19;
+      radius = 25;
    }
    
    public void act(){
+      target = null;
       super.act();
-      dPTheta += (Math.random()-.5)/300;
-      pTheta += dPTheta;
    }
 
    @Override

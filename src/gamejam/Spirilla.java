@@ -9,11 +9,11 @@ package gamejam;
  *
  * @author Clem
  */
-public class Spirazoa extends Intruder{
+public class Spirilla extends Intruder{
     
     private int rateoffire;
     
-    public Spirazoa()
+    public Spirilla()
     {
       bounces = true;
       x = Math.random() * Engine.getWidth();

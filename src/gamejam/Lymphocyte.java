@@ -12,6 +12,8 @@ package gamejam;
 //This Tower moves towards the nearest Intruder and damages it on contact.
 //Additionally, this Tower calls nearby Towers to attack the Intruder it is attacking.
 public class Lymphocyte extends Tower {
+   public static final SpriteSet SP = SpriteSet.load("resources/images/lymphocyte.txt");
+   
     public Lymphocyte()
     {
         x = Math.random()*Engine.getWidth();
@@ -20,7 +22,7 @@ public class Lymphocyte extends Tower {
         vel = 0;
         fTheta = Math.random() * Math.PI * 2;
         theta = 0;
-        sprite = null;
+        sprite = SP;
         ratUp=2;
         ratDown=8;
         primeDist = 100;
@@ -28,6 +30,7 @@ public class Lymphocyte extends Tower {
         bounces = false;
         infectionsRemaining = 2;
         maxDTheta = Math.PI/30;
+        radius = 26;
     }
     
     public Lymphocyte(double placewidth, double placeheight)
