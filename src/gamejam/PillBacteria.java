@@ -12,9 +12,10 @@ import java.awt.Point;
  * @author Kevin
  */
 public class PillBacteria extends Intruder {
-   public static final SpriteSet SP = SpriteSet.load("resources/images/pills.txt");
+   public static final SpriteSet SP = SpriteSet.load("resources/images/bacteria.txt");
    protected PillBacteria parent;
-   public static final double DIST_CUTOFF = SP.getSpriteWidth();
+   protected Entity rTarget;
+   public static final double DIST_CUTOFF = 100;
 
    private static final double aggression = 2.0;
 
@@ -22,7 +23,7 @@ public class PillBacteria extends Intruder {
       bounces = true;
       x = Math.random() * Engine.getGameWidth();
       y = Math.random() * Engine.getGameHeight();
-      maxVel = .5;
+      maxVel = 3;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;
       col = ColorType.values()[(int) (Math.random() * ColorType.values().length)];
@@ -33,6 +34,7 @@ public class PillBacteria extends Intruder {
       maxHp = hp = 500;
       drops = 30;
       radius = 12;
+      maxDTheta = Math.PI/15;
    }
 
    public enum ColorType {
@@ -57,6 +59,10 @@ public class PillBacteria extends Intruder {
       return new Point((int)(x-Math.cos(theta)*sprite.getSpriteWidth()/2), (int)(y-Math.sin(theta)*sprite.getSpriteWidth()/2));
    }
    
+   public void face(Point p){
+      theta = fTheta = Math.atan2(p.y-y, p.x-x);
+   }
+   
    @Override
    public void render(Graphics2D g){
       sprite.enact(col.name());
@@ -65,32 +71,63 @@ public class PillBacteria extends Intruder {
    
    @Override
    public void act() {
-      if(parent != null){
-         if(parent.disposable){
+      if(parent != null && parent != this){
+         if(parent.disposable || dist(parent)>DIST_CUTOFF){
             parent = null;
          }
+         rTarget = null;
       }
       if (parent == null){
-         Tower nTower = Engine.getBloodVessel().nearestTower(this);
+         if(rTarget == null)
+            rTarget = Engine.getBloodVessel().nearestTower(this);
          PillBacteria nPill = Engine.getBloodVessel().nearestPill(this);
       
          if(nPill != null && dist(nPill)<DIST_CUTOFF){
             parent = nPill;
             target = nPill;
-         }else if (nPill != null && nTower != null) {
-            if (dist(nPill) * aggression < dist(nTower)) {
+         }else if (nPill != null && rTarget != null) {
+            if (dist(nPill) * aggression < dist(rTarget)) {
                target = nPill;
             } else {
-               target = nTower;
+               target = rTarget;
             }
          } else if (nPill != null) {
             target = nPill;
          }
       }else if(parent != this){
          target = parent;
+         rTarget = null;
       }else{
-         target = Engine.getBloodVessel().nearestTower(this);
+         target = rTarget;
       }
+      System.out.println("TARGET: "+target + " / "+rTarget+" / "+parent);
       super.act();
+   }
+   
+   public boolean isProblem(PillBacteria p){
+      PillBacteria hd = p;
+      while(hd.parent != null)
+         if((hd = hd.parent) == this)
+            return true;
+      return false;
+   }
+   
+   public void move(){
+      if(parent == null){
+         super.move();
+         fTheta = theta;
+      }else{
+         //dFTheta = fTheta;
+         face(parent.tail());
+         dFTheta -= fTheta;
+         x += Math.cos(theta)*vel;
+         y += Math.sin(theta)*vel;
+      }
+   }
+   
+   public void onCollision(Entity e){
+      if(e instanceof Tower){
+         e.damage(75);
+      }
    }
 }

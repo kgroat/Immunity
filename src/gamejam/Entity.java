@@ -23,7 +23,7 @@ public abstract class Entity {
    protected Entity target;
    protected double hp, maxHp, x, y, vel, targetVel, theta, fTheta, dFTheta, maxDTheta, maxVel, mass, pTheta, dPTheta;
    protected boolean disposable;
-   protected double primeDist, ratUp, ratDown;
+   protected double primeDist, ratUp, ratDown, minDist;
    protected boolean bounces;
    protected double radius;
    
@@ -38,7 +38,7 @@ public abstract class Entity {
    public void act(){
       if(target != null){
          double th, baseTh = theta;
-         targetVel = Math.min(dist(target)*maxVel/primeDist, maxVel);
+         targetVel = Math.min((dist(target)-minDist)*maxVel/(primeDist-minDist), maxVel);
          for(int i=-TURN_TRIES; i<TURN_TRIES; i++){
             th = baseTh + maxDTheta*i/TURN_TRIES;
             if(isCloser(th)){
@@ -63,9 +63,9 @@ public abstract class Entity {
       pTheta += dPTheta;
       fTheta += dFTheta;
       vel = (ratDown*vel + ratUp*targetVel)/(ratUp+ratDown);
-      while(pTheta < 0) pTheta += Math.PI*2;
-      while(fTheta < 0) fTheta += Math.PI*2;
-      while(theta < 0) theta += Math.PI*2;
+      while(pTheta < 0) pTheta += Math.PI*200;
+      while(fTheta < 0) fTheta += Math.PI*200;
+      while(theta < 0) theta += Math.PI*200;
       pTheta %= Math.PI*2;
       fTheta %= Math.PI*2;
       theta %= Math.PI*2;

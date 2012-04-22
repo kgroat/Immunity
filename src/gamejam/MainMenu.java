@@ -18,7 +18,10 @@ import java.util.ArrayList;
  */
 public class MainMenu extends GameMode {
     
+   private int selected;
+   
     public MainMenu(){
+       selected = -1;
         buttons = new ArrayList();
         int cx = ((Engine.getWidth()-300)/2);
         int cy = ((Engine.getHeight()-200)/2);
@@ -26,6 +29,7 @@ public class MainMenu extends GameMode {
 
             @Override
             public void onClick() {
+               AudioClip.get("Select3.ogg").forcePlay(true, true);
                 Engine.start2();
                 System.out.println("STUFFFFFFF\n");
             }
