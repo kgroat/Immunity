@@ -34,6 +34,7 @@ public class Flagellate extends Intruder{
     {
         if (hascrashed)
             target=Engine.getBloodVessel().nearestTower(this);
+        super.act();
     }
     
     //The flagellate slams into a target and knocks it back, then finds a new target.
