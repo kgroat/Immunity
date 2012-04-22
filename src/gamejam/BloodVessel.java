@@ -143,6 +143,12 @@ public class BloodVessel extends GameMode {
        return out.toArray(new Tower[out.size()]);
    }
    
+   public Tower randomTower()
+   {
+       int returner = (int)(Math.random()*towers.size());
+       return towers.get(returner);
+   }
+   
    public Intruder randomIntruder()
    {
        int returner = (int)(Math.random()*intruders.size());
