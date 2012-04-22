@@ -63,10 +63,10 @@ public class BloodVessel extends GameMode {
          }
          double newX = e.x + e.vel * Math.cos(e.theta);
          double newY = e.y + e.vel * Math.sin(e.theta);
-         if(newX < 0 || newX > Engine.getWidth()){
+         if(newX < 0 || newX > Engine.getGameWidth()){
             e.bounceX();
          }
-         if(newY < 0 || newY > Engine.getHeight()){
+         if(newY < 0 || newY > Engine.getGameHeight()){
             e.bounceY();
          }
       }
@@ -108,7 +108,9 @@ public class BloodVessel extends GameMode {
    public Tower nearestTower(Entity e){
       Tower t = null;
       double best = Double.MAX_VALUE;
-      for(Tower tt: towers){
+      Tower tt;
+      for(int i=0; i<towers.size(); i++){
+         tt = towers.get(i);
          if(e.dist(tt)<best){
             best = e.dist(tt);
             t = tt;
@@ -227,7 +229,7 @@ public class BloodVessel extends GameMode {
    @Override
    public void render(Graphics2D g) {
       g.setColor(BG);
-      g.fillRect(0, 0, Engine.getWidth(), Engine.getHeight());
+      g.fillRect(0, 0, Engine.getGameWidth(), Engine.getGameHeight());
       for(int i=0; i<towers.size(); i++){
          towers.get(i).prerender(g);
       }
@@ -245,19 +247,21 @@ public class BloodVessel extends GameMode {
    }
    
    public void add(Entity e){
-      if(e instanceof Tower){
-         towers.add((Tower)e);
-         if(e instanceof Civilian){
-            civilians.add((Civilian)e);
+      if(e != null){
+         if(e instanceof Tower){
+            towers.add((Tower)e);
+            if(e instanceof Civilian){
+               civilians.add((Civilian)e);
+            }
          }
+         if(e instanceof Intruder){
+            intruders.add((Intruder)e);
+         }
+         if(e instanceof Projectile){
+            projectiles.add((Projectile)e);
+         }
+         entities.add(e);
       }
-      if(e instanceof Intruder){
-         intruders.add((Intruder)e);
-      }
-      if(e instanceof Projectile){
-         projectiles.add((Projectile)e);
-      }
-      entities.add(e);
    }
 
    @Override
@@ -267,11 +271,21 @@ public class BloodVessel extends GameMode {
 
    @Override
    public void mousePress(MouseEvent e) {
-      throw new UnsupportedOperationException("Not supported yet.");
+      //TODO: press mouse
    }
 
    @Override
    public void mouseRelease(MouseEvent e) {
-      throw new UnsupportedOperationException("Not supported yet.");
+      //TODO: release mouse
+   }
+
+   @Override
+   public void mouseMove(MouseEvent e) {
+      //TODO: move mouse
+   }
+
+   @Override
+   public void mouseDrag(MouseEvent e) {
+      //TODO: drag mouse
    }
 }

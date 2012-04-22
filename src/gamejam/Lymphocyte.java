@@ -16,8 +16,8 @@ public class Lymphocyte extends Tower {
    
     public Lymphocyte()
     {
-        x = Math.random()*Engine.getWidth();
-        y = Math.random() * Engine.getHeight();
+        x = Math.random()*Engine.getGameWidth();
+        y = Math.random() * Engine.getGameHeight();
         maxVel = 4.08;
         vel = 0;
         fTheta = Math.random() * Math.PI * 2;

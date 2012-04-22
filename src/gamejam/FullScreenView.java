@@ -145,6 +145,19 @@ public class FullScreenView extends JFrame {
             escape();
          }
       });
+      addMouseMotionListener(new MouseMotionAdapter(){
+
+         @Override
+         public void mouseDragged(MouseEvent e) {
+            mouseDrag(e);
+         }
+
+         @Override
+         public void mouseMoved(MouseEvent e) {
+            mouseMove(e);
+         }
+         
+      });
 
       screen = screenDevice;
       initializeGraphics();
@@ -178,13 +191,23 @@ public class FullScreenView extends JFrame {
    }
    
    public void mousePress(MouseEvent e){
-      MouseEvent tmp = new MouseEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiers(), e.getX()-insetLeft, e.getY()-insetTop, e.getClickCount(), e.isPopupTrigger(), e.getButton());
-      Engine.mousePress(tmp);
+      Engine.mousePress(fix(e));
    }
    
    public void mouseRelease(MouseEvent e){
-      MouseEvent tmp = new MouseEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiers(), e.getX()-insetLeft, e.getY()-insetTop, e.getClickCount(), e.isPopupTrigger(), e.getButton());
-      Engine.mouseRelease(tmp);
+      Engine.mouseRelease(fix(e));
+   }
+   
+   public void mouseMove(MouseEvent e){
+      Engine.mouseMove(fix(e));
+   }
+   
+   public void mouseDrag(MouseEvent e){
+      Engine.mouseDrag(fix(e));
+   }
+   
+   public MouseEvent fix(MouseEvent e){
+      return new MouseEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiers(), e.getX()-insetLeft, e.getY()-insetTop, e.getClickCount(), e.isPopupTrigger(), e.getButton());
    }
 
    /**

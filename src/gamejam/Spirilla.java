@@ -16,8 +16,8 @@ public class Spirilla extends Intruder{
     public Spirilla()
     {
       bounces = true;
-      x = Math.random() * Engine.getWidth();
-      y = Math.random() * Engine.getHeight();
+      x = Math.random() * Engine.getGameWidth();
+      y = Math.random() * Engine.getGameHeight();
       maxVel = 3;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;

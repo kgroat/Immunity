@@ -30,8 +30,8 @@ public class Civilian extends Tower {
       mass = 100;
       theta = fTheta = Math.random()*Math.PI*2;
       vel = Math.random()*.5;
-      x = Math.random() * Engine.getWidth();
-      y = Math.random() * Engine.getHeight();
+      x = Math.random() * Engine.getGameWidth();
+      y = Math.random() * Engine.getGameHeight();
       sprite = SP;
       pTheta = fTheta = Math.random()*Math.PI*2;
       dPTheta = (Math.random()*2-1)*Math.PI/50;

@@ -52,6 +52,16 @@ public class ADVMode extends GameMode {
    public void mouseRelease(MouseEvent e) {
       throw new UnsupportedOperationException("Not supported yet.");
    }
+
+   @Override
+   public void mouseMove(MouseEvent e) {
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
+
+   @Override
+   public void mouseDrag(MouseEvent e) {
+      throw new UnsupportedOperationException("Not supported yet.");
+   }
     
 
 }

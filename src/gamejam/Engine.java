@@ -26,6 +26,14 @@ public final class Engine {
    private static boolean running, debug;
    
    private static int vWidth, vHeight;
+
+   static void mouseDrag(MouseEvent e) {
+      currentMode.mouseDrag(e);
+   }
+
+   static void mouseMove(MouseEvent e) {
+      currentMode.mouseMove(e);
+   }
    
    private Engine(){
       //DO NOTHING
@@ -144,6 +152,23 @@ public final class Engine {
       if(currentMode != null)
          currentMode.update();
    }
+   
+   public static int getGameWidth(){
+      return vWidth;
+   }
+   
+   public static int getGameHeight(){
+      return vHeight-150;
+   }
+   
+   public static int getGameX(){
+      return 0;
+   }
+   
+   public static int getGameY(){
+      return 0;
+   }
+   
    
    public static int getWidth(){
       return vWidth;

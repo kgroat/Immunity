@@ -31,4 +31,8 @@ public abstract class GameMode {
    public abstract void update();
    
    public abstract GameMode escape();
+
+   public abstract void mouseMove(MouseEvent e);
+   
+   public abstract void mouseDrag(MouseEvent e);
 }

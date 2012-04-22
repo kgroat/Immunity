@@ -22,7 +22,7 @@ public class MainMenu extends GameMode {
         buttons = new ArrayList();
         int cx = ((Engine.getWidth()-300)/2);
         int cy = ((Engine.getHeight()-200)/2);
-        buttons.add(new Button("String Test", new Font("serif", Font.PLAIN, 20), Engine.getWidth()/2, cy+10, Button.CENTER) {
+        buttons.add(new Button("String Test", new Font("serif", Font.PLAIN, 20), Engine.getGameWidth()/2, cy+10, Button.CENTER) {
 
             @Override
             public void onClick() {
@@ -72,9 +72,7 @@ public class MainMenu extends GameMode {
         int cx = ((Engine.getWidth()-300)/2);
         int cy = ((Engine.getHeight()-200)/2);
         g.fillRect(cx, cy, 300, 200);
-        g.setColor(new Color(255, 255, 0, 100));
         for (int j=0; j<buttons.size(); j++){
-            g.fill(buttons.get(j).getBounds());
             buttons.get(j).render(g);
         }
        
@@ -89,6 +87,17 @@ public class MainMenu extends GameMode {
     public GameMode escape() {
         return this;
     }
+
+   @Override
+   public void mouseMove(MouseEvent e) {
+      for(Button b: buttons)
+         b.hilight=b.getBounds().contains(e.getPoint());
+   }
+
+   @Override
+   public void mouseDrag(MouseEvent e) {
+      //Do nothing
+   }
     
     
 }

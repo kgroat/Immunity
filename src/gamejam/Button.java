@@ -34,6 +34,7 @@ public abstract class Button{
    public static final Font MENU_FONT = new Font("", Font.BOLD, 20);//SOMETHING.deriveFont(Font.BOLD, 20);
    public static final Font DEFAULT_FONT = new Font("", Font.PLAIN, 12);//SOMETHING.deriveFont(Font.PLAIN, 12);
    public static final Color DEFAULT_COLOR = new Color(50, 50, 120);
+   public static final Color DEFAULT_HILIGHT = new Color(150, 150, 255, 100);
    public static final int LEFT_JUSTIFIED = 0;
    public static final int CENTER = 1;
    public static final int RIGHT_JUSTIFIED = 2;
@@ -41,11 +42,12 @@ public abstract class Button{
    protected Font font;
    protected String text;
    protected LineMetrics metrics;
-   protected Color color;
+   protected Color color, hilightColor;
    protected FontRenderContext frc;
    protected int width, height;
    protected boolean enabled;
    protected Color disabledColor;
+   protected boolean hilight;
    
    public Button(String s, Font f, int tx, int ty){
       this(s, f, tx, ty, LEFT_JUSTIFIED);
@@ -68,7 +70,9 @@ public abstract class Button{
             x = tx - width;
             break;
       }
+      hilightColor = DEFAULT_HILIGHT;
       color = DEFAULT_COLOR;
+      hilight = false;
    }
    
    public void setEnabled(boolean b){
@@ -76,6 +80,10 @@ public abstract class Button{
    }
    
    public void render(Graphics2D g){
+      if(hilight){
+         g.setColor(hilightColor);
+         g.fillRoundRect(x-5, y-5, width+10, height+10, 10, 10);
+      }
       g.setFont(font);
       g.setColor(color);
       g.drawString(text, x, y+metrics.getAscent());

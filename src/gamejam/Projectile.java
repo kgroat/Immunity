@@ -17,8 +17,8 @@ public class Projectile extends Entity {
    private boolean bounced;
 
    public Projectile() {
-      x = Math.random() * Engine.getWidth();
-      y = Math.random() * Engine.getHeight();
+      x = Math.random() * Engine.getGameWidth();
+      y = Math.random() * Engine.getGameHeight();
       maxVel = 6;
       vel = 6;
       fTheta = Math.random() * Math.PI * 2;

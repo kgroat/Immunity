@@ -17,8 +17,8 @@ public class Flagellate extends Intruder{
     public Flagellate()
     {
         bounces = true;
-      x = Math.random() * Engine.getWidth();
-      y = Math.random() * Engine.getHeight();
+      x = Math.random() * Engine.getGameWidth();
+      y = Math.random() * Engine.getGameHeight();
       maxVel = 5.9;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;

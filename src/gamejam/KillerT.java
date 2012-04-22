@@ -18,8 +18,8 @@ public class KillerT extends Tower {
    private int rateoffire;
 
    public KillerT() {
-      x = Math.random() * Engine.getWidth();
-      y = Math.random() * Engine.getHeight();
+      x = Math.random() * Engine.getGameWidth();
+      y = Math.random() * Engine.getGameHeight();
       maxVel = 0;
       vel = 0;
       fTheta = Math.random() * Math.PI * 2;
@@ -70,14 +70,14 @@ public class KillerT extends Tower {
    @Override
    public void move() {
       if (target != null) {
-         double tTheta = ((theta + Math.PI) % (Math.PI * 2) - Math.PI);
+         double tTheta = ((fTheta + Math.PI) % (Math.PI * 2) - Math.PI);
          double targetangle = Math.atan2(target.y - y, target.x - x);
          targetangle -= tTheta;
          double signum = Math.signum(targetangle);
          targetangle = Math.abs(targetangle);
          if(targetangle > Math.PI) signum *= -1;
          targetangle = Math.min(Math.abs(targetangle), maxDTheta);
-         fTheta = theta += signum * targetangle;
+         fTheta += signum * targetangle;
       }
       super.move();
    }

@@ -15,8 +15,8 @@ public class NaturalKiller extends Tower {
     //default constructor
     public NaturalKiller()
     {
-        x = Math.random()*Engine.getWidth();        //width of the window
-        y = Math.random() * Engine.getHeight();     //height of the window
+        x = Math.random()*Engine.getGameWidth();        //width of the window
+        y = Math.random() * Engine.getGameHeight();     //height of the window
         maxVel = 5.4;           //maximum possible velocity
         vel = 0;                //starting velocity
         fTheta =Math.random() * Math.PI * 2;    //direction in which it is facing
