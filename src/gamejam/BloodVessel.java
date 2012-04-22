@@ -110,6 +110,18 @@ public class BloodVessel extends GameMode {
       }
    }
    
+   public Civilian nearestCivilian(Entity e){
+      Civilian i = null;
+      double best = Double.MAX_VALUE;
+      for(Civilian ti: civilians){
+         if(e.dist(ti)<best){
+            best = e.dist(ti);
+            i = ti;
+         }
+      }
+      return i;
+   }
+   
    public Tower nearestTower(Entity e){
       Tower t = null;
       double best = Double.MAX_VALUE;

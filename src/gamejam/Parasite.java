@@ -75,4 +75,16 @@ public class Parasite extends Intruder {
             other.damage(30);
         }
     }
+    
+    public void bounceX()
+    {
+        wanderlust = 5+(int)(Math.random()*11);
+        walking=!walking;
+    }
+    
+    public void bounceY()
+    {
+        wanderlust = 5+(int)(Math.random()*11);
+        walking=!walking;
+    }
 }
