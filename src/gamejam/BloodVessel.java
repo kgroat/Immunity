@@ -52,6 +52,39 @@ public class BloodVessel extends GameMode {
       waves = new ArrayList();
       AudioClip.get("time-to-kick-ass.ogg").forcePlay(true, true);
    }
+   
+   public BloodVessel(String s){
+      this();
+//      for(int i=0; i<60; i++)
+//         add(new PillBacteria());
+      for(int i=0; i<10; i++)
+         add(new Civilian());
+      Neutrophil temp = new Neutrophil();
+      temp.infectionsRemaining = 0;
+      add(temp);
+      for(int i=0; i<10; i++)
+          add(new Neutrophil());
+//      for(int i=0; i<10; i++)
+//          add(new Monocyte());
+      for(int i=0; i<20; i++)
+          add(new Virus());
+//      for(int i=0; i<10; i++)
+//          add(new Lymphocyte());
+//      for(int i=0; i<10; i++)
+//          add(new KillerT());
+//      for(int i=0; i<10; i++)
+//          add(new Spirillum());
+//      for(int i=0; i<10; i++)
+//          add(new Flagellate());
+      for(int i=0; i<10; i++)
+          add(new Basophil());
+      for(int i=0; i<10; i++)
+          add(new Ciliate());
+//      for(int i=0; i<10; i++)
+//          add(new NaturalKiller());
+      for(int i=0; i<10; i++)
+          add(new Dendrite());
+   }
 
    @Override
    public void update() {
@@ -394,7 +427,7 @@ public class BloodVessel extends GameMode {
       }
    }
    
-   public void add(Entity e) {
+   public final void add(Entity e) {
       if (e != null) {
          if (e instanceof Tower) {
             towers.add((Tower) e);
