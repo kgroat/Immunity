@@ -77,27 +77,35 @@ public final class Engine {
    static void start2(){
       BloodVessel bv;
       currentMode = bv = new BloodVessel();
-      for(int i=0; i<60; i++)
-         bv.add(new PillBacteria());
+//      for(int i=0; i<60; i++)
+//         bv.add(new PillBacteria());
       for(int i=0; i<10; i++)
          bv.add(new Civilian());
-      Neutrophil temp = new Neutrophil();
-      temp.infectionsRemaining = 0;
-      bv.add(temp);
+//      Neutrophil temp = new Neutrophil();
+//      temp.infectionsRemaining = 0;
+//      bv.add(temp);
+//      for(int i=0; i<10; i++)
+//          bv.add(new Neutrophil());
+//      for(int i=0; i<10; i++)
+//          bv.add(new Monocyte());
+//      for(int i=0; i<20; i++)
+//          bv.add(new Virus());
+//      for(int i=0; i<10; i++)
+//          bv.add(new Lymphocyte());
+//      for(int i=0; i<10; i++)
+//          bv.add(new KillerT());
+//      for(int i=0; i<10; i++)
+//          bv.add(new Spirillum());
+//      for(int i=0; i<10; i++)
+//          bv.add(new Flagellate());
       for(int i=0; i<10; i++)
-          bv.add(new Neutrophil());
+          bv.add(new Basophil());
       for(int i=0; i<10; i++)
-          bv.add(new Monocyte());
-      for(int i=0; i<20; i++)
-          bv.add(new Virus());
+          bv.add(new Ciliate());
       for(int i=0; i<10; i++)
-          bv.add(new Lymphocyte());
+          bv.add(new NaturalKiller());
       for(int i=0; i<10; i++)
-          bv.add(new KillerT());
-      for(int i=0; i<10; i++)
-          bv.add(new Spirillum());
-      for(int i=0; i<10; i++)
-          bv.add(new Flagellate());
+          bv.add(new Dendrite());
    }
    
    static void stop(){
@@ -201,4 +209,7 @@ public final class Engine {
       currentMode.mouseRelease(e);
    }
    
+   public static BufferedImage getImage(){
+      return buffer;
+   }
 }

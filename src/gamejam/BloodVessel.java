@@ -4,10 +4,12 @@
  */
 package gamejam;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -18,23 +20,34 @@ public class BloodVessel extends GameMode {
    
    public enum TowerType { neutrophil, macrophage, monocyte, dendrite, basophil, lymphocyte, naturalkiller, killert };
 
-   public static final Color BG = new Color(201, 58, 58);
+   public static final BufferedImage BG = FileUtility.loadImage("resources/images/bg.png");
+   public static final BufferedImage PANEL = FileUtility.loadImage("resources/images/panel.png");
    ArrayList<Entity> entities;
    ArrayList<Tower> towers;
    ArrayList<Civilian> civilians;
    ArrayList<Intruder> intruders;
    ArrayList<Projectile> projectiles;
+   ArrayList<Shockwave> waves;
+   double inTh, outTh;
    
-   int aminoAcids;
+   int aminoAcids, furthest;
+   boolean[] enabled;
    TowerType selected;
+   Entity ontop;
 
    public BloodVessel() {
+      furthest = 8;
+      enabled = new boolean[8];
+      for(int i=0; i<8; i++){
+         enabled[i] = true;
+      }
       selected = TowerType.neutrophil;
       entities = new ArrayList();
       towers = new ArrayList();
       civilians = new ArrayList();
       intruders = new ArrayList();
       projectiles = new ArrayList();
+      waves = new ArrayList();
    }
 
    @Override
@@ -73,6 +86,20 @@ public class BloodVessel extends GameMode {
          }
          if (newY < 0 || newY > Engine.getGameHeight()) {
             e.bounceY();
+         }
+      }
+      Shockwave s;
+      for(int i=0; i<waves.size(); i++){
+         s = waves.get(i);
+         if(s.isDisposable()){
+            waves.remove(i);
+            i--;
+         }else{
+            s.update();
+            for(int j=0; j<entities.size(); j++){
+               e = entities.get(j);
+               s.collideAndEffect(e);
+            }
          }
       }
       for (int i = 0; i < entities.size(); i++) {
@@ -256,8 +283,7 @@ public class BloodVessel extends GameMode {
 
    @Override
    public void render(Graphics2D g) {
-      g.setColor(BG);
-      g.fillRect(0, 0, Engine.getGameWidth(), Engine.getGameHeight());
+      g.drawImage(BG, 0, 0, null);
       for (int i = 0; i < towers.size(); i++) {
          towers.get(i).prerender(g);
       }
@@ -272,9 +298,86 @@ public class BloodVessel extends GameMode {
       for (int i = 0; i < towers.size(); i++) {
          towers.get(i).render(g);
       }
+      for(int i=0; i<waves.size(); i++){
+         if(waves.get(i).isDisposable()){
+            waves.remove(i);
+            i--;
+         }else{
+            waves.get(i).render(Engine.getImage());
+         }
+      }
+      if(ontop != null){
+         ontop.render(g);
+      }
       //Interface
+      drawInterface(g);
    }
 
+   public void drawInterface(Graphics2D g){
+      g.drawImage(PANEL, 0, Engine.getGameHeight(), null);
+      g.setColor(Color.red);
+      g.setStroke(new BasicStroke(10));
+      g.drawRoundRect(selected.ordinal()*81+6, Engine.getGameHeight()+5, 70, 140, 20, 20);
+      inTh -= Math.PI/37;
+      //outTh += Math.PI/53;
+      SpriteSet curr;
+      for(int i=0; i<furthest; i++){
+         if(enabled[i]){
+            curr = placeSprite(i+1);
+            curr.enact("pre");
+            curr.drawRot(g, i*81+41, Engine.getGameHeight()+40, inTh);
+            curr.enact("post");
+            curr.drawRot(g, i*81+41, Engine.getGameHeight()+40, outTh);
+         }
+      }
+   }
+    
+   public SpriteSet placeSprite(int t){
+      switch(t){
+         case 1:
+            return Neutrophil.SP;
+         case 2:
+            return Macrophage.SP;
+         case 3:
+            return Monocyte.SP;
+         case 4:
+            return Dendrite.SP;
+         case 5:
+            return Basophil.SP;
+         case 6:
+            return Lymphocyte.SP;
+         case 7:
+            return NaturalKiller.SP;
+         case 8:
+            return KillerT.SP;
+         default:
+            return Civilian.SP;
+      }
+   }
+   
+   public Tower getTower(TowerType t){
+      switch(t){
+         case neutrophil:
+            return new Neutrophil();
+         case macrophage:
+            return new Macrophage();
+         case monocyte:
+            return new Monocyte();
+         case dendrite:
+            return new Dendrite();
+         case basophil:
+            return new Basophil();
+         case lymphocyte:
+            return new Lymphocyte();
+         case naturalkiller:
+            return new NaturalKiller();
+         case killert:
+            return new KillerT();
+         default:
+            return null;
+      }
+   }
+   
    public void add(Entity e) {
       if (e != null) {
          if (e instanceof Tower) {
@@ -292,6 +395,10 @@ public class BloodVessel extends GameMode {
          entities.add(e);
       }
    }
+   
+   public void add(Shockwave s){
+      waves.add(s);
+   }
 
    @Override
    public GameMode escape() {
@@ -300,21 +407,23 @@ public class BloodVessel extends GameMode {
 
    @Override
    public void mousePress(MouseEvent e) {
-      //TODO: press mouse
+      ontop = getTower(selected);
+      ontop.setLoc(e.getPoint());
    }
 
    @Override
    public void mouseRelease(MouseEvent e) {
-      //TODO: release mouse
+      add(ontop);
+      ontop = null;
    }
 
    @Override
    public void mouseMove(MouseEvent e) {
-      //TODO: move mouse
+      ontop.setLoc(e.getPoint());
    }
 
    @Override
    public void mouseDrag(MouseEvent e) {
-      //TODO: drag mouse
+      ontop.setLoc(e.getPoint());
    }
 }

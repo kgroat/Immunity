@@ -11,7 +11,7 @@ package gamejam;
  */
 //This Tower flies at the nearest enemy and then explodes, dealing damage to everything nearby (friendly and enemy).
 public class NaturalKiller extends Tower {
-   public static final SpriteSet SP = SpriteSet.load("resources/images/friendly.txt");
+   public static final SpriteSet SP = SpriteSet.load("resources/images/naturalKiller.txt");
     
     //default constructor
     public NaturalKiller()
@@ -22,7 +22,7 @@ public class NaturalKiller extends Tower {
         vel = 0;                //starting velocity
         fTheta =Math.random() * Math.PI * 2;    //direction in which it is facing
         theta = 0;              //dircetion in which it is travelling
-        sprite = null;          //the image - do not manipulate
+        sprite = SP;          //the image - do not manipulate
         ratUp=5;            //acceleration rate w/ respect to ratDown
         ratDown=7;
         primeDist = 100;    //if the target distance is over 100 pixels, it will
@@ -34,6 +34,7 @@ public class NaturalKiller extends Tower {
         bounces = true;
         infectionsRemaining = 3;
         maxDTheta = Math.PI / 17;
+        radius = 21;
     }
     
     //alternate contructor that lets you set the initial location rather than
@@ -53,27 +54,16 @@ public class NaturalKiller extends Tower {
         if (target != null && target.disposable)
             target=null;
         super.act();
-        //then go get a new target
-        if (target != null && Helper.intersects(this.getBounds(), target.getBounds()))
-        {
-            Entity [] victims = Engine.getBloodVessel().entitiesNearby(this, 150);
-            for (int k=0; k<victims.length; k++)
-            {
-                victims[k].damage(500);
-            }
-            disposable = true;
-        }
     }
     
     //called whenever this() collides with ANYTHING else (friend or foe)
+   @Override
     public void onCollision(Entity other){
         //and if it collides with an enemy, it explodes and tries to kill it
         //(50 damage)
         if (other instanceof Intruder && !disposable){
-            Entity[] e = Engine.getBloodVessel().entitiesNearby(this, 200);            
-            for(int i=0; i<e.length; i++){
-                e[i].damage(50);
-            }
+           Engine.getBloodVessel().add(new Shockwave(x, y, 100));
+            disposable = true;
         }    
     }
 }

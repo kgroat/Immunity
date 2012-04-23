@@ -83,6 +83,11 @@ public abstract class Entity {
       return (int)y;
    }
    
+   public void setLoc(Point p){
+      x = p.x;
+      y = p.y;
+   }
+   
    public int getWidth(){
       if(sprite == null)
          return 0;
@@ -152,6 +157,7 @@ public abstract class Entity {
       double tx = vel*Math.cos(theta);
       double ty = vel*Math.sin(theta);
       theta = Math.atan2(ty, -tx);
+      if(x < 0) x = -x;
    }
    
    //calculate the y-direction on collision

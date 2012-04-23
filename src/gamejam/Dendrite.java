@@ -9,12 +9,12 @@ package gamejam;
  *
  * @author Clem
  */
-public class Dendritic extends Tower {
-   public static final SpriteSet SP = SpriteSet.load("resources/images/friendly.txt");
+public class Dendrite extends Tower {
+   public static final SpriteSet SP = SpriteSet.load("resources/images/dendritic.txt");
     
     private int cooldown;
     
-    public Dendritic()
+    public Dendrite()
     {
         x = Math.random()*Engine.getGameWidth();
         y = Math.random() * Engine.getGameHeight();
@@ -22,15 +22,17 @@ public class Dendritic extends Tower {
         vel = 0;
         fTheta =Math.random() * Math.PI * 2;
         theta = 0;
-        sprite = null;
+        sprite = SP;
         ratUp=0;
         ratDown=1;
         primeDist = 100;
         maxHp = hp=450;
         cooldown = 30;
+        bounces = true;
+        radius = 22;
     }
     
-    public Dendritic(double startwidth, double startheight)
+    public Dendrite(double startwidth, double startheight)
     {
         this();
         x = startwidth;

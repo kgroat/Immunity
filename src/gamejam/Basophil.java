@@ -10,6 +10,7 @@ package gamejam;
  * @author Clem
  */
 public class Basophil extends Tower {
+   public static final SpriteSet SP = SpriteSet.load("resources/images/basophil.txt");
 
     public Basophil()
     {
@@ -19,11 +20,14 @@ public class Basophil extends Tower {
         vel = 0;
         fTheta =Math.random() * Math.PI * 2;
         theta = 0;
-        sprite = null;
+        sprite = SP;
         ratUp=0;
         ratDown=1;
         primeDist = 100;
         maxHp = hp=1000;
+        infectionsRemaining = 10;
+        radius = 31;
+        bounces = true;
     }
     
     public Basophil(double placex, double placey)
