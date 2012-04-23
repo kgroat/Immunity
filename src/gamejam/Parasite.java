@@ -34,7 +34,7 @@ public class Parasite extends Intruder {
       maxDTheta = Math.PI/15;
       drops = 75;
       mass = 250;
-      radius = 50;
+      radius = 45;
     }
     
     @Override
@@ -46,7 +46,7 @@ public class Parasite extends Intruder {
     @Override
     public void act()
     {
-        Tower[] taunt = Engine.getBloodVessel().towersNearby(this, 150);
+        Tower[] taunt = Engine.getBloodVessel().towersNearby(this, 200);
         for (int j=0; j<taunt.length; j++)
             taunt [j].target=this;
     }
