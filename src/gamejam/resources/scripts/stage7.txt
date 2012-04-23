@@ -1,12 +1,12 @@
 LEFT: Friends Happy
 SAY: "Steve, Randy, & Tammy" We heard Charlie's doing better!
-WAIT
+WAIT:
 RIGHT: Parents Normal
 SAY: "Mom n Dad" We certainly hope so.
-WAIT
+WAIT:
 RIGHT: Agents Normal
 SAY: "Agents" For the future of mankind, we hope so too.
-WAIT
+WAIT:
 LEFT: Friends WTF
 NARRATE: Mankind?!  That sounds serious!  Charlie, you gotta get better!
-WAIT
+WAIT:

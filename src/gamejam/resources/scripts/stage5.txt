@@ -1,11 +1,11 @@
 NARRATE: And so, Charlie lay in bed.  Days passed and became weeks.  He dreamed of many things.
 	He dreamed of hot dogs, skateboarding, and not vomiting out his guts.
-WAIT
+WAIT:
 NARRATE: He slept.  And slept.  And slept.
 
 LEFT: Charlie Unpleasant
 SAY: "Charlie" Wait!  I canÅft just sleep!  I havenÅft done anything with my life yet!
-WAIT
+WAIT:
 LEFT: Charlie Gnarly
 NARRATE: I have to get better!
-WAIT
+WAIT:

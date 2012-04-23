@@ -1,27 +1,27 @@
 LEFT: Parents Normal
 SAY: "Dad" ItÅfs been six weeks by now.
-WAIT
+WAIT:
 SAY: "Mom" DidnÅft Doctor Chavauski say Charles only had two weeks to live?
-WAIT
+WAIT:
 RIGHT: Agents Normal
 SAY: "???" That's what we're here about!
-WAIT
+WAIT:
 LEFT: Parents Shock
 SAY: "Agent Johnson" Agent Johnson!
-WAIT
+WAIT:
 SAY: "Agent White" Agent White!
-WAIT
+WAIT:
 RIGHT: Agents Shouting
 SAY: "Agents" The Center for Disease Control!
-WAIT
+WAIT:
 SAY: "Mom n Dad" The Center for Disease Control?!
-WAIT
+WAIT:
 RIGHT: Agents Normal
 SAY: "Agents" The Center for Disease Control.
-WAIT
+WAIT:
 SAY: "Agents" WeÅfre interested in your son.  HeÅfs lived a lot longer than anyone else with the PLAGUE.
-WAIT
+WAIT:
 SAY: "Agents" If he survives, we can use his blood to make a vaccine for the Plague.  We could save thousands!
-WAIT
+WAIT:
 NARRATE: That's my boy!
-WAIT
+WAIT:
