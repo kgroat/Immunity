@@ -19,10 +19,13 @@ public class PillBacteria extends Intruder {
 
    private static final double aggression = 2.0;
 
-   public PillBacteria() {
+   public PillBacteria(){
+      this(true);
+   }
+   
+   public PillBacteria(boolean left) {
+      super(left);
       bounces = true;
-      x = Math.random() * Engine.getGameWidth();
-      y = Math.random() * Engine.getGameHeight();
       maxVel = 3;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;
@@ -100,7 +103,6 @@ public class PillBacteria extends Intruder {
       }else{
          target = rTarget;
       }
-      System.out.println("TARGET: "+target + " / "+rTarget+" / "+parent);
       super.act();
    }
    

@@ -16,11 +16,14 @@ public class EColi extends Intruder {
     
     private int cooldown;
     
-    public EColi()
+    public EColi(){
+       this(true);
+    }
+    
+    public EColi(boolean left)
     {
+       super(left);
       bounces = false;
-      x = Math.random() * Engine.getGameWidth();
-      y = Math.random() * Engine.getGameHeight();
       maxVel = 4;
       vel = Math.random() * maxVel;
       maxDTheta = Math.PI/15;

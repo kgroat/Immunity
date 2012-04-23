@@ -13,6 +13,7 @@ import java.awt.Graphics2D;
  */
 //The most basic Tower.  It chases nearby enemies and damages them on contact.
 public class Neutrophil extends Tower {
+   public static final int COST = 50;
     public static final SpriteSet SP = SpriteSet.load("resources/images/neutrophil.txt");
     
     public Neutrophil ()
@@ -27,11 +28,12 @@ public class Neutrophil extends Tower {
         ratUp=1;
         ratDown=29;
         primeDist = 100;
-        maxHp = hp=670;
+        maxHp = hp=1300;
         bounces = false;
         maxDTheta = Math.PI/50;
         infectionsRemaining = 4;
         radius = 31;
+        cost = COST;
     }
     
     public Neutrophil(double placewidth, double placeheight)
@@ -53,6 +55,6 @@ public class Neutrophil extends Tower {
    @Override
    public void onCollision(Entity other){
       if(other instanceof Intruder)
-         other.damage(10);
+         other.damage(50);
    }
 }

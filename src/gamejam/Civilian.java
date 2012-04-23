@@ -24,13 +24,13 @@ public class Civilian extends Tower {
    
    public Civilian() {
       bounces = true;
-      maxHp = hp = 2000;
+      maxHp = hp = 5000;
       maxDTheta = 0;
       maxVel = 0;
       mass = 100;
       theta = fTheta = Math.random()*Math.PI*2;
       vel = Math.random()*.5;
-      x = Math.random() * Engine.getGameWidth();
+      x = Math.random() * Engine.getGameWidth()/2 + Engine.getGameWidth()/2;
       y = Math.random() * Engine.getGameHeight();
       sprite = SP;
       pTheta = fTheta = Math.random()*Math.PI*2;

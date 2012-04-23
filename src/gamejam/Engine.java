@@ -44,10 +44,10 @@ public final class Engine {
    static void start() {
       FullScreenView.instance().setName("Immunity: Tower Defense");
       FullScreenView.instance().setTitle("Immunity: Tower Defense");
-      FullScreenView.instance().drawImage(LOADING);
       debug = false;
       running = true;
       resize();
+      FullScreenView.instance().drawImage(LOADING);
       setMode(new MainMenu());
       mainLoop = new Thread(){
          public void run(){
@@ -78,11 +78,6 @@ public final class Engine {
       mainLoop.start();
       renderLoop.start();
       AudioClip.get("i-get-around.ogg").forcePlay(true, true);
-   }
-   
-   static void start2(){
-      setMode(new ADVMode("resources/scripts/stage10.txt"));
-      //setMode(new ADVMode("resources/scripts/intro.txt"));
    }
    
    static void stop(){

@@ -18,11 +18,14 @@ public class Flagellate extends Intruder{
     private int crashTimer;
    private int frame;
     
-    public Flagellate()
+   public Flagellate(){
+      this(true);
+   }
+   
+    public Flagellate(boolean left)
     {
+       super(left);
       bounces = true;
-      x = Math.random() * Engine.getGameWidth();
-      y = Math.random() * Engine.getGameHeight();
       maxVel = 5.9;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;
@@ -72,8 +75,6 @@ public class Flagellate extends Intruder{
          frame = (frame + 1) % (sprite.numFrames() * FRAMES_PER);
          sprite.setCurrentFrame(frame / FRAMES_PER);
          sprite.drawRot(g, (int) x, (int) y, fTheta);
-      } else {
-         System.out.println("WHOOPSIE!");
       }
    }
 

@@ -28,10 +28,22 @@ public abstract class Entity {
    protected double radius;
 
    public Entity() {
+      x = Math.random()*Engine.getGameWidth();
+      y = Math.random()*Engine.getGameHeight();
       fTheta = Math.random() * Math.PI * 2;
       pTheta = Math.random() * Math.PI * 2;
       dFTheta = (Math.random() * 2 - 1) * Math.PI / 50;
       dPTheta = (Math.random() * 2 - 1) * Math.PI / 50;
+   }
+   public Entity(boolean left){
+      this();
+      theta = (Math.random()-.5)*Math.PI;
+      vel = Math.random()*3;
+      if(left)
+         x = 1;
+      else
+         x = Engine.getGameWidth()-1;
+      theta += Math.PI;
    }
 
    //act sets an entity's target and moves it

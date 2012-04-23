@@ -254,12 +254,13 @@ public class FullScreenView extends JFrame {
                instance.setBounds(50, 50, 800+i.left+i.right, 600+i.top+i.bottom);
                instance.setResizable(false);
             }
+            System.out.println("View initialized");
+            Engine.start();
          } catch (Exception e) {
+            System.err.println("View failed to initialize");
             instance.closeProgram();
             System.err.println(e);
          }
-         System.out.println("View initialized");
-         Engine.start();
       }
    }
 

@@ -80,7 +80,8 @@ public class ADVMode extends GameMode {
                System.out.println("AUDIO: "+c.getName());
                AudioClip tmp = AudioClip.get(c.getName());
                tmp.forcePlay(true, true);
-               audioClips.add(tmp);
+               if(tmp.getType() == AudioClip.ClipType.sfx)
+                  audioClips.add(tmp);
                break;
             case shake:
                shakeIntensity = c.getOne();
@@ -128,7 +129,7 @@ public class ADVMode extends GameMode {
       height += rect.getHeight();
       BufferedImage out = new BufferedImage(600, (int)(height+1), BufferedImage.TYPE_INT_ARGB);
       Graphics2D g2 = out.createGraphics();
-      g2.setColor(Color.red);
+      g2.setColor(Color.WHITE);
       g2.setFont(current);
       float tHeight = 0;
       for(int i=0; i<lines.size(); i++){
@@ -170,7 +171,7 @@ public class ADVMode extends GameMode {
          sayImage = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
          g2 = sayImage.createGraphics();
          tmp = render(say, g);
-         g2.setColor(Color.BLUE);
+         g2.setColor(Color.DARK_GRAY);
          LineMetrics metrics = g2.getFont().getLineMetrics(name, g2.getFontRenderContext());
          if(tmp.getHeight() > 150){
             g2.fill3DRect(95, 600-tmp.getHeight()-10, 610, tmp.getHeight()+10, true);
@@ -189,7 +190,7 @@ public class ADVMode extends GameMode {
          narrateImage = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
          g2 = narrateImage.createGraphics();
          tmp = render(narrate, g);
-         g2.setColor(Color.BLUE);
+         g2.setColor(Color.DARK_GRAY);
          g2.fill3DRect(95, 0, 610, Math.max(160, tmp.getHeight()+10), true);
          g2.drawImage(tmp, 100, 5, null);
       }

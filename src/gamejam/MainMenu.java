@@ -32,8 +32,8 @@ public class MainMenu extends GameMode {
          @Override
          public void onClick() {
             AudioClip.get("Select3.ogg").forcePlay(true, true);
-            Engine.start2();
-            System.out.println("STUFFFFFFF\n");
+            //Engine.setMode(new ADVMode("resources/scripts/stage10.txt"));
+            Engine.setMode(new ADVMode("resources/scripts/intro.txt"));
          }
       });
    }

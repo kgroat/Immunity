@@ -27,7 +27,7 @@ public class AudioClip {
 
    public static final double DISTANCER = 100;
    
-   protected enum ClipType {
+   public static enum ClipType {
 
       sfx, music
    };
@@ -562,5 +562,9 @@ public class AudioClip {
       listenerVel.put(vals);
       listenerVel.flip();
       AL10.alListener(AL10.AL_VELOCITY, listenerVel);
+   }
+   
+   public ClipType getType() {
+      return type;
    }
 }

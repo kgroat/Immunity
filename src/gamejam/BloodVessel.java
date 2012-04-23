@@ -6,6 +6,7 @@ package gamejam;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -18,10 +19,35 @@ import java.util.ArrayList;
  */
 public class BloodVessel extends GameMode {
    
+   BufferedImage normal, bad, good;
+
+   private void normalizeProbs() {
+      double total = 0;
+      for(int i=0; i<intruderProbs.length; i++){
+         total += intruderProbs[i];
+      }
+      for(int i=0; i<intruderProbs.length; i++){
+         intruderProbs[i]/=total;
+      }
+   }
+
+   private void spawnIntruder() {
+      double t = Math.random();
+      int curr = 0;
+      while(t > 0 && curr < IntruderType.values().length){
+         t -= intruderProbs[curr];
+         curr++;
+      }
+      curr--;
+      add(getIntruder(curr));
+   }
+   
    public enum TowerType { neutrophil, macrophage, monocyte, dendrite, basophil, lymphocyte, naturalkiller, killert };
+   public enum IntruderType { ciliate, ecoli, flagellate, fungalspore, parasite, pillbacteria, spirillum, virus };
 
    public static final BufferedImage BG = FileUtility.loadImage("resources/images/bg.png");
    public static final BufferedImage PANEL = FileUtility.loadImage("resources/images/panel.png");
+   public static final int FRAMES_PER=2;
    ArrayList<Entity> entities;
    ArrayList<Tower> towers;
    ArrayList<Civilian> civilians;
@@ -32,16 +58,20 @@ public class BloodVessel extends GameMode {
    double inTh, outTh;
    String nextName;
    
-   int aminoAcids, furthest, framesLeft;
-   boolean[] enabled;
+   int aminoAcids, framesLeft, spawnFreq, spawnLeft, aminoFrame;
+   boolean[] towersEnabled;
+   double[] intruderProbs;
    TowerType selected;
-   Entity ontop;
+   Tower ontop;
 
    public BloodVessel() {
-      furthest = 8;
-      enabled = new boolean[8];
-      for(int i=0; i<8; i++){
-         enabled[i] = true;
+      towersEnabled = new boolean[TowerType.values().length];
+      intruderProbs = new double[IntruderType.values().length];
+      for(int i=0; i<towersEnabled.length; i++){
+         towersEnabled[i] = true;
+      }
+      for(int i=0; i<intruderProbs.length; i++){
+         intruderProbs[i] = 1;
       }
       selected = TowerType.neutrophil;
       entities = new ArrayList();
@@ -52,6 +82,11 @@ public class BloodVessel extends GameMode {
       particles = new ArrayList();
       waves = new ArrayList();
       nextName = "intro.txt";
+      normalizeProbs();
+      AudioClip.get("time-to-kick-ass.ogg").forcePlay(true, true);
+      normal = FileUtility.loadImage(ADVMode.IMG+"Charlie Normal.png");
+      good = FileUtility.loadImage(ADVMode.IMG+"Charlie Gnarly.png");
+      bad = FileUtility.loadImage(ADVMode.IMG+"Charlie Unpleasant.png");
    }
    
    public BloodVessel(String s){
@@ -62,68 +97,225 @@ public class BloodVessel extends GameMode {
          name = s;
       if(s.endsWith("intro.txt")){
          nextName = "tutorial1.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("tutorial1.txt")){
          nextName = "tutorial2.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 1, 1, 0, 1, 1, 0};
+         towersEnabled = new boolean[]{true, true, true, true, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 3000;
+         for(int i=0; i<30; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("tutorial2.txt")){
          nextName = "tutorial3.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 0};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 3000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("tutorial3.txt")){
          nextName = "stage1.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 1};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 2000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage1.txt")){
          nextName = "stage2.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 5};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 1000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage2.txt")){
          nextName = "stage3.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage3.txt")){
          nextName = "stage4.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage4.txt")){
          nextName = "stage5.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage5.txt")){
          nextName = "stage6.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage6.txt")){
          nextName = "stage7.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage7.txt")){
          nextName = "stage8.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage8.txt")){
          nextName = "stage9.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage9.txt")){
          nextName = "stage10.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else if(s.endsWith("stage10.txt")){
          nextName = "infinitemode.txt";
+         framesLeft = 30*60; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }else{//infinitemode
-         
+         nextName = "infinitemode.txt";
+         framesLeft = Integer.MAX_VALUE; //60 seconds
+         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
+         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         normalizeProbs();
+         spawnFreq = 20;
+         aminoAcids = 4000;
+         for(int i=0; i<20; i++){
+            spawnIntruder();
+         }
+         for(int i=0; i<10; i++){
+            add(new Civilian());
+         }
       }
-//      for(int i=0; i<60; i++)
-//         add(new PillBacteria());
-      for(int i=0; i<10; i++)
-         add(new Civilian());
-      Neutrophil temp = new Neutrophil();
-      temp.infectionsRemaining = 0;
-      add(temp);
-      for(int i=0; i<10; i++)
-          add(new Neutrophil());
-//      for(int i=0; i<10; i++)
-//          add(new Monocyte());
-      for(int i=0; i<20; i++)
-          add(new Virus());
-//      for(int i=0; i<10; i++)
-//          add(new Lymphocyte());
-//      for(int i=0; i<10; i++)
-//          add(new KillerT());
-//      for(int i=0; i<10; i++)
-//          add(new Spirillum());
-//      for(int i=0; i<10; i++)
-//          add(new Flagellate());
-      for(int i=0; i<10; i++)
-          add(new Basophil());
-      for(int i=0; i<10; i++)
-          add(new Ciliate());
-//      for(int i=0; i<10; i++)
-//          add(new NaturalKiller());
-      for(int i=0; i<10; i++)
-          add(new Dendrite());
    }
 
    @Override
    public void update() {
+      spawnLeft--;
+      framesLeft--;
+      if(framesLeft > 0 && spawnLeft <= 0){
+         spawnLeft = spawnFreq;
+         spawnIntruder();
+      }
       Helper.Intersection pt;
       Entity e, other;
       PillBacteria p1, p2;
@@ -332,28 +524,36 @@ public class BloodVessel extends GameMode {
    public void press(KeyEvent e) {
        switch(e.getKeyCode()){
           case KeyEvent.VK_1:
-             selected = TowerType.neutrophil;
+             if(towersEnabled[0])
+               selected = TowerType.neutrophil;
              break;
           case KeyEvent.VK_2:
-             selected = TowerType.macrophage;
+             if(towersEnabled[1])
+               selected = TowerType.macrophage;
              break;
           case KeyEvent.VK_3:
-             selected = TowerType.monocyte;
+             if(towersEnabled[2])
+               selected = TowerType.monocyte;
              break;
           case KeyEvent.VK_4:
-             selected = TowerType.dendrite;
+             if(towersEnabled[3])
+               selected = TowerType.dendrite;
              break;
           case KeyEvent.VK_5:
-             selected = TowerType.basophil;
+             if(towersEnabled[4])
+               selected = TowerType.basophil;
              break;
           case KeyEvent.VK_6:
-             selected = TowerType.lymphocyte;
+             if(towersEnabled[5])
+               selected = TowerType.lymphocyte;
              break;
           case KeyEvent.VK_7:
-             selected = TowerType.naturalkiller;
+             if(towersEnabled[6])
+               selected = TowerType.naturalkiller;
              break;
           case KeyEvent.VK_8:
-             selected = TowerType.killert;
+             if(towersEnabled[7])
+               selected = TowerType.killert;
              break;
        }
    }
@@ -406,17 +606,60 @@ public class BloodVessel extends GameMode {
       inTh -= Math.PI/37;
       //outTh += Math.PI/53;
       SpriteSet curr;
-      for(int i=0; i<furthest; i++){
-         if(enabled[i]){
+      AminoParticle.SP.setCurrentFrame(aminoFrame/FRAMES_PER);
+      Font aminoFont = new Font("sans", Font.BOLD, 20), nameFont = new Font("sans", Font.PLAIN, 10);
+      Color aminoColor = Color.GREEN, nameColor = Color.RED;
+      aminoFrame = (aminoFrame + 1) % (AminoParticle.SP.numFrames() * FRAMES_PER);
+      for(int i=0; i<towersEnabled.length; i++){
+         if(towersEnabled[i]){
             curr = placeSprite(i+1);
             curr.enact("pre");
             curr.drawRot(g, i*81+41, Engine.getGameHeight()+40, inTh);
             curr.enact("post");
             curr.drawRot(g, i*81+41, Engine.getGameHeight()+40, outTh);
+            AminoParticle.SP.draw(g, i*81+12, Engine.getGameHeight()+75);
+            g.setFont(aminoFont);
+            g.setColor(aminoColor);
+            g.drawString(cost(i), i*81+32, Engine.getGameHeight()+91);
+            g.setFont(nameFont);
+            g.setColor(nameColor);
+            g.drawString(name(i), i*81+12, Engine.getGameHeight()+106);
          }
       }
+      g.setFont(aminoFont);
+      g.setColor(aminoColor);
+      g.drawImage(normal, Engine.getWidth()-150, Engine.getHeight()-200, null);
+      AminoParticle.SP.draw(g, 5, 5);
+      g.drawString(String.valueOf(aminoAcids), 20, 16);
    }
     
+   public String cost(int i){
+      switch(i){
+         case 0: return String.valueOf(Neutrophil.COST);
+         case 1: return String.valueOf(Macrophage.COST);
+         case 2: return String.valueOf(Monocyte.COST);
+         case 3: return String.valueOf(Dendrite.COST);
+         case 4: return String.valueOf(Basophil.COST);
+         case 5: return String.valueOf(Lymphocyte.COST);
+         case 6: return String.valueOf(NaturalKiller.COST);
+         case 7: return String.valueOf(KillerT.COST);
+      }
+      return "N/A";
+   }
+   public String name(int i){
+      switch(i){
+         case 0: return "Neutrophil";
+         case 1: return "Macrophage";
+         case 2: return "Monocyte";
+         case 3: return "Dendrite";
+         case 4: return "Basophil";
+         case 5: return "Lymphocyte";
+         case 6: return "Natural Killer";
+         case 7: return "Killer T";
+      }
+      return "N/A";
+   }
+   
    public SpriteSet placeSprite(int t){
       switch(t){
          case 1:
@@ -508,6 +751,33 @@ public class BloodVessel extends GameMode {
       }
    }
    
+   public Intruder getIntruder(IntruderType t){
+      return getIntruder(t.ordinal());
+   }
+   
+   public Intruder getIntruder(int i){
+      switch(i){
+         case 0:
+            return new Ciliate();
+         case 1:
+            return new EColi();
+         case 2:
+            return new Flagellate();
+         case 3:
+            return new FungalSpore();
+         case 4:
+            return new Parasite();
+         case 5:
+            return new PillBacteria();
+         case 6:
+            return new Spirillum();
+         case 7:
+            return new Virus();
+         default:
+            return null;
+      }
+   }
+   
    public void add(Shockwave s){
       waves.add(s);
    }
@@ -534,8 +804,10 @@ public class BloodVessel extends GameMode {
 
    @Override
    public void mouseRelease(MouseEvent e) {
-      if(ontop != null)
+      if(ontop != null && (ontop.cost < aminoAcids || Engine.isDebug())){
          add(ontop);
+         aminoAcids -= ontop.cost;
+      }
       ontop = null;
    }
 

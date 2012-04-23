@@ -11,8 +11,9 @@ import java.awt.Graphics2D;
  * @author Kevin
  */
 public abstract class Tower extends Entity {
-    protected int infectionsRemaining;
+    protected int infectionsRemaining, cost;
     protected int numViruses = 0;
+    
 
     public boolean isInfected() {
         return infectionsRemaining <= 0;
@@ -25,7 +26,7 @@ public abstract class Tower extends Entity {
    @Override
    public void act() {
        if(isInfected()) {
-           this.damage((80));
+           this.damage(50);
            numViruses++;
        }
        super.act();

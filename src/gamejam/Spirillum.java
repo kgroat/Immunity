@@ -17,10 +17,13 @@ public class Spirillum extends Intruder {
    private int rateoffire;
    private int frame;
 
-   public Spirillum() {
+   public Spirillum(){
+      this(true);
+   }
+   
+   public Spirillum(boolean left) {
+      super(left);
       bounces = true;
-      x = Math.random() * Engine.getGameWidth();
-      y = Math.random() * Engine.getGameHeight();
       maxVel = 3;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;
@@ -54,8 +57,6 @@ public class Spirillum extends Intruder {
          frame = (frame + 1) % (sprite.numFrames() * FRAMES_PER);
          sprite.setCurrentFrame(frame / FRAMES_PER);
          sprite.drawRot(g, (int) x, (int) y, fTheta);
-      } else {
-         System.out.println("WHOOPSIE!");
       }
    }
 

@@ -12,56 +12,58 @@ import java.awt.Graphics2D;
  */
 public class Virus extends Intruder {
 
-    public static final SpriteSet SP = SpriteSet.load("resources/images/particles.txt");
+   public static final SpriteSet SP = SpriteSet.load("resources/images/particles.txt");
+   private String name;
 
-    private String name;
-    
-    public Virus() {
-        x = Math.random() * Engine.getGameWidth();
-        y = Math.random() * Engine.getGameHeight();
-        maxVel = .5;
-        vel = Math.random() * maxVel;
-        theta = fTheta = Math.random() * Math.PI * 2;
-        sprite = SP;
-        ratUp = 0;
-        ratDown = 7;
-        primeDist = sprite.getSpriteWidth() / 2;
-        maxHp = hp = 50;
-        name = "v"+(int)(Math.random()*4+1);
-        drops=5;
-        radius = 4;
-    }
+   public Virus() {
+      this(true);
+   }
 
-    public Virus(double tx, double ty) {
-        this();
-        x = tx;
-        y = ty;
-        vel *= 5;
-    }
-    
-    public Virus(double tx, double ty, double tTheta) {
-        this();
-        x = tx;
-        y = ty;
-        theta = tTheta;
-    }
+   public Virus(boolean left) {
+      super(left);
+      maxVel = .5;
+      vel = Math.random() * maxVel;
+      theta = fTheta = Math.random() * Math.PI * 2;
+      sprite = SP;
+      ratUp = 0;
+      ratDown = 7;
+      primeDist = sprite.getSpriteWidth() / 2;
+      maxHp = hp = 50;
+      name = "v" + (int) (Math.random() * 4 + 1);
+      drops = 5;
+      radius = 4;
+   }
 
-    @Override
-    public void act() {
+   public Virus(double tx, double ty) {
+      this();
+      x = tx;
+      y = ty;
+      vel *= 5;
+   }
+
+   public Virus(double tx, double ty, double tTheta) {
+      this();
+      x = tx;
+      y = ty;
+      theta = tTheta;
+   }
+
+   @Override
+   public void act() {
 //        target = Engine.getBloodVessel().nearestUninfectedTower(this);
 //        super.act();
-    }
-    
-    @Override
-    public void onCollision(Entity e) {
-        if(e instanceof Tower) {
-            ((Tower)e).infect();
-            disposable = true;
-        }
-    }
-    
+   }
+
    @Override
-   public void render(Graphics2D g){
+   public void onCollision(Entity e) {
+      if (e instanceof Tower) {
+         ((Tower) e).infect();
+         disposable = true;
+      }
+   }
+
+   @Override
+   public void render(Graphics2D g) {
       sprite.enact(name);
       super.render(g);
    }

@@ -10,21 +10,26 @@ package gamejam;
  * @author Clem
  */
 public class FungalSpore extends Intruder {
-    
-    public FungalSpore()
+   public static final SpriteSet SP = SpriteSet.load("resources/images/fungus.txt");
+   
+   public FungalSpore(){
+      this(true);
+   }
+   
+    public FungalSpore(boolean left)
     {
+       super(left);
         bounces = true;
-      x = Math.random() * Engine.getGameWidth();
-      y = Math.random() * Engine.getGameHeight();
       maxVel = 2;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;
-      sprite = null;
+      sprite = SP;
       ratUp = 2;
       ratDown = 7;
       primeDist = sprite.getSpriteWidth()/2;
       maxHp = hp = 1000;
       drops = 50;
+      radius = 15;
     }
     
     public boolean damage(double ouch)

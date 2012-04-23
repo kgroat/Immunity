@@ -11,6 +11,7 @@ package gamejam;
  */
 //Macrophages chase the nearest enemy down and ram into them repeatedly until one of them dies.
 public class Macrophage extends Tower{
+   public static final int COST = 30;
    public static final SpriteSet SP = SpriteSet.load("resources/images/macrophage.txt");
 
     public Macrophage()
@@ -25,11 +26,12 @@ public class Macrophage extends Tower{
         ratUp=5;
         ratDown=9;
         primeDist = 0;
-        maxHp = hp=300;
+        maxHp = hp=400;
         bounces = true;
         infectionsRemaining = 3;
         maxDTheta = Math.PI / 14;
         radius = 23;
+        cost = COST;
     }
     
     public Macrophage(double startwidth, double startheight)

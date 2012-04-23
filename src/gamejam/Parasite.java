@@ -14,11 +14,14 @@ public class Parasite extends Intruder {
     private int wanderlust;
     private boolean walking;
     
-    public Parasite ()
+    public Parasite(){
+       this(true);
+    }
+    
+    public Parasite (boolean left)
     {
+       super(left);
       bounces = false;
-      x = Math.random() * Engine.getGameWidth();
-      y = Math.random() * Engine.getGameHeight();
       maxVel = 3;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;

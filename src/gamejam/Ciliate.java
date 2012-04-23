@@ -15,11 +15,13 @@ public class Ciliate extends Intruder {
    public static final SpriteSet SP = SpriteSet.load("resources/images/bacteria.txt");
    public static final int FRAMES_PER = 2;
     int frame;
-    public Ciliate ()
+    public Ciliate(){
+       this(true);
+    }
+    public Ciliate (boolean left)
     {
+       super(left);
       bounces = true;
-      x = Math.random() * Engine.getGameWidth();
-      y = Math.random() * Engine.getGameHeight();
       maxVel = 2.5;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;
@@ -27,7 +29,7 @@ public class Ciliate extends Intruder {
       ratUp = 1;
       ratDown = 8;
       primeDist = sprite.getSpriteWidth()/2;
-      maxHp = hp = 600;
+      maxHp = hp = 300;
       maxDTheta = Math.PI / 10;
       drops = 35;
       radius = 11;
@@ -46,8 +48,6 @@ public class Ciliate extends Intruder {
          frame = (frame + 1) % (sprite.numFrames() * FRAMES_PER);
          sprite.setCurrentFrame(frame / FRAMES_PER);
          sprite.drawRot(g, (int) x, (int) y, fTheta);
-      } else {
-         System.out.println("WHOOPSIE!");
       }
    }
     
