@@ -33,6 +33,7 @@ public class Ciliate extends Intruder {
       maxDTheta = Math.PI / 10;
       drops = 35;
       radius = 11;
+      mass = 70;
     }
     
     public void act()

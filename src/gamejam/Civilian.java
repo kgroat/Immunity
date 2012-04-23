@@ -60,4 +60,9 @@ public class Civilian extends Tower {
       sprite.enact("post");
       sprite.drawRot(g, (int)x, (int)y, fTheta);
    }
+   
+   public void onDispose(){
+      super.onDispose();
+      Engine.getBloodVessel().civilianKilled();
+   }
 }

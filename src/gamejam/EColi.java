@@ -36,6 +36,7 @@ public class EColi extends Intruder {
       drops = 35;
       cooldown = 30;
       radius = 8;
+      mass = 20;
     }
     
     public void act()

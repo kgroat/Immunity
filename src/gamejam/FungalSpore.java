@@ -30,6 +30,7 @@ public class FungalSpore extends Intruder {
       maxHp = hp = 1000;
       drops = 50;
       radius = 15;
+      mass = 30;
     }
     
     public boolean damage(double ouch)

@@ -36,6 +36,7 @@ public class Spirillum extends Intruder {
       maxHp = hp = 450;
       rateoffire = 15;
       drops = 35;
+      mass = 50;
    }
 
    public void act() {

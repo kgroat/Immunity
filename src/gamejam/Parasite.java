@@ -33,6 +33,7 @@ public class Parasite extends Intruder {
       wanderlust = 90;
       maxDTheta = Math.PI/15;
       drops = 75;
+      mass = 250;
     }
     
     @Override

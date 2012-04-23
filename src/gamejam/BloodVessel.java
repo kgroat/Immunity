@@ -56,14 +56,15 @@ public class BloodVessel extends GameMode {
    ArrayList<Shockwave> waves;
    ArrayList<Particle> particles;
    double inTh, outTh;
-   String nextName;
+   String nextName, sayText;
    
-   int aminoAcids, framesLeft, spawnFreq, spawnLeft, aminoFrame;
+   int aminoAcids, framesLeft, spawnFreq, spawnLeft, aminoFrame, intrudersKilled, frameCounter;
+   boolean isGood;
    boolean[] towersEnabled;
    double[] intruderProbs;
    TowerType selected;
    Tower ontop;
-
+   
    public BloodVessel() {
       towersEnabled = new boolean[TowerType.values().length];
       intruderProbs = new double[IntruderType.values().length];
@@ -280,11 +281,11 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage10.txt")){
          nextName = "infinitemode.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, 1, 1, 1, 1};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
          spawnFreq = 20;
-         aminoAcids = 4000;
+         aminoAcids = 100000;
          for(int i=0; i<20; i++){
             spawnIntruder();
          }
@@ -294,11 +295,11 @@ public class BloodVessel extends GameMode {
       }else{//infinitemode
          nextName = "infinitemode.txt";
          framesLeft = Integer.MAX_VALUE; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, 1, 1, 1, 1};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
-         aminoAcids = 4000;
+         spawnFreq = 3;
+         aminoAcids = 100000;
          for(int i=0; i<20; i++){
             spawnIntruder();
          }
@@ -329,17 +330,8 @@ public class BloodVessel extends GameMode {
             if (e.collides(other)) {
                e.onCollision(other);
                other.onCollision(e);
-               if (!(e instanceof Virus || other instanceof Virus) && (e.bounces && other.bounces || e.getClass() == other.getClass())) {
-                  Helper.Velocity vel = Helper.sum(e.vel, e.theta, other.vel, other.theta);
-                  tVel = Helper.subtract(e, vel, .5).vel;
-                  tVel += Helper.subtract(other, vel, .5).vel;
-                  e.vel = vel.vel / 2;
-                  e.theta = vel.theta;
-                  other.vel = vel.vel / 2;
-                  other.theta = vel.theta;
-                  vel = Helper.collisionVel(e, other, tVel);
-                  Helper.add(e, vel, .5);
-                  Helper.add(other, vel, -.5);
+               if ((!(e instanceof Virus || other instanceof Virus) && (e.bounces && other.bounces || e.getClass() == other.getClass())) || e instanceof Basophil || other instanceof Basophil) {
+                  Helper.bounce(e, other);
                }
             }
          }
@@ -380,13 +372,32 @@ public class BloodVessel extends GameMode {
             civilians.remove(e);
             projectiles.remove(e);
             particles.remove(e);
-            if (e instanceof Tower) {
-               int q = ((Tower) e).numViruses;
-               for (int j = 0; j < q; j++) {
-                  add(new Virus(e.x, e.y));
-               }
-            }
             i--;
+         }
+      }
+   }
+   
+   public void sayGood(){
+      frameCounter = 60;
+      isGood = true;
+      sayText = "";
+   }
+   
+   public void sayBad(){
+      frameCounter = 60;
+      isGood = false;
+      sayText = "";
+   }
+   
+   public void civilianKilled(){
+      sayBad();
+   }
+   
+   public void intruderKilled(Intruder i){
+      if(!(i instanceof Virus)){
+         intrudersKilled++;
+         if(intrudersKilled % 40 == 0){
+            sayGood();
          }
       }
    }
@@ -628,7 +639,16 @@ public class BloodVessel extends GameMode {
       }
       g.setFont(aminoFont);
       g.setColor(aminoColor);
-      g.drawImage(normal, Engine.getWidth()-150, Engine.getHeight()-200, null);
+      if(frameCounter <= 0){
+         g.drawImage(normal, Engine.getWidth()-150, Engine.getHeight()-200, null);
+      }else{
+         if(isGood){
+            g.drawImage(good, Engine.getWidth()-150, Engine.getHeight()-200, null);
+         }else{
+            g.drawImage(bad, Engine.getWidth()-150, Engine.getHeight()-200, null);
+         }
+         frameCounter--;
+      }
       AminoParticle.SP.draw(g, 5, 5);
       g.drawString(String.valueOf(aminoAcids), 20, 16);
    }
@@ -646,6 +666,7 @@ public class BloodVessel extends GameMode {
       }
       return "N/A";
    }
+   
    public String name(int i){
       switch(i){
          case 0: return "Neutrophil";

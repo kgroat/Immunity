@@ -34,6 +34,7 @@ public class Projectile extends Entity {
       bounces = false;
       radius=5;
       bounced = true;
+      mass = 5;
    }
 
    public Projectile(double startwidth, double startheight, double starttheta, Entity e) {

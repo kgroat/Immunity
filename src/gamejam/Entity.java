@@ -34,6 +34,7 @@ public abstract class Entity {
       pTheta = Math.random() * Math.PI * 2;
       dFTheta = (Math.random() * 2 - 1) * Math.PI / 50;
       dPTheta = (Math.random() * 2 - 1) * Math.PI / 50;
+      mass = 100;
    }
    public Entity(boolean left){
       this();

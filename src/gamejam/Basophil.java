@@ -10,7 +10,7 @@ package gamejam;
  * @author Clem
  */
 public class Basophil extends Tower {
-   public static final int COST = 200;
+   public static final int COST = 500;
    public static final SpriteSet SP = SpriteSet.load("resources/images/basophil.txt");
 
     public Basophil()
@@ -30,12 +30,6 @@ public class Basophil extends Tower {
         radius = 31;
         bounces = true;
         cost = COST;
-    }
-    
-    public Basophil(double placex, double placey)
-    {
-        this();
-        x=placex;
-        y=placey;
+        mass = 300;
     }
 }

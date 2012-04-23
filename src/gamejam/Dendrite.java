@@ -10,7 +10,7 @@ package gamejam;
  * @author Clem
  */
 public class Dendrite extends Tower {
-   public static final int COST = 30;
+   public static final int COST = 100;
    public static final SpriteSet SP = SpriteSet.load("resources/images/dendritic.txt");
     
     private int cooldown;
@@ -32,13 +32,7 @@ public class Dendrite extends Tower {
         bounces = true;
         radius = 22;
         cost = COST;
-    }
-    
-    public Dendrite(double startwidth, double startheight)
-    {
-        this();
-        x = startwidth;
-        y = startheight;
+        mass = 80;
     }
     
     public void act()

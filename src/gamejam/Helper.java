@@ -102,4 +102,26 @@ public class Helper {
       double theta = Math.atan2(y, x);
       return new Velocity(vel, theta);
    }
+   
+   public static void bounce(Entity one, Entity two){
+      double b = .25, rb = 1 - b;
+      double mx1 = Math.cos(one.theta)*one.vel*one.mass;
+      double my1 = Math.sin(one.theta)*one.vel*one.mass;
+      double mx2 = Math.cos(two.theta)*two.vel*two.mass;
+      double my2 = Math.sin(two.theta)*two.vel*two.mass;
+      double dmx = mx1-mx2;
+      double dmy = my1-my2;
+      double mom = Math.sqrt(dmx*dmx + dmy*dmy);
+      double mdr = Math.atan2(dmy, dmx);
+      double v1 = mx2 / one.mass;
+      double v2 = mx2 / two.mass;
+      Velocity dif = sum(one.vel, one.theta, -v1, mdr);
+      dif = sum(dif.vel*b, dif.theta, v1*rb, mdr);
+      one.vel = dif.vel;
+      one.theta = dif.theta;
+      dif = sum(two.vel, two.theta, -v2, mdr);
+      dif = sum(dif.vel*b, dif.theta, v2*rb, mdr);
+      one.vel = dif.vel;
+      one.theta = dif.theta;
+   }
 }

@@ -38,6 +38,7 @@ public class Flagellate extends Intruder{
       crashTimer=0;
       drops = 40;
       radius = 4;
+      mass = 40;
     }
     
     public void move(){

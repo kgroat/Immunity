@@ -43,4 +43,12 @@ public abstract class Tower extends Entity {
       sprite.enact("post");
       sprite.drawRot(g, (int)x, (int)y, fTheta);
    }
+   
+   @Override
+   public void onDispose(){
+      super.onDispose();
+      for (int j = 0; j < numViruses; j++) {
+         Engine.getBloodVessel().add(new Virus(x, y));
+      }
+   }
 }

@@ -28,6 +28,7 @@ public class ADVMode extends GameMode {
    protected ArrayList<AudioClip> audioClips;
    protected Font current;
    protected int sayHeight;
+   protected String from;
 
    public ADVMode(String s) {
       this(ADVScript.parse(s));
@@ -35,6 +36,7 @@ public class ADVMode extends GameMode {
          super.name = s.substring(s.lastIndexOf("/")+1);
       else
          super.name = s;
+      from = s;
    }
 
    public ADVMode(ADVScript s) {
@@ -48,6 +50,11 @@ public class ADVMode extends GameMode {
       audioClips = new ArrayList();
       current = new Font("sans", Font.BOLD, 30);
       advance();
+      if(s.name.contains("/"))
+         super.name = s.name.substring(s.name.lastIndexOf("/")+1);
+      else
+         super.name = s.name;
+      from = s.name;
    }
 
    public final void advance(){

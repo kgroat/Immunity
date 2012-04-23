@@ -32,6 +32,7 @@ public class Virus extends Intruder {
       name = "v" + (int) (Math.random() * 4 + 1);
       drops = 5;
       radius = 4;
+      mass = 10;
    }
 
    public Virus(double tx, double ty) {

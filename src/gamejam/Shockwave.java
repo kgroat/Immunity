@@ -43,7 +43,7 @@ public class Shockwave{
       double dist = dist(other);
       if(dist < radius + other.radius){
          double val = power*(maxRad-dist)/maxRad;
-         Helper.add(other, new Helper.Velocity(val/15., Math.atan2(other.y-y, other.x-x)), 1);
+         Helper.add(other, new Helper.Velocity(val/15., Math.atan2(other.y-y, other.x-x)), 25/other.mass);
          other.damage(50);
       }
    }

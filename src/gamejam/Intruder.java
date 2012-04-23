@@ -30,5 +30,6 @@ public abstract class Intruder extends Entity {
          Engine.getBloodVessel().add(new AminoParticle(this));
       }
       Engine.getBloodVessel().aminoAcids+=drops;
+      Engine.getBloodVessel().intruderKilled(this);
    }
 }

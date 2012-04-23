@@ -38,6 +38,7 @@ public class PillBacteria extends Intruder {
       drops = 30;
       radius = 12;
       maxDTheta = Math.PI/15;
+      mass = 40;
    }
 
    public enum ColorType {

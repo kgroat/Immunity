@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
 //This Tower stands still and heals other Towers near it.
 public class Monocyte extends Tower {
 
-   public static final int COST = 300;
+   public static final int COST = 400;
    public static final SpriteSet SP = SpriteSet.load("resources/images/monocyte.txt");
    Tower[] patients;
 
@@ -35,14 +35,9 @@ public class Monocyte extends Tower {
       radius = 22;
       bounces = true;
       cost = COST;
+      mass = 60;
    }
-
-   public Monocyte(double placewidth, double placeheight) {
-      this();
-      x = placewidth;
-      y = placeheight;
-   }
-
+   
    public void act() {
       double thet, dist;
       patients = Engine.getBloodVessel().towersNearby(this, 150);

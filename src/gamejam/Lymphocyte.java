@@ -12,7 +12,7 @@ package gamejam;
 //Additionally, this Tower calls nearby Towers to attack the Intruder it is attacking.
 public class Lymphocyte extends Tower {
 
-   public static final int COST = 50;
+   public static final int COST = 150;
    public static final SpriteSet SP = SpriteSet.load("resources/images/lymphocyte.txt");
 
    public Lymphocyte() {
@@ -32,12 +32,7 @@ public class Lymphocyte extends Tower {
       maxDTheta = Math.PI / 30;
       radius = 26;
       cost = COST;
-   }
-
-   public Lymphocyte(double placewidth, double placeheight) {
-      this();
-      x = placewidth;
-      y = placeheight;
+      mass = 150;
    }
 
    public void act() {

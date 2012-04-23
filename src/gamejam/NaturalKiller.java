@@ -10,7 +10,7 @@ package gamejam;
  */
 //This Tower flies at the nearest enemy and then explodes, dealing damage to everything nearby (friendly and enemy).
 public class NaturalKiller extends Tower {
-   public static final int COST = 100;
+   public static final int COST = 300;
    public static final SpriteSet SP = SpriteSet.load("resources/images/naturalKiller.txt");
 
    //default constructor
@@ -35,14 +35,7 @@ public class NaturalKiller extends Tower {
       maxDTheta = Math.PI / 17;
       radius = 21;
         cost = COST;
-   }
-
-   //alternate contructor that lets you set the initial location rather than
-   //a random location
-   public NaturalKiller(double placewidth, double placeheight) {
-      this();
-      x = placewidth;
-      y = placeheight;
+      mass = 50;
    }
 
    @Override

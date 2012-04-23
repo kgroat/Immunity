@@ -19,25 +19,14 @@ import java.util.ArrayList;
  */
 public class MainMenu extends GameMode {
 
+   private static final BufferedImage BACK = FileUtility.loadImage("resources/images/title_back.png"), FRONT = FileUtility.loadImage("resources/images/title_front.png");
    private int selected;
+   private BufferedImage bg;
 
    public MainMenu() {
+      bg = new BufferedImage(Engine.getWidth(), Engine.getHeight(), BufferedImage.TYPE_INT_ARGB);
       name = "Immunity: Tower Defense";
-      selected = -1;
-      buttons = new ArrayList();
-      int cx = ((Engine.getWidth() - 300) / 2);
-      int cy = ((Engine.getHeight() - 200) / 2);
-      buttons.add(new Button("Start game", new Font("serif", Font.PLAIN, 20), Engine.getGameWidth() / 2, cy + 10, Button.CENTER) {
-
-         @Override
-         public void onClick() {
-            AudioClip.get("Select3.ogg").forcePlay(true, true);
-            //Engine.setMode(new ADVMode("resources/scripts/stage10.txt"));
-            Engine.setMode(new ADVMode("resources/scripts/intro.txt"));
-         }
-      });
    }
-   ArrayList<Button> buttons;
 
    @Override
    public void press(KeyEvent e) {
@@ -49,17 +38,9 @@ public class MainMenu extends GameMode {
 
    @Override
    public void mousePress(MouseEvent e) {
-      System.out.println(e.getX() + " / " + e.getY());
-
-      for (int i = 0; i < buttons.size(); i++) {
-         System.out.println(buttons.get(i).x + " / " + buttons.get(i).y);
-         System.out.println(buttons.get(i).width + " / " + buttons.get(i).height);
-
-         if (buttons.get(i).getBounds().contains(e.getPoint())) {
-            buttons.get(i).onClick();
-         }
-      }
-
+      AudioClip.get("Select3.ogg").forcePlay(true, true);
+      Engine.setMode(new ADVMode("resources/scripts/infinitemode.txt"));
+      //Engine.setMode(new ADVMode("resources/scripts/intro.txt"));
    }
 
    @Override
@@ -68,16 +49,8 @@ public class MainMenu extends GameMode {
 
    @Override
    public void render(Graphics2D g) {
-      g.setColor(new Color(0, 0, 70));
-      g.fillRect(0, 0, Engine.getWidth(), Engine.getHeight());
-      g.setColor(Color.white);
-      int cx = ((Engine.getWidth() - 300) / 2);
-      int cy = ((Engine.getHeight() - 200) / 2);
-      g.fillRect(cx, cy, 300, 200);
-      for (int j = 0; j < buttons.size(); j++) {
-         buttons.get(j).render(g);
-      }
-
+      g.drawImage(BACK, 0, 0, null);
+      g.drawImage(FRONT, 0, 0, null);
    }
 
    @Override
@@ -91,9 +64,6 @@ public class MainMenu extends GameMode {
 
    @Override
    public void mouseMove(MouseEvent e) {
-      for (Button b : buttons) {
-         b.hilight = b.getBounds().contains(e.getPoint());
-      }
    }
 
    @Override
