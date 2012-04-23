@@ -56,67 +56,40 @@ public class BloodVessel extends GameMode {
    
    public BloodVessel(String s){
       this();
-      switch(s){
-         case "intro.txt":
-            nextName = "tutorial1.txt";
-            break;
-            
-         case "tutorial1.txt":
-            nextName = "tutorial2.txt";
-            break;
+      if(s.contains("/"))
+         name = s.substring(s.lastIndexOf("/")+1);
+      else
+         name = s;
+      if(s.endsWith("intro.txt")){
+         nextName = "tutorial1.txt";
+      }else if(s.endsWith("tutorial1.txt")){
+         nextName = "tutorial2.txt";
+      }else if(s.endsWith("tutorial2.txt")){
+         nextName = "tutorial3.txt";
+      }else if(s.endsWith("tutorial3.txt")){
+         nextName = "stage1.txt";
+      }else if(s.endsWith("stage1.txt")){
+         nextName = "stage2.txt";
+      }else if(s.endsWith("stage2.txt")){
+         nextName = "stage3.txt";
+      }else if(s.endsWith("stage3.txt")){
+         nextName = "stage4.txt";
+      }else if(s.endsWith("stage4.txt")){
+         nextName = "stage5.txt";
+      }else if(s.endsWith("stage5.txt")){
+         nextName = "stage6.txt";
+      }else if(s.endsWith("stage6.txt")){
+         nextName = "stage7.txt";
+      }else if(s.endsWith("stage7.txt")){
+         nextName = "stage8.txt";
+      }else if(s.endsWith("stage8.txt")){
+         nextName = "stage9.txt";
+      }else if(s.endsWith("stage9.txt")){
+         nextName = "stage10.txt";
+      }else if(s.endsWith("stage10.txt")){
+         nextName = "infinitemode.txt";
+      }else{//infinitemode
          
-         case "tutorial2.txt":
-            nextName = "tutorial3.txt";
-            break;
-         
-         case "tutorial3.txt":
-            nextName = "stage1.txt";
-            break;
-         
-         case "stage1.txt":
-            nextName = "stage2.txt";
-            break;
-         
-         case "stage2.txt":
-            nextName = "stage3.txt";
-            break;
-         
-         case "stage3.txt":
-            nextName = "stage4.txt";
-            break;
-         
-         case "stage4.txt":
-            nextName = "stage5.txt";
-            break;
-         
-         case "stage5.txt":
-            nextName = "stage6.txt";
-            break;
-         
-         case "stage6.txt":
-            nextName = "stage7.txt";
-            break;
-         
-         case "stage7.txt":
-            nextName = "stage8.txt";
-            break;
-         
-         case "stage8.txt":
-            nextName = "stage9.txt";
-            break;
-         
-         case "stage9.txt":
-            nextName = "stage10.txt";
-            break;
-         
-         case "stage10.txt":
-            nextName = "infinitemode.txt";
-            break;
-            
-         case "infinitemode.txt":
-         default:
-            nextName = "infinitemode.txt";
-            break;
       }
 //      for(int i=0; i<60; i++)
 //         add(new PillBacteria());
@@ -578,7 +551,8 @@ public class BloodVessel extends GameMode {
          ontop.setLoc(e.getPoint());
    }
    
+   @Override
    public boolean isDone(){
-      return civilians.size()>0;
+      return civilians.isEmpty() || framesLeft<=0 && intruders.isEmpty();
    }
 }

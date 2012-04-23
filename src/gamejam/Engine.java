@@ -16,6 +16,8 @@ import java.awt.image.BufferedImage;
  */
 public final class Engine {
    
+   private static final BufferedImage LOADING = FileUtility.loadImage("resources/images/loading.png");
+   
    private static int LOGIC_DELAY = 30;
    private static int PAINT_DELAY = 30;
    
@@ -40,10 +42,13 @@ public final class Engine {
    }
    
    static void start() {
+      FullScreenView.instance().setName("Immunity: Tower Defense");
+      FullScreenView.instance().setTitle("Immunity: Tower Defense");
+      FullScreenView.instance().drawImage(LOADING);
       debug = false;
       running = true;
       resize();
-      currentMode = new MainMenu();
+      setMode(new MainMenu());
       mainLoop = new Thread(){
          public void run(){
             while(running){
@@ -76,7 +81,7 @@ public final class Engine {
    }
    
    static void start2(){
-      currentMode = new ADVMode("resources/scripts/tutorial1.txt");
+      setMode(new ADVMode("resources/scripts/tutorial1.txt"));
    }
    
    static void stop(){
@@ -113,6 +118,7 @@ public final class Engine {
 
    static void setMode(GameMode g){
       currentMode = g;
+      FullScreenView.instance().setTitle(currentMode.name);
    }
    
    public static BufferedImage render(){
@@ -135,7 +141,7 @@ public final class Engine {
       if(currentMode != null && !currentMode.isDone())
          currentMode.update();
       else
-         currentMode = currentMode.escape();
+         setMode(currentMode.escape());
    }
    
    public static int getGameWidth(){

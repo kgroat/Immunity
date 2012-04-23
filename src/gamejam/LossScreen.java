@@ -15,11 +15,11 @@ import java.awt.event.MouseEvent;
 public class LossScreen extends GameMode {
 
    public LossScreen(){
-      
+      name = "You lose!";
    }
    
    public LossScreen(String s){
-      
+      this();
    }
    
    @Override

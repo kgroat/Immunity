@@ -22,11 +22,12 @@ public class MainMenu extends GameMode {
    private int selected;
 
    public MainMenu() {
+      name = "Immunity: Tower Defense";
       selected = -1;
       buttons = new ArrayList();
       int cx = ((Engine.getWidth() - 300) / 2);
       int cy = ((Engine.getHeight() - 200) / 2);
-      buttons.add(new Button("String Test", new Font("serif", Font.PLAIN, 20), Engine.getGameWidth() / 2, cy + 10, Button.CENTER) {
+      buttons.add(new Button("Start game", new Font("serif", Font.PLAIN, 20), Engine.getGameWidth() / 2, cy + 10, Button.CENTER) {
 
          @Override
          public void onClick() {

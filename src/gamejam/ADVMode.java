@@ -30,7 +30,10 @@ public class ADVMode extends GameMode {
 
    public ADVMode(String s) {
       this(ADVScript.parse(s));
-      super.name = s;
+      if(s.contains("/"))
+         super.name = s.substring(s.lastIndexOf("/")+1);
+      else
+         super.name = s;
    }
 
    public ADVMode(ADVScript s) {
