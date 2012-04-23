@@ -5,11 +5,14 @@
 
 package gamejam;
 
+import java.awt.Graphics2D;
+
 /**
  *
  * @author Clem
  */
 public class EColi extends Intruder {
+   public static final SpriteSet SP = SpriteSet.load("resources/images/bacteria.txt");
     
     private int cooldown;
     
@@ -29,6 +32,7 @@ public class EColi extends Intruder {
       maxHp = hp = 490;
       drops = 35;
       cooldown = 30;
+      radius = 8;
     }
     
     public void act()
@@ -37,6 +41,7 @@ public class EColi extends Intruder {
         {
             target = Engine.getBloodVessel().nearestCivilian(this);
         }
+        cooldown--;
         super.act();
     }
     
@@ -50,9 +55,13 @@ public class EColi extends Intruder {
         {if (cooldown == 0)
             {
                 Engine.getBloodVessel().aminoAcids-=1;
-                cooldown=31;
+                cooldown=10;
             }
-            cooldown--;
         }   
+    }
+    
+    public void render(Graphics2D g){
+       sprite.enact("ecoli");
+       sprite.drawRot(g, (int)x, (int)y, fTheta);
     }
 }

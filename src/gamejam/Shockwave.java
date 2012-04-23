@@ -41,7 +41,9 @@ public class Shockwave{
    
    public void collideAndEffect(Entity other){
       double dist = dist(other);
-      if(dist < radius){
+      if(dist < radius + other.radius){
+         if(!(other instanceof Particle))
+            System.out.println("YUP "+other);
          double val = power*(maxRad-dist)/maxRad;
          Helper.add(other, new Helper.Velocity(val/15., Math.atan2(other.y-y, other.x-x)), 1);
          other.damage(50);
@@ -52,12 +54,12 @@ public class Shockwave{
       //For now:
       RippleEffect.operate(bi, (int)x, (int)y, radius, (total-curr)*(total-curr)*(power+20.)/120/20/15, Math.PI/2, 0);//curr/2.5);
       Graphics g = bi.getGraphics();
-      g.setColor(new Color(255, 200, 0, 50*(total-curr)/total));
+      g.setColor(new Color(255, 200, 0, Math.max(0, Math.min(50*(total-curr)/total, 255))));
       g.fillOval((int)(x-radius), (int)(y-radius), (int)(2*radius), (int)(2*radius));
    }
    
    public double dist(Entity other){
-      double dx = other.x-x, dy = other.x-y;
+      double dx = other.x-x, dy = other.y-y;
       return Math.sqrt(dx*dx+dy*dy);
    }
    

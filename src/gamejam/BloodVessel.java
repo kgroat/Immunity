@@ -28,6 +28,7 @@ public class BloodVessel extends GameMode {
    ArrayList<Intruder> intruders;
    ArrayList<Projectile> projectiles;
    ArrayList<Shockwave> waves;
+   ArrayList<Particle> particles;
    double inTh, outTh;
    
    int aminoAcids, furthest;
@@ -47,7 +48,9 @@ public class BloodVessel extends GameMode {
       civilians = new ArrayList();
       intruders = new ArrayList();
       projectiles = new ArrayList();
+      particles = new ArrayList();
       waves = new ArrayList();
+      AudioClip.get("time-to-kick-ass.ogg").forcePlay(true, true);
    }
 
    @Override
@@ -109,11 +112,13 @@ public class BloodVessel extends GameMode {
       for (int i = 0; i < entities.size(); i++) {
          e = entities.get(i);
          if (e.disposable) {
+            e.onDispose();
             entities.remove(e);
             towers.remove(e);
             intruders.remove(e);
             civilians.remove(e);
             projectiles.remove(e);
+            particles.remove(e);
             if (e instanceof Tower) {
                int q = ((Tower) e).numViruses;
                for (int j = 0; j < q; j++) {
@@ -126,15 +131,17 @@ public class BloodVessel extends GameMode {
    }
 
    public Civilian nearestCivilian(Entity e) {
-      Civilian i = null;
+      Civilian c = null;
       double best = Double.MAX_VALUE;
-      for (Civilian ti : civilians) {
-         if (e.dist(ti) < best) {
-            best = e.dist(ti);
-            i = ti;
+      Civilian tc;
+      for (int i=0; i<civilians.size(); i++) {
+         tc = civilians.get(i);
+         if (e.dist(tc) < best) {
+            best = e.dist(tc);
+            c = tc;
          }
       }
-      return i;
+      return c;
    }
 
    public Tower nearestTower(Entity e) {
@@ -190,7 +197,9 @@ public class BloodVessel extends GameMode {
    public Intruder nearestIntruder(Entity e) {
       Intruder i = null;
       double best = Double.MAX_VALUE;
-      for (Intruder ti : intruders) {
+      Intruder ti;
+      for (int j=0; j<intruders.size(); j++) {
+         ti = intruders.get(j);
          if (e.dist(ti) < best) {
             best = e.dist(ti);
             i = ti;
@@ -212,7 +221,9 @@ public class BloodVessel extends GameMode {
    public Entity nearestEntity(Entity e) {
       Entity ne = null;
       double best = Double.MAX_VALUE;
-      for (Entity te : entities) {
+      Entity te;
+      for (int i=0; i<entities.size(); i++) {
+         te = entities.get(i);
          if (e.dist(te) < best) {
             best = e.dist(te);
             ne = te;
@@ -234,7 +245,9 @@ public class BloodVessel extends GameMode {
    public PillBacteria nearestPill(PillBacteria p) {
       PillBacteria out = null, tmp;
       double dist = Double.MAX_VALUE;
-      for (Intruder i : intruders) {
+      Intruder i;
+      for (int j=0; j<intruders.size(); j++) {
+         i = intruders.get(j);
          if (i instanceof PillBacteria) {
             tmp = (PillBacteria) i;
             if (tmp.col == p.col && tmp.dist(p) < dist && tmp != p && !p.isProblem(tmp)) {
@@ -284,6 +297,9 @@ public class BloodVessel extends GameMode {
    @Override
    public void render(Graphics2D g) {
       g.drawImage(BG, 0, 0, null);
+      for (int i = 0; i < particles.size(); i++) {
+         particles.get(i).render(g);
+      }
       for (int i = 0; i < towers.size(); i++) {
          towers.get(i).prerender(g);
       }
@@ -392,6 +408,9 @@ public class BloodVessel extends GameMode {
          if (e instanceof Projectile) {
             projectiles.add((Projectile) e);
          }
+         if(e instanceof Particle){
+            particles.add((Particle)e);
+         }
          entities.add(e);
       }
    }
@@ -413,17 +432,20 @@ public class BloodVessel extends GameMode {
 
    @Override
    public void mouseRelease(MouseEvent e) {
-      add(ontop);
+      if(ontop != null)
+         add(ontop);
       ontop = null;
    }
 
    @Override
    public void mouseMove(MouseEvent e) {
-      ontop.setLoc(e.getPoint());
+      if(ontop != null)
+         ontop.setLoc(e.getPoint());
    }
 
    @Override
    public void mouseDrag(MouseEvent e) {
-      ontop.setLoc(e.getPoint());
+      if(ontop != null)
+         ontop.setLoc(e.getPoint());
    }
 }

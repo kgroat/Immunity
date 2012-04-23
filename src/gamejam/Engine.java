@@ -72,6 +72,7 @@ public final class Engine {
       renderLoop.setDaemon(true);
       mainLoop.start();
       renderLoop.start();
+      AudioClip.get("i-get-around.ogg").forcePlay(true, true);
    }
    
    static void start2(){
@@ -81,15 +82,15 @@ public final class Engine {
 //         bv.add(new PillBacteria());
       for(int i=0; i<10; i++)
          bv.add(new Civilian());
-//      Neutrophil temp = new Neutrophil();
-//      temp.infectionsRemaining = 0;
-//      bv.add(temp);
-//      for(int i=0; i<10; i++)
-//          bv.add(new Neutrophil());
+      Neutrophil temp = new Neutrophil();
+      temp.infectionsRemaining = 0;
+      bv.add(temp);
+      for(int i=0; i<10; i++)
+          bv.add(new Neutrophil());
 //      for(int i=0; i<10; i++)
 //          bv.add(new Monocyte());
-//      for(int i=0; i<20; i++)
-//          bv.add(new Virus());
+      for(int i=0; i<20; i++)
+          bv.add(new Virus());
 //      for(int i=0; i<10; i++)
 //          bv.add(new Lymphocyte());
 //      for(int i=0; i<10; i++)
@@ -102,8 +103,8 @@ public final class Engine {
           bv.add(new Basophil());
       for(int i=0; i<10; i++)
           bv.add(new Ciliate());
-      for(int i=0; i<10; i++)
-          bv.add(new NaturalKiller());
+//      for(int i=0; i<10; i++)
+//          bv.add(new NaturalKiller());
       for(int i=0; i<10; i++)
           bv.add(new Dendrite());
    }
