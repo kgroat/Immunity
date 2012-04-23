@@ -1,0 +1,10 @@
+LEFT: Charlie Normal
+SAY: "Charlie" I'd better clean my knee.
+WAIT
+LEFT: Charlie Unpleasant
+SAY: "Charlie" Whoa!  That stings!
+WAIT
+SAY: "Charlie" Ugh.  Ew.
+WAIT
+NARRATE: My knee looks gnarly!
+WAIT

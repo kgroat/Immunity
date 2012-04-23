@@ -1,0 +1,9 @@
+LEFT: Charlie Unpleasant
+RIGHT: Parents Shock
+SAY: "Charlie" Ugh.
+WAIT
+SAY: "Dad" What do we do?
+WAIT
+SAY: "I guess we make him comfortable for now."
+WAIT
+NARRATE: I feel terrible...

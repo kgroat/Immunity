@@ -9,3 +9,4 @@ Select2.ogg;      SFX;   ONCE;   0.7;   0;
 Select3.ogg;      SFX;   ONCE;   0.7;   0;
 Select4.ogg;      SFX;   ONCE;   0.7;   0;
 Fun.ogg;          MUSIC; LOOP;   1.0;   0;
+Crash.wav;        SFX;   ONCE;   0.8;   0;
