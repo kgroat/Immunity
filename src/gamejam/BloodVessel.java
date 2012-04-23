@@ -415,6 +415,30 @@ public class BloodVessel extends GameMode {
       }
    }
    
+   public Intruder randIntruder(){
+      int i = (int)(Math.random()*8);
+      switch(i){
+         case 0:
+            return new Ciliate();
+         case 1:
+            return new EColi();
+         case 2:
+            return new Flagellate();
+         case 3:
+            return new FungalSpore();
+         case 4:
+            return new Parasite();
+         case 5:
+            return new PillBacteria();
+         case 6:
+            return new Spirillum();
+         case 7:
+            return new Virus();
+         default:
+            return null;
+      }
+   }
+   
    public void add(Shockwave s){
       waves.add(s);
    }
@@ -426,8 +450,14 @@ public class BloodVessel extends GameMode {
 
    @Override
    public void mousePress(MouseEvent e) {
-      ontop = getTower(selected);
-      ontop.setLoc(e.getPoint());
+      if(e.getButton() == MouseEvent.BUTTON1){
+         ontop = getTower(selected);
+         ontop.setLoc(e.getPoint());
+      }else{
+         Intruder i = randIntruder();
+         i.setLoc(e.getPoint());
+         add(i);
+      }
    }
 
    @Override

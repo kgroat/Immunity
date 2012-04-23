@@ -25,7 +25,7 @@ public class EColi extends Intruder {
       vel = Math.random() * maxVel;
       maxDTheta = Math.PI/15;
       theta = fTheta = Math.random() * Math.PI * 2;
-      sprite = null;
+      sprite = SP;
       ratUp = 1;
       ratDown = 9;
       primeDist = 32;

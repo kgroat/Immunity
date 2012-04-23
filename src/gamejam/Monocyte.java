@@ -63,10 +63,15 @@ public class Monocyte extends Tower {
    public void render(Graphics2D g) {
       sprite.enact("post");
       sprite.drawRot(g, (int)x, (int)y, fTheta);
-      if(patients != null && Engine.isDebug()){
+      if(patients != null){
          g.setColor(Color.GREEN);
+         double thet, dist;
          for(int i=0; i<patients.length; i++){
-            g.drawLine((int)x, (int)y, (int)patients[i].x, (int)patients[i].y);
+            thet = Math.atan2(patients[i].y-y, patients[i].x-x);
+            dist = dist(patients[i])*Math.random();
+            Engine.getBloodVessel().add(new Particle(x+Math.cos(thet)*dist, y+Math.sin(thet)*dist));
+            if(Engine.isDebug())
+               g.drawLine((int)x, (int)y, (int)patients[i].x, (int)patients[i].y);
          }
       }
    }

@@ -24,7 +24,7 @@ public class Macrophage extends Tower{
         sprite = SP;
         ratUp=5;
         ratDown=9;
-        primeDist = 100;
+        primeDist = 0;
         maxHp = hp=300;
         bounces = true;
         infectionsRemaining = 3;
@@ -43,6 +43,8 @@ public class Macrophage extends Tower{
     {
         if (target != null && target.disposable)
             target=null;
+        if(target == null)
+           target = Engine.getBloodVessel().nearestIntruder(this);
         super.act();
     }
     

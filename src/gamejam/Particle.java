@@ -28,6 +28,18 @@ public class Particle extends Entity {
       name = "p"+(int)(Math.random()*4+1);
    }
    
+   public Particle(double tx, double ty){
+      life = (int)(Math.random()*26+5);
+      sprite = SP;
+      ratUp = 0;
+      ratDown = 1;
+      theta = Math.random()*Math.PI*2;
+      vel = Math.random()*1;
+      x = tx;
+      y = ty;
+      name = "k"+(int)(Math.random()*4+1);
+   }
+   
    @Override
    public boolean damage(double d){
       return disposable;

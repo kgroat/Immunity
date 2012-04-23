@@ -42,8 +42,6 @@ public class Shockwave{
    public void collideAndEffect(Entity other){
       double dist = dist(other);
       if(dist < radius + other.radius){
-         if(!(other instanceof Particle))
-            System.out.println("YUP "+other);
          double val = power*(maxRad-dist)/maxRad;
          Helper.add(other, new Helper.Velocity(val/15., Math.atan2(other.y-y, other.x-x)), 1);
          other.damage(50);
