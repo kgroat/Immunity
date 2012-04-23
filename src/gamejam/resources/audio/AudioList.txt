@@ -9,7 +9,7 @@ Select2.ogg;          SFX;   ONCE;   0.7;   0;
 Select3.ogg;          SFX;   ONCE;   0.7;   0;
 Select4.ogg;          SFX;   ONCE;   0.7;   0;
 i-get-around.ogg;     MUSIC; LOOP;   1.0;   0;
-oh-noez.ogg;           MUSIC; LOOP;   1.0;   0;
+oh-noez.ogg;          MUSIC; LOOP;   1.0;   0;
 time-to-kick-ass.ogg; MUSIC; LOOP;   1.0;   0;
 Crash.ogg;            SFX;   ONCE;   0.8;   0;
 phone.ogg;            SFX;   ONCE;   0.8;   0;

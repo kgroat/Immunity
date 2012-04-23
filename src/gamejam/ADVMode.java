@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author Clem
  */
 public class ADVMode extends GameMode {
-   public static final String IMG = "resources/images/";
+   public static final String IMG = "resources/images/scriptimages/";
    public static final String LOC = "resources/scripts/";
 
    protected BufferedImage cutinRight, cutinLeft, sayImage, narrateImage;
@@ -27,6 +27,7 @@ public class ADVMode extends GameMode {
    protected boolean done;
    protected ArrayList<AudioClip> audioClips;
    protected Font current;
+   protected int sayHeight;
 
    public ADVMode(String s) {
       this(ADVScript.parse(s));
@@ -45,7 +46,7 @@ public class ADVMode extends GameMode {
       say = "";
       name = "";
       audioClips = new ArrayList();
-      current = new Font("serif", Font.PLAIN, 15);
+      current = new Font("sans", Font.BOLD, 30);
       advance();
    }
 
@@ -90,26 +91,37 @@ public class ADVMode extends GameMode {
       }
       sayImage = null;
       narrateImage = null;
+      sayHeight = 160;
    }
    
    public BufferedImage render(String in, Graphics2D g){
       g.setFont(current);
       String[] words = in.split(" ");
+      String [] w2;
       String tmp = "", tmp2 = "";
       ArrayList<String> lines = new ArrayList();
       Rectangle2D rect = new Rectangle2D.Double(0, 0, 0, 0);
       LineMetrics metrics;
       double height = 0;
       for(int i=0; i<words.length; i++){
-         tmp2 = (tmp + " " + words[i]);
-         rect = current.getStringBounds(tmp2, g.getFontRenderContext());
-         metrics = current.getLineMetrics(tmp2, g.getFontRenderContext());
-         if(rect.getWidth() < 600){
-            tmp = tmp2;
+         if(words[i].contains("/n")){
+            w2 = words[i].split("/n");
+            for(int j=0; j<w2.length; j++){
+               tmp2 = (tmp+" "+w2[j]).trim();
+               lines.add(tmp2);
+               tmp2 = tmp = "";
+            }
          }else{
-            lines.add(tmp);
-            tmp2 = tmp = words[i];
-            height += metrics.getHeight();
+            tmp2 = (tmp + " " + words[i]).trim();
+            rect = current.getStringBounds(tmp2, g.getFontRenderContext());
+            metrics = current.getLineMetrics(tmp2, g.getFontRenderContext());
+            if(rect.getWidth() < 600){
+               tmp = tmp2;
+            }else{
+               lines.add(tmp);
+               tmp2 = tmp = words[i];
+               height += metrics.getHeight();
+            }
          }
       }
       lines.add(tmp2);
@@ -148,9 +160,9 @@ public class ADVMode extends GameMode {
       g.setColor(Color.black);
       g.fillRect(0, 0, 800, 600);
       if(cutinRight != null)
-         g.drawImage(cutinRight, 100+dx, 160+dy, 200, 300, null);
+         g.drawImage(cutinRight, 705-cutinRight.getWidth()+dx, 600-sayHeight-cutinRight.getHeight()+dy, null);
       if(cutinLeft != null)
-         g.drawImage(cutinLeft, 500+dx, 160+dy, 200, 300, null);
+         g.drawImage(cutinLeft, 95+cutinLeft.getWidth()+dx, 600-sayHeight-cutinLeft.getHeight()+dy, -cutinLeft.getWidth(), cutinLeft.getHeight(), null);
       
       BufferedImage tmp;
       Graphics2D g2;
@@ -171,6 +183,7 @@ public class ADVMode extends GameMode {
             g2.setColor(Color.WHITE);
             g2.drawString(name, 100, 438-metrics.getDescent());
          }
+         sayHeight = Math.max(160, tmp.getHeight()+10);
       }
       if(narrate.length() > 0 && narrateImage == null){
          narrateImage = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);

@@ -1,3 +1,4 @@
+AUDIO: oh-noez.ogg
 LEFT: Charlie Gnarly
 RIGHT: Friends Happy
 SAY: "Charlie" I love hot dogs!

@@ -1,7 +1,8 @@
+AUDIO: oh-noez.ogg
 LEFT: Parents Happy
 SAY: "Mom" You know, for the first time in months, I think Charles is sleeping soundly.
 WAIT:
-SAY: "Dad" Yeah.  ThatÅfs my boy!  Saving the world.
+SAY: "Dad" Yeah.  That's my boy!  Saving the world.
 WAIT:
 SAY: "Mom" Yeah.
 WAIT:

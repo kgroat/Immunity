@@ -1,3 +1,4 @@
+AUDIO: oh-noez.ogg
 LEFT: Friends WTF
 RIGHT: Parents Shock
 SAY: "Steve, Randy, & Tammy" Dude!  Mrs. Little!  Charlie, like, collapsed!

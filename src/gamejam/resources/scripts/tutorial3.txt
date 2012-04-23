@@ -1,3 +1,4 @@
+AUDIO: oh-noez.ogg
 LEFT: Charlie Normal
 SAY: "Charlie" I'd better clean my knee.
 WAIT:

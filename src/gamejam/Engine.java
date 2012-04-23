@@ -81,7 +81,8 @@ public final class Engine {
    }
    
    static void start2(){
-      setMode(new ADVMode("resources/scripts/tutorial1.txt"));
+      setMode(new ADVMode("resources/scripts/stage10.txt"));
+      //setMode(new ADVMode("resources/scripts/intro.txt"));
    }
    
    static void stop(){

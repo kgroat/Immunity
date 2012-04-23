@@ -1,3 +1,4 @@
+AUDIO: oh-noez.ogg
 LEFT: Charlie Gnarly
 SAY: "Charlie" Yeah!
 WAIT:

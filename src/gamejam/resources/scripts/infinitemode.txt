@@ -1,8 +1,9 @@
+AUDIO: oh-noez.ogg
 LEFT: Charlie Unpleasant
 SAY: "Charlie" Mom!  Are you okay?
 WAIT:
 RIGHT: Parents Happy
-SAY: "Mom" IÅfm feeling much better, thanks to your extraordinary immune system!
+SAY: "Mom" I'm feeling much better, thanks to your extraordinary immune system!
 WAIT:
 LEFT: Charlie Gnarly
 SAY: "Charlie" That's gnarly, Mom!
@@ -25,7 +26,7 @@ SAY: "Charlie" Huh?
 WAIT:
 SAY: "Agent White" We have to go all around the world and cure all the people with the plague.  Agent Johnson?
 WAIT:
-SAY: "Agent Johnson" WeÅfre so glad to have had your help, Charles.  You deserve a medal.  LetÅfs go, Agent White.
+SAY: "Agent Johnson" We're so glad to have had your help, Charles.  You deserve a medal.  Let's go, Agent White.
 WAIT:
 NARRATE: To save the world!
 WAIT:

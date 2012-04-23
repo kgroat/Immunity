@@ -1,3 +1,4 @@
+AUDIO: oh-noez.ogg
 LEFT: Charlie Unpleasant
 RIGHT: Parents Shock
 SAY: "Charlie" Ugh.

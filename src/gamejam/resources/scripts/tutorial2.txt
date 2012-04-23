@@ -1,3 +1,4 @@
+AUDIO: oh-noez.ogg
 LEFT: Charlie Normal
 SAY: "Charlie" Mom!  I'm home!
 WAIT:

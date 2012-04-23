@@ -1,3 +1,4 @@
+AUDIO: oh-noez.ogg
 LEFT: Friends Happy
 SAY: "Steve, Randy, & Tammy" We heard Charlie's doing better!
 WAIT:

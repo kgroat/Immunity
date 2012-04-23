@@ -1,3 +1,4 @@
+AUDIO: oh-noez.ogg
 LEFT: Parents Shock
 RIGHT: Doctor Normal
 SAY: "Mom" How is he, doctor?
@@ -12,7 +13,7 @@ WAIT:
 LEFT: Parents Shock
 SAY: "Dad" Can you help him, doc?
 WAIT:
-SAY: "Doctor" It's bad.  He has the PLAGUE."
+SAY: "Doctor" It's bad.  He has the PLAGUE.
 WAIT:
 NARRATE: At most, I give him two weeks.
 WAIT:
