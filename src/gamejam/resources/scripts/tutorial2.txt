@@ -1,0 +1,19 @@
+LEFT: Charlie Normal
+SAY: "Charlie" Mom!  I'm home!
+WAIT
+RIGHT: Parents Happy
+SAY: "Mom n Dad" Welcome back, Charles!
+WAIT
+RIGHT: Parents Shock
+SAY: "Mom n Dad" Oh no!  What happened to your knee?
+WAIT
+SAY: "Charlie" Don't worry, it's just a scratch.
+WAIT
+SAY: "Charlie" But first, I'm thirsty.
+WAIT
+RIGHT: Parents Normal
+SAY: "Dad" Getting some vitamins, my boy?
+WAIT
+LEFT: Charlie Gnarly
+Narrate: I love OJ!
+WAIT

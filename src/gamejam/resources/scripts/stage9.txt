@@ -1,0 +1,11 @@
+LEFT: Parents Happy
+SAY: "Mom" You know, for the first time in months, I think Charles is sleeping soundly.
+WAIT
+SAY: "Dad" Yeah.  ThatÅfs my boy!  Saving the world.
+WAIT
+SAY: "Mom" Yeah.
+WAIT
+SAY: "Mom" *cough* *cough*
+WAIT
+NARRATE: Yeah, saving the world.
+WAIT

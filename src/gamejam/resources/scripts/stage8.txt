@@ -1,0 +1,24 @@
+NARRATE: The world watches with bated breath as Charlie fights the PLAGUE.
+WAIT
+NARRATE: On his shoulders rests the PLAGUE Vaccine, and saving the whole world.
+WAIT
+NARRATE: Overnight, he has become a celebrity, and everyone is glued to their TVs, praying for his health.
+WAIT
+LEFT: Parents Normal
+SAY: "Mom n Dad" Go Charlie go!
+WAIT
+LEFT: Friends Happy
+SAY: "Steve, Randy, & Tammy" Go Charlie go!
+WAIT
+LEFT: Doctor Normal
+SAY: "Doctor" Go Charlie go!
+WAIT
+LEFT: Agents Shouting
+SAY: "Agents" Go Charlie go!
+WAIT
+LEFT: Kitten Normal
+SAY: "Adorable Kitten" Go Charlie go!
+WAIT
+LEFT: The World
+NARRATE: GO CHARLIE GO!
+WAIT

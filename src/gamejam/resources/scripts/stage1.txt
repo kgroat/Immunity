@@ -1,0 +1,16 @@
+LEFT: Charlie Gnarly
+RIGHT: Friends Happy
+SAY: "Charlie" I love hot dogs!
+WAIT
+SAY: "Steve, Randy, & Tammy" Yeah!
+WAIT
+LEFT: Charlie Normal
+SAY: "Charlie and Friends" Yum!
+WAIT
+LEFT: Charlie Unpleasant
+SAY: "Charlie" BLEAGH!
+WAIT
+RIGHT: Friends WTF
+SAY: "Steve, Randy, & Tammy" OH MY GOD!  HE JUST VOMITED ALL OVER THE FLOOR!
+WAIT
+NARRATE: Dude, I'm feelin' sickified...

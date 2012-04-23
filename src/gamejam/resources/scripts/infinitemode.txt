@@ -1,0 +1,31 @@
+LEFT: Charlie Unpleasant
+SAY: "Charlie" Mom!  Are you okay?
+WAIT
+RIGHT: Parents Happy
+SAY: "Mom" IÅfm feeling much better, thanks to your extraordinary immune system!
+WAIT
+LEFT: Charlie Gnarly
+SAY: "Charlie" That's gnarly, Mom!
+WAIT
+SAY: "Dad" I'm so proud of you, my boy!
+WAIT
+LEFT: Friends Happy
+SAY: "Steve, Randy, & Tammy" Three cheers for Charlie and his amazing blood!
+WAIT
+RIGHT: Doctor Normal
+SAY: "Doctor" Hip hip...
+WAIT
+SAY: "Everyone" HOORAY!
+WAIT
+LEFT: Agents Normal
+SAY: "Agents" Unfortunately, our work is not yet done.
+WAIT
+RIGHT: Charlie Normal
+SAY: "Charlie" Huh?
+WAIT
+SAY: "Agent White" We have to go all around the world and cure all the people with the plague.  Agent Johnson?
+WAIT
+SAY: "Agent Johnson" WeÅfre so glad to have had your help, Charles.  You deserve a medal.  LetÅfs go, Agent White.
+WAIT
+NARRATE: To save the world!
+WAIT
