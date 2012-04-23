@@ -1,37 +1,37 @@
 NARRATE: And so...
-WAIT
+WAIT:
 LEFT: Agents Shouting
 SAY: "Agents" WeÅfve done it!  The vaccine is finished and Charles Little is healthy!
-WAIT
+WAIT:
 RIGHT: Charlie Normal
 SAY: "Charlie" Really?
-WAIT
+WAIT:
 RIGHT: Charlie Gnarly
 SAY: "Charlie" Gnarly!
-WAIT
+WAIT:
 LEFT: Agents Normal
 SAY: "Agents" Good job, Charles.  Thanks to you, the world will soon be free of Plague.
-WAIT
+WAIT:
 LEFT: Doctor Normal
 SAY: "Doctor" All we need now is someone to test the vaccine on.
-WAIT
+WAIT:
 AUDIO: phone.wav
 SAY: "Doctor" I'll get that.
-WAIT
+WAIT:
 SAY: "Doctor" Hello?
-WAIT
+WAIT:
 SAY: "Dad" Doc!  You gotta help!  My wife collapsed!  I think she hasÅc
-WAIT
+WAIT:
 SAY: "Dad & Doctor" The PLAGUE! /n The PLAGUE?
-WAIT
+WAIT:
 SAY: "Charlie" Oh no!  Mom must have caught it when she was taking care of me!
-WAIT
+WAIT:
 LEFT: Agents Normal
 SAY: "Charlie" Please!  Agent Johnson!  Agent White!  Use the vaccine on my mom!  Save her, dudes!
-WAIT
+WAIT:
 SAY: "Agents" ...
-WAIT
+WAIT:
 SAY: "Agents" Alright, let's go..."
-WAIT
+WAIT:
 NARRATE: Save Mom!
-WAIT
+WAIT:

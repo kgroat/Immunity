@@ -1,17 +1,17 @@
 LEFT: Charlie Gnarly
 SAY: "Charlie" Yeah!
-WAIT
+WAIT:
 LEFT:
 RIGHT: Charlie Gnarly
 SAY: "Charlie" I love skateboarding!
-WAIT
+WAIT:
 RIGHT:
 LEFT: Charlie Normal
 SAY: "Charlie" It would suck if I crashed into something right now."
-WAIT
+WAIT:
 LEFT: Charlie Gnarly
 SAY: "Charlie" OH NO!  Boxes that I might crash into!
-WAIT
+WAIT:
 
 SHAKE: 4 2000
 AUDIO: Crash.wav
@@ -19,3 +19,4 @@ AUDIO: Crash.wav
 LEFT: Charlie Unpleasant
 SAY: "Charlie" I crashed...
 NARRATE: "Ow!  My knee!"
+WAIT:

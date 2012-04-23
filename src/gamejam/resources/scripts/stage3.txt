@@ -1,17 +1,18 @@
 LEFT: Parents Shock
 RIGHT: Doctor Normal
 SAY: "Mom" How is he, doctor?
-WAIT
+WAIT:
 LEFT: Charlie Unpleasant
 SAY: "Doctor" Let's see.  Take off your shirt, son, and let me listen to your heartbeat.
-WAIT
+WAIT:
 SAY: "Charlie" ...
-WAIT
+WAIT:
 SAY: "Doctor" Hmm...
-WAIT
+WAIT:
 LEFT: Parents Shock
 SAY: "Dad" Can you help him, doc?
-WAIT
+WAIT:
 SAY: "Doctor" It's bad.  He has the PLAGUE."
-WAIT
+WAIT:
 NARRATE: At most, I give him two weeks.
+WAIT:

@@ -1,15 +1,16 @@
 LEFT: Friends WTF
 RIGHT: Parents Shock
 SAY: "Steve, Randy, & Tammy" Dude!  Mrs. Little!  Charlie, like, collapsed!
-WAIT
+WAIT:
 SAY: "Mom n Dad" OH NO!
-WAIT
+WAIT:
 SAY: "Mom" My poor son!
-WAIT
+WAIT:
 SAY: "Dad" How could this happen to my boy?!
-WAIT
+WAIT:
 SAY: "Mom" Quick!  To the car!
-WAIT
+WAIT:
 SAY: "Dad" Let's get him to the doctor...
-WAIT
+WAIT:
 NARRATE: Pronto!
+WAIT:
