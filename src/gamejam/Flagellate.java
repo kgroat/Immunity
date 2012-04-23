@@ -4,6 +4,7 @@
  */
 
 package gamejam;
+import java.awt.Graphics2D;
 import java.awt.color.*;
 
 /**
@@ -11,30 +12,42 @@ import java.awt.color.*;
  * @author Clem
  */
 public class Flagellate extends Intruder{
+   public static final SpriteSet SP = SpriteSet.load("resources/images/bacteria.txt");
+   public static final int FRAMES_PER = 2;
     
-    boolean hascrashed;
+    private int crashTimer;
+   private int frame;
     
     public Flagellate()
     {
-        bounces = true;
+      bounces = true;
       x = Math.random() * Engine.getGameWidth();
       y = Math.random() * Engine.getGameHeight();
       maxVel = 5.9;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;
-      sprite = null;
-      ratUp = 6;
+      maxDTheta = Math.PI/20;
+      sprite = SP;
+      ratUp = 2;
       ratDown = 8;
-      primeDist = sprite.getSpriteWidth()/2;
+      primeDist = 0;
       maxHp = hp = 500;
-      hascrashed=true;
+      crashTimer=0;
       drops = 40;
+      radius = 4;
+    }
+    
+    public void move(){
+       super.move();
+       fTheta = theta;
     }
     
     public void act()
     {
-        if (hascrashed)
+        if (crashTimer <= 0 && target == null){
             target=Engine.getBloodVessel().nearestTower(this);
+        }else
+         crashTimer--;
         super.act();
     }
     
@@ -45,10 +58,23 @@ public class Flagellate extends Intruder{
         if (other instanceof Tower)
         {
             other.damage(35);
-            hascrashed=true;
+            target = null;
+            crashTimer=10;
         }
         else
             super.onCollision(other);
     }
+    
+
+   public void render(Graphics2D g) {
+      sprite.enact("flagellate");
+      if (sprite.numFrames() > 0) {
+         frame = (frame + 1) % (sprite.numFrames() * FRAMES_PER);
+         sprite.setCurrentFrame(frame / FRAMES_PER);
+         sprite.drawRot(g, (int) x, (int) y, fTheta);
+      } else {
+         System.out.println("WHOOPSIE!");
+      }
+   }
 
 }

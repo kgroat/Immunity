@@ -40,7 +40,7 @@ public final class Engine {
    }
    
    static void start() {
-      debug = true;
+      debug = false;
       running = true;
       resize();
       currentMode = new MainMenu();
@@ -77,7 +77,7 @@ public final class Engine {
    static void start2(){
       BloodVessel bv;
       currentMode = bv = new BloodVessel();
-      for(int i=0; i<50; i++)
+      for(int i=0; i<60; i++)
          bv.add(new PillBacteria());
       for(int i=0; i<10; i++)
          bv.add(new Civilian());
@@ -94,6 +94,10 @@ public final class Engine {
           bv.add(new Lymphocyte());
       for(int i=0; i<10; i++)
           bv.add(new KillerT());
+      for(int i=0; i<10; i++)
+          bv.add(new Spirillum());
+      for(int i=0; i<10; i++)
+          bv.add(new Flagellate());
    }
    
    static void stop(){

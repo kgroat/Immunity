@@ -184,6 +184,15 @@ public class SpriteSet {
    public int getSpriteWidth() {
       return spriteWidth;
    }
+   
+   public int numFrames(){
+      if(currentSingle != null)
+         return currentSingle.frame.length;
+      if(currentLoop != null)
+         return currentLoop.frame.length;
+      return 0;
+         
+   }
 
    /**
     * Prints every frame of every Sprite in the SpriteSet, as a sprite sheet
