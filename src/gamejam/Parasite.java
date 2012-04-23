@@ -34,6 +34,7 @@ public class Parasite extends Intruder {
       maxDTheta = Math.PI/15;
       drops = 75;
       mass = 250;
+      radius = 50;
     }
     
     @Override

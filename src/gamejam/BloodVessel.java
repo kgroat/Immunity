@@ -103,7 +103,7 @@ public class BloodVessel extends GameMode {
          intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
          towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
          normalizeProbs();
-         spawnFreq = 20;
+         spawnFreq = 15;
          aminoAcids = 4000;
          for(int i=0; i<20; i++){
             spawnIntruder();
@@ -117,7 +117,7 @@ public class BloodVessel extends GameMode {
          intruderProbs = new double[]{1, 0, 1, 1, 0, 1, 1, 0};
          towersEnabled = new boolean[]{true, true, true, true, false, false, false, false};
          normalizeProbs();
-         spawnFreq = 20;
+         spawnFreq = 14;
          aminoAcids = 3000;
          for(int i=0; i<30; i++){
             spawnIntruder();
@@ -131,7 +131,7 @@ public class BloodVessel extends GameMode {
          intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 0};
          towersEnabled = new boolean[]{true, true, true, true, true, true, false, false};
          normalizeProbs();
-         spawnFreq = 20;
+         spawnFreq = 12;
          aminoAcids = 3000;
          for(int i=0; i<20; i++){
             spawnIntruder();
@@ -145,7 +145,7 @@ public class BloodVessel extends GameMode {
          intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 1};
          towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
+         spawnFreq = 10;
          aminoAcids = 2000;
          for(int i=0; i<20; i++){
             spawnIntruder();
@@ -159,7 +159,7 @@ public class BloodVessel extends GameMode {
          intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 5};
          towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
+         spawnFreq = 10;
          aminoAcids = 1000;
          for(int i=0; i<20; i++){
             spawnIntruder();
