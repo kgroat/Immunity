@@ -56,7 +56,7 @@ public class BloodVessel extends GameMode {
    ArrayList<Shockwave> waves;
    ArrayList<Particle> particles;
    double inTh, outTh;
-   String nextName, sayText;
+   String nextName, sayText, from;
    
    int aminoAcids, framesLeft, spawnFreq, spawnLeft, aminoFrame, intrudersKilled, frameCounter;
    boolean isGood;
@@ -96,6 +96,7 @@ public class BloodVessel extends GameMode {
          name = s.substring(s.lastIndexOf("/")+1);
       else
          name = s;
+      from = s;
       if(s.endsWith("intro.txt")){
          nextName = "tutorial1.txt";
          framesLeft = 30*60; //60 seconds
@@ -808,7 +809,7 @@ public class BloodVessel extends GameMode {
       if(civilians.size() > 0)
          return new ADVMode(ADVMode.LOC+nextName);
       else
-         return new LossScreen();
+         return new LossScreen(from);
    }
 
    @Override

@@ -217,7 +217,7 @@ public class ADVMode extends GameMode {
 
    @Override
    public GameMode escape() {
-      return new BloodVessel(super.name);
+      return new BloodVessel(from);
    }
 
    @Override
