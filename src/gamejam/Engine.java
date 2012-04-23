@@ -76,7 +76,7 @@ public final class Engine {
    }
    
    static void start2(){
-      currentMode = new ADVMode("resources/scripts/tutorial1.txt", new BloodVessel(""));
+      currentMode = new ADVMode("resources/scripts/tutorial1.txt");
    }
    
    static void stop(){
@@ -132,8 +132,10 @@ public final class Engine {
    }
    
    public static void update(){
-      if(currentMode != null)
+      if(currentMode != null && !currentMode.isDone())
          currentMode.update();
+      else
+         currentMode = currentMode.escape();
    }
    
    public static int getGameWidth(){

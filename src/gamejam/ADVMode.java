@@ -17,7 +17,8 @@ import java.util.ArrayList;
  * @author Clem
  */
 public class ADVMode extends GameMode {
-   private static final String IMG = "resources/images/";
+   public static final String IMG = "resources/images/";
+   public static final String LOC = "resources/scripts/";
 
    protected BufferedImage cutinRight, cutinLeft, sayImage, narrateImage;
    protected String narrate, say, name;
@@ -25,16 +26,14 @@ public class ADVMode extends GameMode {
    protected int shakeIntensity, shakeRemaining;
    protected boolean done;
    protected ArrayList<AudioClip> audioClips;
-   protected GameMode parent;
    protected Font current;
 
-   public ADVMode(String s, GameMode p) {
-      this(ADVScript.parse(s), p);
+   public ADVMode(String s) {
+      this(ADVScript.parse(s));
       super.name = s;
    }
 
-   public ADVMode(ADVScript s, GameMode p) {
-      parent = p;
+   public ADVMode(ADVScript s) {
       script = s;
       cutinRight = null;
       cutinLeft = null;
@@ -157,16 +156,17 @@ public class ADVMode extends GameMode {
          g2 = sayImage.createGraphics();
          tmp = render(say, g);
          g2.setColor(Color.BLUE);
+         LineMetrics metrics = g2.getFont().getLineMetrics(name, g2.getFontRenderContext());
          if(tmp.getHeight() > 150){
             g2.fill3DRect(95, 600-tmp.getHeight()-10, 610, tmp.getHeight()+10, true);
             g2.drawImage(tmp, 100, 600-tmp.getHeight()-10, null);
             g2.setColor(Color.WHITE);
-            g2.drawString(name, 100, 600-tmp.getHeight()-40);
+            g2.drawString(name, 100, 600-tmp.getHeight()-12-metrics.getDescent());
          }else{
             g2.fill3DRect(95, 440, 610, 160, true);
             g2.drawImage(tmp, 100, 450, null);
             g2.setColor(Color.WHITE);
-            g2.drawString(name, 100, 410);
+            g2.drawString(name, 100, 438-metrics.getDescent());
          }
       }
       if(narrate.length() > 0 && narrateImage == null){
@@ -189,13 +189,11 @@ public class ADVMode extends GameMode {
    @Override
    public void update() {
       //Do nothing
-      if(done)
-         Engine.setMode(escape());
    }
 
    @Override
    public GameMode escape() {
-      return parent;
+      return new BloodVessel(super.name);
    }
 
    @Override

@@ -13,8 +13,8 @@ LEFT: Charlie Gnarly
 SAY: "Charlie" OH NO!  Boxes that I might crash into!
 WAIT:
 
-SHAKE: 4 2000
-AUDIO: Crash.wav
+SHAKE: 4 20
+AUDIO: Crash.ogg
 
 LEFT: Charlie Unpleasant
 SAY: "Charlie" I crashed...

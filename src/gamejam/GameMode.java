@@ -35,4 +35,6 @@ public abstract class GameMode {
    public abstract void mouseMove(MouseEvent e);
    
    public abstract void mouseDrag(MouseEvent e);
+   
+   public abstract boolean isDone();
 }
