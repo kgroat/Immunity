@@ -13,7 +13,7 @@ import java.awt.Graphics2D;
  */
 //This Tower stays in place unless something moves it and shoots at a random target every half second.
 public class KillerT extends Tower {
-   public static final int COST = 500;
+   public static final int COST = 250;
    public static final SpriteSet SP = SpriteSet.load("resources/images/killerT.txt");
    private int rateoffire;
 

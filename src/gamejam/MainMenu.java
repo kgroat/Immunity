@@ -39,8 +39,8 @@ public class MainMenu extends GameMode {
    @Override
    public void mousePress(MouseEvent e) {
       AudioClip.get("Select3.ogg").forcePlay(true, true);
-      //Engine.setMode(new ADVMode("resources/scripts/infinitemode.txt"));
-      Engine.setMode(new ADVMode("resources/scripts/intro.txt"));
+      Engine.setMode(new ADVMode("resources/scripts/infinitemode.txt"));
+      //Engine.setMode(new ADVMode("resources/scripts/intro.txt"));
    }
 
    @Override

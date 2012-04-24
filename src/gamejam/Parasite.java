@@ -10,7 +10,7 @@ package gamejam;
  * @author Clem
  */
 public class Parasite extends Intruder {
-   public static final SpriteSet SP = SpriteSet.load("resoureces/images/parasite.txt");
+   public static final SpriteSet SP = SpriteSet.load("resources/images/parasite.txt");
     
     private int wanderlust;
     private boolean walking;
@@ -55,8 +55,9 @@ public class Parasite extends Intruder {
     @Override
     public void move()
     {
-        if (walking){
+       targetVel = maxVel;
           vel = (ratDown*vel + ratUp*targetVel)/(ratUp+ratDown);
+        if (walking){
           x += vel*Math.cos(theta);
           y += vel*Math.sin(theta);
           if(wanderlust <= 0){
@@ -83,15 +84,17 @@ public class Parasite extends Intruder {
         }
     }
     
-    public void bounceX()
-    {
-        wanderlust = 5+(int)(Math.random()*11);
-        walking=!walking;
-    }
-    
-    public void bounceY()
-    {
-        wanderlust = 5+(int)(Math.random()*11);
-        walking=!walking;
-    }
+//    public void bounceX()
+//    {
+//       super.bounceX();
+//        wanderlust = 5+(int)(Math.random()*11);
+//        walking=!walking;
+//    }
+//    
+//    public void bounceY()
+//    {
+//       super.bounceY();
+//        wanderlust = 5+(int)(Math.random()*11);
+//        walking=!walking;
+//    }
 }

@@ -17,6 +17,7 @@ import java.util.ArrayList;
  * @author Clem
  */
 public class ADVMode extends GameMode {
+   public static final BufferedImage BG = FileUtility.loadImage("resources/images/dialog.png");
    public static final String IMG = "resources/images/scriptimages/";
    public static final String LOC = "resources/scripts/";
 
@@ -165,8 +166,7 @@ public class ADVMode extends GameMode {
          dx = (int)(shakeIntensity * (Math.random()*2-1));
          dy = (int)(shakeIntensity * (Math.random()*2-1));
       }
-      g.setColor(Color.black);
-      g.fillRect(0, 0, 800, 600);
+      g.drawImage(BG, dx, dy, null);
       if(cutinRight != null)
          g.drawImage(cutinRight, 705-cutinRight.getWidth()+dx, 600-sayHeight-cutinRight.getHeight()+dy, null);
       if(cutinLeft != null)
