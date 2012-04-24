@@ -10,7 +10,7 @@ package gamejam;
  * @author Clem
  */
 public class Dendrite extends Tower {
-   public static final int COST = 100;
+   public static final int COST = 300;
    public static final SpriteSet SP = SpriteSet.load("resources/images/dendritic.txt");
     
     private int cooldown;
@@ -37,12 +37,7 @@ public class Dendrite extends Tower {
     
     public void act()
     {
-        if (cooldown==0)
-        {
-            Engine.getBloodVessel().aminoAcids++;
-            cooldown=31;
-        }
-        cooldown--;
+        Engine.getBloodVessel().aminoAcids++;
     }
 
 }
