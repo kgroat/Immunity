@@ -10,6 +10,7 @@ package gamejam;
  * @author Clem
  */
 public class Parasite extends Intruder {
+   public static final SpriteSet SP = SpriteSet.load("resoureces/images/parasite.txt");
     
     private int wanderlust;
     private boolean walking;
@@ -25,10 +26,10 @@ public class Parasite extends Intruder {
       maxVel = 3;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;
-      sprite = null;
+      sprite = SP;
       ratUp = 3;
       ratDown = 7;
-      primeDist = sprite.getSpriteWidth()/2;
+      primeDist = 0;
       maxHp = hp = 2000;
       wanderlust = 90;
       maxDTheta = Math.PI/15;

@@ -1,0 +1,3 @@
+/gamejam/resources/images/parasite.png
+100 x 100
+LOOP: blah (5) ;

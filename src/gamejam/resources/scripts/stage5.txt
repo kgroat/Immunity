@@ -5,7 +5,7 @@ WAIT:
 NARRATE: He slept.  And slept.  And slept.
 
 LEFT: Charlie Unpleasant
-SAY: "Charlie" Wait!  I can�ft just sleep!  I haven't done anything with my life yet!
+SAY: "Charlie" Wait!  I can't just sleep!  I haven't done anything with my life yet!
 WAIT:
 LEFT: Charlie Gnarly
 NARRATE: I have to get better!

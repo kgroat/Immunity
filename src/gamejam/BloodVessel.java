@@ -19,6 +19,17 @@ import java.util.ArrayList;
  */
 public class BloodVessel extends GameMode {
    
+   public static final BufferedImage CHARLIE_NORM = FileUtility.loadImage("resoureces/images/Charlie Normal.png");
+   public static final BufferedImage CHARLIE_GOOD = FileUtility.loadImage("resoureces/images/Charlie Gnarly.png");
+   public static final BufferedImage CHARLIE_BAD = FileUtility.loadImage("resoureces/images/Charlie Unpleasant.png");
+   public static final BufferedImage PARENTS_NORM = FileUtility.loadImage("resoureces/images/Parents Normal.png");
+   public static final BufferedImage PARENTS_GOOD = FileUtility.loadImage("resoureces/images/Parents Normal.png");
+   public static final BufferedImage PARENTS_BAD = FileUtility.loadImage("resoureces/images/Parents Shock.png");
+   public static final BufferedImage AGENTS = FileUtility.loadImage("resoureces/images/Agents Shouting.png");
+   public static final BufferedImage DOCTOR = FileUtility.loadImage("resoureces/images/Doctor Normal.png");
+   public static final BufferedImage FRIENDS_GOOD = FileUtility.loadImage("resoureces/images/Friends Normal.png");
+   public static final BufferedImage FRIENDS_BAD = FileUtility.loadImage("resoureces/images/Friends WTF.png");
+   
    BufferedImage normal, bad, good;
 
    private void normalizeProbs() {
