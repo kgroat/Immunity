@@ -137,6 +137,8 @@ public class ADVMode extends GameMode {
       height += rect.getHeight();
       BufferedImage out = new BufferedImage(600, (int)(height+1), BufferedImage.TYPE_INT_ARGB);
       Graphics2D g2 = out.createGraphics();
+      g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+      g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
       g2.setColor(Color.WHITE);
       g2.setFont(current);
       float tHeight = 0;
