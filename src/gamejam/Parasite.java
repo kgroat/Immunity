@@ -27,7 +27,7 @@ public class Parasite extends Intruder {
     {
        super(left);
       bounces = false;
-      maxVel = 3;
+      maxVel = 7;
       vel = Math.random() * maxVel;
       theta = fTheta = Math.random() * Math.PI * 2;
       sprite = SP;

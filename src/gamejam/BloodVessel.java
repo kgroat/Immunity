@@ -630,8 +630,8 @@ public class BloodVessel extends GameMode {
       //outTh += Math.PI/53;
       SpriteSet curr;
       AminoParticle.SP.setCurrentFrame(aminoFrame/FRAMES_PER);
-      Font aminoFont = new Font("sans", Font.BOLD, 20), nameFont = new Font("sans", Font.PLAIN, 10);
-      Color aminoColor = Color.GREEN, nameColor = Color.RED;
+      Font aminoFont = new Font("sans", Font.BOLD, 20), nameFont = new Font("sans", Font.PLAIN, 10), numFont = new Font("sans", Font.BOLD, 30);
+      Color aminoColor = Color.GREEN, nameColor = Color.RED, numColor = Color.BLACK;
       aminoFrame = (aminoFrame + 1) % (AminoParticle.SP.numFrames() * FRAMES_PER);
       for(int i=0; i<towersEnabled.length; i++){
          if(towersEnabled[i]){
@@ -647,6 +647,9 @@ public class BloodVessel extends GameMode {
             g.setFont(nameFont);
             g.setColor(nameColor);
             g.drawString(name(i), i*81+12, Engine.getGameHeight()+106);
+            g.setFont(numFont);
+            g.setColor(numColor);
+            g.drawString(String.valueOf(i+1), i*81+33, Engine.getGameHeight()+135);
          }
       }
       g.setFont(aminoFont);
