@@ -307,11 +307,11 @@ public class BloodVessel extends GameMode {
       }else{//infinitemode
          nextName = "infinitemode.txt";
          framesLeft = Integer.MAX_VALUE; //60 seconds
-         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 5};
+         intruderProbs = new double[]{1, 1, 1, 1, .08, 1, 1, 5};
          towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 9;
-         aminoAcids = 100000;
+         spawnFreq = 5;
+         aminoAcids = 5000;
          for(int i=0; i<50; i++){
             spawnIntruder();
          }
