@@ -342,7 +342,7 @@ public class BloodVessel extends GameMode {
             if (e.collides(other)) {
                e.onCollision(other);
                other.onCollision(e);
-               if ((!(e instanceof Virus || other instanceof Virus) && (e.bounces && other.bounces || e.getClass() == other.getClass())) || e instanceof Basophil || other instanceof Basophil) {
+               if ((!(e instanceof Virus || other instanceof Virus) && (e.bounces && other.bounces || e.getClass() == other.getClass()) && !((e instanceof Parasite && other instanceof Intruder) || (other instanceof Parasite && e instanceof Intruder))) || e instanceof Basophil || other instanceof Basophil) {
                   Helper.bounce(e, other);
                }
             }

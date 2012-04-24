@@ -5,14 +5,18 @@
 
 package gamejam;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 /**
  *
  * @author Clem
  */
 public class Parasite extends Intruder {
    public static final SpriteSet SP = SpriteSet.load("resources/images/parasite.txt");
+   public static final int FRAMES_PER = 1;;
     
-    private int wanderlust;
+    private int wanderlust, frame;
     private boolean walking;
     
     public Parasite(){
@@ -55,6 +59,7 @@ public class Parasite extends Intruder {
     @Override
     public void move()
     {
+       fTheta = theta;
        targetVel = maxVel;
           vel = (ratDown*vel + ratUp*targetVel)/(ratUp+ratDown);
         if (walking){
@@ -75,6 +80,15 @@ public class Parasite extends Intruder {
             }
         }
         wanderlust--;
+    }
+    
+    public void render(Graphics2D g){
+      if (sprite.numFrames() > 0) {
+         frame = (frame + 1) % (sprite.numFrames() * FRAMES_PER);
+         sprite.setCurrentFrame(frame / FRAMES_PER);
+         sprite.drawRot(g, (int) x, (int) y, fTheta);
+         //System.out.println(frame + " / " + sprite.numFrames() + " / " + FRAMES_PER);
+      }
     }
     
     @Override
