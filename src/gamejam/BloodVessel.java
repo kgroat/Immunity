@@ -128,7 +128,7 @@ public class BloodVessel extends GameMode {
          intruderProbs = new double[]{1, 0, 1, 1, 0, 1, 1, 0};
          towersEnabled = new boolean[]{true, true, true, true, false, false, false, false};
          normalizeProbs();
-         spawnFreq = 14;
+         spawnFreq = 16;
          aminoAcids = 3000;
          for(int i=0; i<30; i++){
             spawnIntruder();
@@ -142,9 +142,9 @@ public class BloodVessel extends GameMode {
          intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 0};
          towersEnabled = new boolean[]{true, true, true, true, true, true, false, false};
          normalizeProbs();
-         spawnFreq = 12;
+         spawnFreq = 17;
          aminoAcids = 3000;
-         for(int i=0; i<20; i++){
+         for(int i=0; i<40; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -156,9 +156,9 @@ public class BloodVessel extends GameMode {
          intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 1};
          towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 10;
-         aminoAcids = 2000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 16;
+         aminoAcids = 3000;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -167,12 +167,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage1.txt")){
          nextName = "stage2.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 5};
+         intruderProbs = new double[]{1, 1, 1, 1, 0, 1, 1, 2};
          towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 10;
-         aminoAcids = 1000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 15;
+         aminoAcids = 3000;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -181,12 +181,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage2.txt")){
          nextName = "stage3.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 2};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
-         aminoAcids = 4000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 14;
+         aminoAcids = 2500;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -195,12 +195,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage3.txt")){
          nextName = "stage4.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 3};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
-         aminoAcids = 4000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 14;
+         aminoAcids = 2500;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -209,12 +209,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage4.txt")){
          nextName = "stage5.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 3};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
-         aminoAcids = 4000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 13;
+         aminoAcids = 2500;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -223,12 +223,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage5.txt")){
          nextName = "stage6.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 4};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
-         aminoAcids = 4000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 13;
+         aminoAcids = 3000;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -237,12 +237,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage6.txt")){
          nextName = "stage7.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 4};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
-         aminoAcids = 4000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 12;
+         aminoAcids = 3000;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -251,12 +251,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage7.txt")){
          nextName = "stage8.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 5};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
-         aminoAcids = 4000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 12;
+         aminoAcids = 3000;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -265,12 +265,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage8.txt")){
          nextName = "stage9.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 5};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
-         aminoAcids = 4000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 11;
+         aminoAcids = 3500;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -279,12 +279,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage9.txt")){
          nextName = "stage10.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 0, 0, 1, 0, 1, 0, 0};
-         towersEnabled = new boolean[]{true, true, false, false, false, false, false, false};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 6};
+         towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
+         spawnFreq = 11;
          aminoAcids = 4000;
-         for(int i=0; i<20; i++){
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -293,12 +293,12 @@ public class BloodVessel extends GameMode {
       }else if(s.endsWith("stage10.txt")){
          nextName = "infinitemode.txt";
          framesLeft = 30*60; //60 seconds
-         intruderProbs = new double[]{1, 1, 1, 1, 1, 1, 1, 1};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 6};
          towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 20;
-         aminoAcids = 100000;
-         for(int i=0; i<20; i++){
+         spawnFreq = 10;
+         aminoAcids = 5000;
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
@@ -307,12 +307,12 @@ public class BloodVessel extends GameMode {
       }else{//infinitemode
          nextName = "infinitemode.txt";
          framesLeft = Integer.MAX_VALUE; //60 seconds
-         intruderProbs = new double[]{1, 1, 1, 1, 1, 1, 1, 1};
+         intruderProbs = new double[]{1, 1, 1, 1, .05, 1, 1, 5};
          towersEnabled = new boolean[]{true, true, true, true, true, true, true, true};
          normalizeProbs();
-         spawnFreq = 3;
+         spawnFreq = 9;
          aminoAcids = 100000;
-         for(int i=0; i<20; i++){
+         for(int i=0; i<50; i++){
             spawnIntruder();
          }
          for(int i=0; i<10; i++){
