@@ -43,7 +43,7 @@ public class Monocyte extends Tower {
       patients = Engine.getBloodVessel().towersNearby(this, 150);
       for (int i = 0; i < patients.length; i++) {
          patients[i].damage(-.5);
-         if(Math.random()<.3){
+         if(Math.random()<.1){
             thet = Math.atan2(patients[i].y - y, patients[i].x - x);
             dist = dist(patients[i]) * Math.random();
             Engine.getBloodVessel().add(new Particle(x + Math.cos(thet) * dist, y + Math.sin(thet) * dist));

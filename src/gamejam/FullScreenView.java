@@ -68,11 +68,11 @@ public class FullScreenView extends JFrame {
          if(s.endsWith(".jar")){
             s = s.substring(s.lastIndexOf("/")+1);
             System.out.println(s);
-            p = r.exec("java -classpath lib"+File.separator+" -Dorg.lwjgl.util.Debug=true -Djava.library.path=lib"+File.separator+"native"+File.separator+nativedir+File.separator+" -jar "+s+" -proper");
+            p = r.exec("java -classpath lib"+File.separator+" -Dorg.lwjgl.util.Debug=false -Djava.library.path=lib"+File.separator+"native"+File.separator+nativedir+File.separator+" -jar "+s+" -proper");
          }else{
-            s = "build/classes/"+"dwimmer"+File.separator+"FullScreenView";
+            s = "build/classes/"+"gamejam"+File.separator+"FullScreenView";
             System.out.println(s);
-            p = r.exec("java -classpath lib"+File.separator+" -Dorg.lwjgl.util.Debug=true -Djava.library.path=lib"+File.separator+"native"+File.separator+nativedir+File.separator+" "+s+" -proper");
+            p = r.exec("java -classpath lib"+File.separator+" -Dorg.lwjgl.util.Debug=false -Djava.library.path=lib"+File.separator+"native"+File.separator+nativedir+File.separator+" "+s+" -proper");
          }
          
          if(p!=null){
@@ -92,7 +92,6 @@ public class FullScreenView extends JFrame {
    
    private static String findLibPath(){
       Properties p = System.getProperties();
-      p.list(System.out);
       String t = p.getProperty("os.name").toLowerCase();
       if(t.contains("mac")){
          return "macosx";

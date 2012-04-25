@@ -22,11 +22,10 @@ import org.lwjgl.util.WaveData;
  * @author kevingroat
  */
 public class AudioClip {
-   
-   public static final String LOC = "resources/audio/";
 
+   public static final String LOC = "resources/audio/";
    public static final double DISTANCER = 100;
-   
+
    public static enum ClipType {
 
       sfx, music
@@ -38,26 +37,27 @@ public class AudioClip {
    private static final float[] gains;// = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f};
    private static final int[] priorities;
    private static final long[] millis;
-   static{
+
+   static {
       int count = 0;
-      float sfx=1, mus=1;
-      Scanner in=null;
-      try{
-         in = FileUtility.loadScanner(LOC+"AudioList.txt");
+      float sfx = 1, mus = 1;
+      Scanner in = null;
+      try {
+         in = FileUtility.loadScanner(LOC + "AudioList.txt");
          count = in.nextInt();
          sfx = in.nextFloat();
          mus = in.nextFloat();
          in.nextLine();
-      }catch(Exception e){
+      } catch (Exception e) {
          e.printStackTrace();
       }
       ClipType[] vals = ClipType.values();
-      for(int i=0; i<vals.length; i++){
-         if(vals[i]==ClipType.sfx){
-            subGains[i]=sfx;
+      for (int i = 0; i < vals.length; i++) {
+         if (vals[i] == ClipType.sfx) {
+            subGains[i] = sfx;
          }
-         if(vals[i]==ClipType.music){
-            subGains[i]=mus;
+         if (vals[i] == ClipType.music) {
+            subGains[i] = mus;
          }
       }
       names = new String[count];
@@ -66,65 +66,84 @@ public class AudioClip {
       gains = new float[count];
       priorities = new int[count];
       millis = new long[count];
-      if(in!=null){
-         try{
+      if (in != null) {
+         try {
             count = 0;
-            while(in.hasNext()){
+            while (in.hasNext()) {
                String next = in.nextLine().trim();
                int place = next.indexOf(";");
                names[count] = next.substring(0, place);
-               next = next.substring(place+1).trim();
+               next = next.substring(place + 1).trim();
                place = next.indexOf(";");
                String test = next.substring(0, place).toUpperCase();
-               next = next.substring(place+1).trim();
-               if(test.contains("SFX")){
-                  types[count]=ClipType.sfx;
-               }else{
-                  types[count]=ClipType.music;
+               next = next.substring(place + 1).trim();
+               if (test.contains("SFX")) {
+                  types[count] = ClipType.sfx;
+               } else {
+                  types[count] = ClipType.music;
                }
                place = next.indexOf(";");
                test = next.substring(0, place).toUpperCase();
-               loop[count]=test.contains("LOOP");
-               next = next.substring(place+1).trim();
+               loop[count] = test.contains("LOOP");
+               next = next.substring(place + 1).trim();
                place = next.indexOf(";");
                test = next.substring(0, place).toUpperCase();
-               gains[count]=Float.parseFloat(test);
-               next = next.substring(place+1).trim();
+               gains[count] = Float.parseFloat(test);
+               next = next.substring(place + 1).trim();
                next = next.replace(";", "");
-               priorities[count]=Integer.parseInt(next);
+               priorities[count] = Integer.parseInt(next);
                count++;
             }
-         }catch(Exception e){
+         } catch (Exception e) {
             e.printStackTrace();
          }
       }
    }
    private static HashMap<String, AudioClip> map = new HashMap<String, AudioClip>();
-   /** Maximum data buffers we will need. */
+   /**
+    * Maximum data buffers we will need.
+    */
    public static final int NUM_BUFFERS = names.length;
-   /** Maximum emissions we will need. */
+   /**
+    * Maximum emissions we will need.
+    */
    public static final int NUM_SOURCES = names.length;
-   /** Buffers hold sound data. */
+   /**
+    * Buffers hold sound data.
+    */
    private static final IntBuffer buffer = BufferUtils.createIntBuffer(NUM_BUFFERS);
-   /** Sources are points emitting sound. */
+   /**
+    * Sources are points emitting sound.
+    */
    private static final IntBuffer source = BufferUtils.createIntBuffer(NUM_BUFFERS);
-   /** Position of the source sound. */
+   /**
+    * Position of the source sound.
+    */
    private static final FloatBuffer sourcePos = BufferUtils.createFloatBuffer(3);
    /*
-    * These are 3D cartesian vector coordinates. A structure or class would be
-    * a more flexible of handling these, but for the sake of simplicity we will
+    * These are 3D cartesian vector coordinates. A structure or class would be a
+    * more flexible of handling these, but for the sake of simplicity we will
     * just leave it as is.
     */
-   /** Velocity of the source sound. */
+   /**
+    * Velocity of the source sound.
+    */
    private static final FloatBuffer sourceVel = BufferUtils.createFloatBuffer(3);
-   /** Position of the listener. */
+   /**
+    * Position of the listener.
+    */
    private static final FloatBuffer listenerPos = BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f});
-   /** Velocity of the listener. */
+   /**
+    * Velocity of the listener.
+    */
    private static final FloatBuffer listenerVel = BufferUtils.createFloatBuffer(3).put(new float[]{0.0f, 0.0f, 0.0f});
-   /** Orientation of the listener. (first 3 elements are "at", second 3 are "up")
-   Also note that these should be units of '1'. */
+   /**
+    * Orientation of the listener. (first 3 elements are "at", second 3 are
+    * "up") Also note that these should be units of '1'.
+    */
    private static final FloatBuffer listenerOri = BufferUtils.createFloatBuffer(6).put(new float[]{0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f});
    private static float masterGain = 1;
+   private static boolean works;
    protected static float[] listPosVals = {0, 0, 0};
 
    static {
@@ -140,19 +159,19 @@ public class AudioClip {
             WaveData waveFile;
             OggData oggFile;
             for (int i = 0; i < names.length; i++) {
-               if(names[i].toLowerCase().endsWith(".wav")){
+               if (names[i].toLowerCase().endsWith(".wav")) {
                   System.out.println("Loading audio clip (" + String.format("%0" + D + "d/%0" + D + "d", i + 1, names.length) + "): " + names[i]);
-                  waveFile = WaveData.create(FileUtility.loadURL(LOC+names[i]));
+                  waveFile = WaveData.create(FileUtility.loadURL(LOC + names[i]));
                   AL10.alBufferData(buffer.get(i), waveFile.format, waveFile.data, waveFile.samplerate);
-                  millis[i] = waveFile.data.capacity()*((waveFile.format == AL10.AL_FORMAT_STEREO16)?250L:((waveFile.format != AL10.AL_FORMAT_MONO8)?500L:1000L))/waveFile.samplerate;
+                  millis[i] = waveFile.data.capacity() * ((waveFile.format == AL10.AL_FORMAT_STEREO16) ? 250L : ((waveFile.format != AL10.AL_FORMAT_MONO8) ? 500L : 1000L)) / waveFile.samplerate;
                   System.out.println(waveFile.format);
                   System.out.println(millis[i]);
                   waveFile.dispose();
-               }else if(names[i].toLowerCase().endsWith(".ogg")){
+               } else if (names[i].toLowerCase().endsWith(".ogg")) {
                   System.out.println("Loading audio clip (" + String.format("%0" + D + "d/%0" + D + "d", i + 1, names.length) + "): " + names[i]);
-                  oggFile = new OggData(FileUtility.loadURL(LOC+names[i]));
+                  oggFile = new OggData(FileUtility.loadURL(LOC + names[i]));
                   AL10.alBufferData(buffer.get(i), oggFile.format, oggFile.data, oggFile.samplerate);
-                  millis[i] = oggFile.data.capacity()*((oggFile.format == AL10.AL_FORMAT_STEREO16)?250L:((oggFile.format != AL10.AL_FORMAT_MONO8)?500L:1000L))/oggFile.samplerate;
+                  millis[i] = oggFile.data.capacity() * ((oggFile.format == AL10.AL_FORMAT_STEREO16) ? 250L : ((oggFile.format != AL10.AL_FORMAT_MONO8) ? 500L : 1000L)) / oggFile.samplerate;
                   System.out.println(oggFile.format);
                   System.out.println(millis[i]);
                }
@@ -174,22 +193,22 @@ public class AudioClip {
                AL10.alSource(source.get(i), AL10.AL_POSITION, sourcePos);
                AL10.alSource(source.get(i), AL10.AL_VELOCITY, sourceVel);
                AL10.alSourcei(source.get(i), AL10.AL_LOOPING, (loop[i] ? AL10.AL_TRUE : AL10.AL_FALSE));
-               AL10.alSourcef(source.get(i), AL10.AL_REFERENCE_DISTANCE, (float)DISTANCER);
+               AL10.alSourcef(source.get(i), AL10.AL_REFERENCE_DISTANCE, (float) DISTANCER);
                AL10.alSourcei(source.get(i), AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
             }
          }
-         
+
          String tName, first, last;
          for (int i = 0; i < names.length; i++) {
             tName = names[i];
-            if(map.containsKey(tName)){
+            if (map.containsKey(tName)) {
                int count = 1;
                first = tName.substring(0, tName.lastIndexOf("."));
                last = tName.substring(tName.lastIndexOf("."));
-               tName = first+"_"+count+last;
-               while(map.containsKey(tName)){
+               tName = first + "_" + count + last;
+               while (map.containsKey(tName)) {
                   count++;
-                  tName = first+"_"+count+last;
+                  tName = first + "_" + count + last;
                }
             }
             map.put(tName, new AudioClip(i).setPriority(priorities[i]));
@@ -201,9 +220,9 @@ public class AudioClip {
          listenerVel.flip();
          AL10.alListener(AL10.AL_VELOCITY, listenerVel);
          AL10.alDistanceModel(AL10.AL_INVERSE_DISTANCE_CLAMPED);
-
+         works = true;
       } catch (Exception e) {
-         e.printStackTrace();
+         works = false;
       }
    }
    protected int sourceNum, priority;
@@ -242,53 +261,57 @@ public class AudioClip {
       System.arraycopy(origin.velocity, 0, velocity, 0, 3);
       type = origin.type;
    }
-   
-   private AudioClip setPriority(int p){
+
+   private AudioClip setPriority(int p) {
       priority = p;
       return this;
    }
 
    public void forcePlay(boolean restart, boolean setProperties) {
-      if(type == ClipType.music){
-         AudioClip tmp;
-         for(int i=0; i<names.length; i++){
-            tmp = get(i);
-            if(tmp.type == ClipType.music){
-               tmp.pause();
+      if (works) {
+         if (type == ClipType.music) {
+            AudioClip tmp;
+            for (int i = 0; i < names.length; i++) {
+               tmp = get(i);
+               if (tmp.type == ClipType.music) {
+                  tmp.pause();
+               }
             }
          }
+         forceEnd = false;
+         if (setProperties) {
+            putProperties();
+         }
+         if (restart) {
+            AL10.alSourceStop(source.get(sourceNum));
+         }
+         AL10.alSourcePlay(source.get(sourceNum));
       }
-      forceEnd = false;
-      if (setProperties) {
-         putProperties();
-      }
-      if (restart) {
-         AL10.alSourceStop(source.get(sourceNum));
-      }
-      AL10.alSourcePlay(source.get(sourceNum));
    }
 
    public void tryPlay(boolean restart, boolean setProperties) {
-      boolean isHigh = true;
-      if(type == ClipType.music){
-         AudioClip tmp;
-         for(int i=0; i<names.length; i++){
-            tmp = get(i);
-            if(tmp != this){
-               if(tmp.type == ClipType.music){
-                  if(priority >= tmp.priority){
-                     tmp.pause();
-                  }else if(tmp.isPlaying()){
-                     isHigh=false;
+      if (works) {
+         boolean isHigh = true;
+         if (type == ClipType.music) {
+            AudioClip tmp;
+            for (int i = 0; i < names.length; i++) {
+               tmp = get(i);
+               if (tmp != this) {
+                  if (tmp.type == ClipType.music) {
+                     if (priority >= tmp.priority) {
+                        tmp.pause();
+                     } else if (tmp.isPlaying()) {
+                        isHigh = false;
+                     }
                   }
                }
             }
          }
-      }
-      if(isHigh){
-         if (!isPlaying()) {
-            forceEnd = false;
-            forcePlay(restart, setProperties);
+         if (isHigh) {
+            if (!isPlaying()) {
+               forceEnd = false;
+               forcePlay(restart, setProperties);
+            }
          }
       }
    }
@@ -317,21 +340,21 @@ public class AudioClip {
    }
 
    public void setRelativeGain(float gain) {
-      this.gain = baseGain*gain;
+      this.gain = baseGain * gain;
    }
 
-   public void setGainFromDist(double dist){
-      this.gain = baseGain*(float)Math.min(1, DISTANCER/(dist+.001));
+   public void setGainFromDist(double dist) {
+      this.gain = baseGain * (float) Math.min(1, DISTANCER / (dist + .001));
    }
-   
+
    public float getPitch() {
       return pitch;
    }
 
-   public long getMillis(){
+   public long getMillis() {
       return millis[sourceNum];
    }
-   
+
    public void setPitch(float pitch) {
       this.pitch = pitch;
    }
@@ -340,7 +363,7 @@ public class AudioClip {
       return position;
    }
 
-   public void setPosition(float...position) {
+   public void setPosition(float... position) {
       this.position = position;
    }
 
@@ -356,7 +379,7 @@ public class AudioClip {
       return velocity;
    }
 
-   public void setVelocity(float...velocity) {
+   public void setVelocity(float... velocity) {
       this.velocity = velocity;
    }
 
@@ -414,18 +437,18 @@ public class AudioClip {
       AL10.alSourcei(source.get(sourceNum), AL10.AL_LOOPING, (looping ? AL10.AL_TRUE : AL10.AL_FALSE));
    }
 
-   public boolean isPertinent(float...vals){
-      return !isPlaying() || dist(vals)<dist(position);
+   public boolean isPertinent(float... vals) {
+      return !isPlaying() || dist(vals) < dist(position);
    }
-   
-   public double dist(float[] in){
+
+   public double dist(float[] in) {
       double total = 0;
-      for(int i=0; i<in.length; i++){
-         total += in[i]*in[i];
+      for (int i = 0; i < in.length; i++) {
+         total += in[i] * in[i];
       }
       return Math.sqrt(total);
    }
-   
+
    public static AudioClip get(int i) {
       return map.get(names[i]);
    }
@@ -468,7 +491,6 @@ public class AudioClip {
       // temporary buffer
 
       public ByteBuffer data = ByteBuffer.allocateDirect(4096 * 8);
-      
       public int samplerate, format;
 
       public OggData(URL u) throws IOException {
@@ -476,32 +498,32 @@ public class AudioClip {
 
          format = oggInputStream.getFormat();
          samplerate = oggInputStream.getRate();
-         
+
          int count = 0;
          try {
             int bytesRead = 1;
-            do{
+            do {
                bytesRead = oggInputStream.read(data, 0, data.capacity());
-               if(bytesRead > 0)
+               if (bytesRead > 0) {
                   count += bytesRead;
-            }while(bytesRead > 0);
+               }
+            } while (bytesRead > 0);
          } catch (IOException e) {
             e.printStackTrace();
          }
          data = ByteBuffer.allocateDirect(count);
          data.rewind();
          oggInputStream = new OggInputStream(u);
-         
+
          try {
             int bytesRead = oggInputStream.read(data, 0, data.capacity());
-            if (bytesRead >= 0) 
+            if (bytesRead >= 0) {
                data.rewind();
+            }
          } catch (IOException e) {
             e.printStackTrace();
          }
       }
-      
-      
    }
 
    protected static IntBuffer createIntBuffer(int size) {
@@ -509,38 +531,40 @@ public class AudioClip {
       temp.order(ByteOrder.nativeOrder());
       return temp.asIntBuffer();
    }
-   
-   public void startAfter(String s, final boolean force, final boolean restart, final boolean setProperties){
+
+   public void startAfter(String s, final boolean force, final boolean restart, final boolean setProperties) {
       final AudioClip other = get(s);
-      if(other != null){
-         Thread t = new Thread(){
+      if (other != null) {
+         Thread t = new Thread() {
+
             @Override
-            public synchronized void run(){
-               while(other.isPlaying()){
+            public synchronized void run() {
+               while (other.isPlaying()) {
                   try {
                      wait(5);
                   } catch (InterruptedException ex) {
                      break;
                   }
                }
-               if(!other.forceEnd)
-                  if(force){
+               if (!other.forceEnd) {
+                  if (force) {
                      forcePlay(restart, setProperties);
-                  }else{
+                  } else {
                      tryPlay(restart, setProperties);
                   }
+               }
             }
          };
          t.start();
       }
    }
 
-   public static void setListeningPosition(float...vals){
+   public static void setListeningPosition(float... vals) {
       float[] tmp;
-      if(vals.length<3){
+      if (vals.length < 3) {
          tmp = new float[3];
          System.arraycopy(vals, 0, tmp, 0, vals.length);
-      }else{
+      } else {
          tmp = vals;
       }
       listPosVals = tmp;
@@ -549,13 +573,13 @@ public class AudioClip {
       listenerPos.flip();
       AL10.alListener(AL10.AL_POSITION, listenerPos);
    }
-   
-   public static void setListeningVelocity(float...vals){
+
+   public static void setListeningVelocity(float... vals) {
       float[] tmp;
-      if(vals.length<3){
+      if (vals.length < 3) {
          tmp = new float[3];
          System.arraycopy(vals, 0, tmp, 0, vals.length);
-      }else{
+      } else {
          tmp = vals;
       }
       listenerVel.clear();
@@ -563,7 +587,7 @@ public class AudioClip {
       listenerVel.flip();
       AL10.alListener(AL10.AL_VELOCITY, listenerVel);
    }
-   
+
    public ClipType getType() {
       return type;
    }

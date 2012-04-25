@@ -95,7 +95,8 @@ public class BloodVessel extends GameMode {
       waves = new ArrayList();
       nextName = "intro.txt";
       normalizeProbs();
-      AudioClip.get("time-to-kick-ass.ogg").forcePlay(true, true);
+      AudioClip a = AudioClip.get("time-to-kick-ass.ogg");
+      if(a!=null)a.forcePlay(true, true);
       normal = FileUtility.loadImage(ADVMode.IMG+"Charlie Normal.png");
       good = FileUtility.loadImage(ADVMode.IMG+"Charlie Gnarly.png");
       bad = FileUtility.loadImage(ADVMode.IMG+"Charlie Unpleasant.png");

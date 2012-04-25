@@ -59,8 +59,11 @@ public class ADVMode extends GameMode {
    }
 
    public final void advance(){
+      AudioClip a;
       while(audioClips.size() > 0){
-         audioClips.get(0).stop();
+         a = audioClips.get(0);
+         if(a!=null)
+            a.stop();
          audioClips.remove(0);
       }
       done = !script.hasNext();
@@ -87,9 +90,11 @@ public class ADVMode extends GameMode {
             case audio:
                System.out.println("AUDIO: "+c.getName());
                AudioClip tmp = AudioClip.get(c.getName());
-               tmp.forcePlay(true, true);
-               if(tmp.getType() == AudioClip.ClipType.sfx)
-                  audioClips.add(tmp);
+               if(tmp != null){
+                  tmp.forcePlay(true, true);
+                  if(tmp.getType() == AudioClip.ClipType.sfx)
+                     audioClips.add(tmp);
+               }
                break;
             case shake:
                shakeIntensity = c.getOne();

@@ -30,11 +30,13 @@ public final class Engine {
    private static int vWidth, vHeight;
 
    static void mouseDrag(MouseEvent e) {
-      currentMode.mouseDrag(e);
+      if(currentMode != null)
+         currentMode.mouseDrag(e);
    }
 
    static void mouseMove(MouseEvent e) {
-      currentMode.mouseMove(e);
+      if(currentMode != null)
+         currentMode.mouseMove(e);
    }
    
    private Engine(){
@@ -77,7 +79,8 @@ public final class Engine {
       renderLoop.setDaemon(true);
       mainLoop.start();
       renderLoop.start();
-      AudioClip.get("i-get-around.ogg").forcePlay(true, true);
+      AudioClip a = AudioClip.get("i-get-around.ogg");
+      if(a!=null)a.forcePlay(true, true);
    }
    
    static void stop(){
@@ -104,14 +107,6 @@ public final class Engine {
          currentMode.release(e);
    }
    
-   static void pressMouse(MouseEvent e){
-      
-   }
-   
-   static void releaseMouse(MouseEvent e){
-      
-   }
-
    static void setMode(GameMode g){
       currentMode = g;
       FullScreenView.instance().setTitle(currentMode.name);
@@ -177,11 +172,13 @@ public final class Engine {
    }
    
    public static void mousePress(MouseEvent e){
-      currentMode.mousePress(e);
+      if(currentMode != null)
+         currentMode.mousePress(e);
    }
    
    public static void mouseRelease(MouseEvent e){
-      currentMode.mouseRelease(e);
+      if(currentMode != null)
+         currentMode.mouseRelease(e);
    }
    
    public static BufferedImage getImage(){
